@@ -1,0 +1,1 @@
+CraftSageData = CraftSageData or {}

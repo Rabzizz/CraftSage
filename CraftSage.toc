@@ -1,0 +1,32 @@
+## Interface: 11504
+## Title: CraftSage
+## Notes: Profession leveling guide for WoW Classic Era / Hardcore
+## Author: CraftSage
+## Version: 1.0.0
+## SavedVariables: CraftSageDB
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\AceAddon-3.0\AceAddon-3.0.lua
+Libs\AceEvent-3.0\AceEvent-3.0.lua
+Libs\AceDB-3.0\AceDB-3.0.lua
+Libs\AceConsole-3.0\AceConsole-3.0.lua
+Libs\AceHook-3.0\AceHook-3.0.lua
+Libs\AceLocale-3.0\AceLocale-3.0.lua
+Libs\SimpleSticky.lua
+
+Locale\enUS.lua
+
+Data\Alchemy.lua
+Data\Blacksmithing.lua
+Data\Engineering.lua
+Data\Enchanting.lua
+Data\Leatherworking.lua
+Data\Tailoring.lua
+Data\Cooking.lua
+Data\FirstAid.lua
+
+UI\Panel.lua
+UI\ShoppingList.lua
+
+Core.lua

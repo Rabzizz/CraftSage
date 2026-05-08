@@ -266,6 +266,7 @@ local function _initialize()
 end
 
 function Panel:Toggle()
+  if not frame then return end
   if frame:IsShown() then
     frame:Hide()
   else

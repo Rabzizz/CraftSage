@@ -22,11 +22,10 @@ end
 function CraftSage:OnEnable()
   self:RegisterEvent("TRADE_SKILL_SHOW", "OnTradeSkillShow")
   self:RegisterEvent("TRADE_SKILL_HIDE", "OnTradeSkillHide")
-  self:RegisterEvent("TRADE_SKILL_UPDATE", "OnTradeSkillUpdate")
 end
 
 function CraftSage:OnTradeSkillShow()
-  local profName, _, skillLevel, maxSkillLevel = GetTradeSkillLine()
+  local profName, skillLevel, maxSkillLevel = GetTradeSkillLine()
   self.currentProf     = profName
   self.currentSkill    = skillLevel
   self.currentMaxSkill = maxSkillLevel
@@ -37,22 +36,36 @@ function CraftSage:OnTradeSkillShow()
 end
 
 function CraftSage:OnTradeSkillHide()
+  self.currentProf = nil
   NS.Panel:Hide()
 end
 
-function CraftSage:OnTradeSkillUpdate()
-  local _, _, skillLevel = GetTradeSkillLine()
-  if skillLevel == self.currentSkill then return end
-  local prevStep = self.activeStepIndex
-  self.currentSkill = skillLevel
-  self.activeStepIndex = self:ComputeActiveStep(self.currentData, skillLevel)
+-- AceEvent RegisterEvent is unreliable for high-frequency events in Classic Era.
+-- Use a raw frame for BAG_UPDATE (mat count refresh) and SKILL_LINES_CHANGED (skill-ups).
+local _craftFrame = CreateFrame("Frame")
+_craftFrame:RegisterEvent("BAG_UPDATE")
+_craftFrame:RegisterEvent("SKILL_LINES_CHANGED")
+_craftFrame:SetScript("OnEvent", function(self, event)
+  local cs = NS.CraftSage
+  if not cs.currentProf or not NS.Panel:IsVisible() then return end
+
+  if event == "SKILL_LINES_CHANGED" then
+    local profName, skillLevel, maxSkillLevel = GetTradeSkillLine()
+    if profName == cs.currentProf then
+      cs.currentSkill    = skillLevel
+      cs.currentMaxSkill = maxSkillLevel
+    end
+  end
+
+  local prevStep = cs.activeStepIndex
+  cs.activeStepIndex = cs:ComputeActiveStep(cs.currentData, cs.currentSkill)
   NS.Panel:Refresh(
-    self.currentProf, skillLevel, self.currentMaxSkill,
-    self.currentData, self.activeStepIndex,
-    self.activeStepIndex ~= prevStep
+    cs.currentProf, cs.currentSkill, cs.currentMaxSkill,
+    cs.currentData, cs.activeStepIndex,
+    cs.activeStepIndex ~= prevStep
   )
-  self:HighlightActiveRecipe()
-end
+  cs:HighlightActiveRecipe()
+end)
 
 function CraftSage:ComputeActiveStep(data, skillLevel)
   if not data then return nil end
@@ -98,11 +111,17 @@ function CraftSage:SlashCommand(input)
     end
   elseif cmd:sub(1, 5) == "debug" then
     local skill = tonumber(strtrim(cmd:sub(6)))
-    if skill then
-      self.currentSkill    = skill
-      self.activeStepIndex = self:ComputeActiveStep(self.currentData, skill)
-      NS.Panel:Refresh(self.currentProf, skill, self.currentMaxSkill, self.currentData, self.activeStepIndex, true)
-      self:Print("Debug: skill forced to " .. skill)
+    if not skill then
+      self:Print("Usage: /craftsage debug <skill>")
+      return
     end
+    if not self.currentProf then
+      self:Print("Open a profession window first.")
+      return
+    end
+    self.currentSkill    = skill
+    self.activeStepIndex = self:ComputeActiveStep(self.currentData, skill)
+    NS.Panel:Refresh(self.currentProf, skill, self.currentMaxSkill, self.currentData, self.activeStepIndex, true)
+    self:Print("Debug: skill forced to " .. skill)
   end
 end

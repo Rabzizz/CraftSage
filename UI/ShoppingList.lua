@@ -9,7 +9,7 @@ local SL_H = 390
 
 -- ── Frame ────────────────────────────────────────────────────────────────────
 
-local frame = CreateFrame("Frame", "CraftSageShoppingListFrame", UIParent)
+local frame = CreateFrame("Frame", "CraftSageShoppingListFrame", UIParent, "BackdropTemplate")
 frame:SetSize(SL_W, SL_H)
 frame:SetPoint("CENTER")
 frame:Hide()
@@ -27,6 +27,12 @@ frame:SetBackdrop({
 })
 frame:SetBackdropColor(0.05, 0.05, 0.12, 0.97)
 frame:SetBackdropBorderColor(0.3, 0.3, 0.8, 1)
+
+local slCloseBtn = CreateFrame("Button", nil, frame, "UIPanelCloseButton")
+slCloseBtn:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 2, 2)
+slCloseBtn:SetScript("OnClick", function() frame:Hide() end)
+
+table.insert(UISpecialFrames, "CraftSageShoppingListFrame")
 
 -- Title
 local titleText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")

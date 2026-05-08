@@ -238,13 +238,14 @@ local function _initialize()
       if i > 6 then break end
       local have = GetItemCount(mat.item) or 0
       local need = mat.count * remaining
-      matRows[i].name:SetText(mat.item)
+      local name = GetItemInfo(mat.item) or ("Item:" .. mat.item)
+      matRows[i].name:SetText(name)
       matRows[i].name:Show()
       if have >= need then
-        matRows[i].count:SetText(L["HAVE"])
+        matRows[i].count:SetText(string.format("%d / %d", have, need))
         matRows[i].count:SetTextColor(0.3, 1, 0.3, 1)
       else
-        matRows[i].count:SetText(string.format(L["NEED_FMT"], need - have))
+        matRows[i].count:SetText(string.format("|cffffff44%d|r / %d", have, need))
         matRows[i].count:SetTextColor(1, 0.3, 0.3, 1)
       end
       matRows[i].count:Show()

@@ -13,6 +13,7 @@ local stepsLabel, stepRows, divider
 local matsLabel, noteText, matRows, msgText
 local shopBtn, resetBtn
 local highlightedIndex
+local _guideBtn
 
 local function ShowAllMats(show)
   for i = 1, 6 do
@@ -37,6 +38,11 @@ local function _initialize()
   frame:SetSize(PANEL_W, PANEL_H)
   frame:Hide()
   frame:SetFrameStrata("HIGH")
+  frame:SetMovable(true)
+  frame:EnableMouse(true)
+  frame:RegisterForDrag("LeftButton")
+  frame:SetScript("OnDragStart", frame.StartMoving)
+  frame:SetScript("OnDragStop",  frame.StopMovingOrSizing)
   frame:SetBackdrop({
     bgFile   = "Interface\\Tooltips\\UI-Tooltip-Background",
     edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
@@ -154,13 +160,10 @@ local function _initialize()
   closeBtn:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 2, 2)
   closeBtn:SetScript("OnClick", function() frame:Hide() end)
 
-  local guideBtn = CreateFrame("Button", nil, TradeSkillFrame, "UIPanelButtonTemplate")
-  guideBtn:SetSize(60, 22)
-  guideBtn:SetText(L["GUIDE_BTN"])
-  guideBtn:SetPoint("RIGHT", TradeSkillCreateButton, "LEFT", -4, 0)
-  guideBtn:SetScript("OnClick", function() Panel:Toggle() end)
-
   table.insert(UISpecialFrames, "CraftSagePanelFrame")
+
+  frame:SetScript("OnShow", function() Panel:UpdateGuideBtnLabel() end)
+  frame:SetScript("OnHide", function() Panel:UpdateGuideBtnLabel() end)
 
   highlightedIndex = nil
 
@@ -168,13 +171,15 @@ local function _initialize()
 
   function Panel:Refresh(profName, skillLevel, maxSkillLevel, data, activeStepIndex, stepChanged)
     if not frame then return end
-    frame:ClearAllPoints()
-    if TradeSkillFrame:IsShown() then
-      frame:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", 2, 0)
-    else
-      frame:SetPoint("CENTER", UIParent, "CENTER", 200, 0)
+    if not frame:IsShown() then
+      frame:ClearAllPoints()
+      if TradeSkillFrame and TradeSkillFrame:IsShown() then
+        frame:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", 2, 0)
+      else
+        frame:SetPoint("CENTER", UIParent, "CENTER", 200, 0)
+      end
+      frame:Show()
     end
-    frame:Show()
 
     profText:SetText(profName or "")
     if data and data.hc_recommended then hcText:Show() else hcText:Hide() end
@@ -274,6 +279,36 @@ function Panel:Toggle()
     Panel:Refresh(cs.currentProf, cs.currentSkill, cs.currentMaxSkill,
       cs.currentData, cs.activeStepIndex)
   end
+end
+
+function Panel:UpdateGuideBtnLabel()
+  if not _guideBtn then return end
+  _guideBtn:SetText(frame and frame:IsShown() and "< Guide" or "Guide >")
+end
+
+local _guideBtnReady = false
+function Panel:EnsureGuideBtn()
+  if _guideBtnReady then return end
+  _guideBtnReady = true
+
+  -- Close panel whenever the profession window hides (more reliable than TRADE_SKILL_HIDE event)
+  TradeSkillFrame:HookScript("OnHide", function()
+    NS.CraftSage.currentProf = nil
+    if frame then frame:Hide() end
+  end)
+
+  local btn = CreateFrame("Button", nil, TradeSkillFrame, "UIPanelButtonTemplate")
+  btn:SetSize(72, 18)
+  -- Anchor left of the frame's X close button; fall back to TOPRIGHT offset
+  local closeBtn = _G["TradeSkillFrameCloseButton"]
+  if closeBtn then
+    btn:SetPoint("RIGHT", closeBtn, "LEFT", -4, 0)
+  else
+    btn:SetPoint("TOPRIGHT", TradeSkillFrame, "TOPRIGHT", -25, -3)
+  end
+  btn:SetScript("OnClick", function() Panel:Toggle() end)
+  _guideBtn = btn
+  Panel:UpdateGuideBtnLabel()
 end
 
 _initOk, _initErr = pcall(_initialize)

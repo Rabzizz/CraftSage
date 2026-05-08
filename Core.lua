@@ -26,6 +26,7 @@ function CraftSage:OnEnable()
 end
 
 function CraftSage:OnTradeSkillShow()
+  NS.Panel:EnsureGuideBtn()
   local profName, skillLevel, maxSkillLevel = GetTradeSkillLine()
   self.currentProf     = profName
   self.currentSkill    = skillLevel

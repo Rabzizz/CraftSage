@@ -239,6 +239,20 @@ No unit test framework runs outside the game client. Test approach:
 
 ---
 
+## Releasing a new version
+
+Every release requires these three steps, in order, before pushing:
+
+1. Bump `## Version:` in `CraftSage.toc`
+2. Add a `## [x.y.z]` section to `CHANGELOG.md`
+3. Commit + `git push`
+
+Never use `git push --tags` — the CI workflow owns tags on GitHub. Pushing a tag manually before the workflow runs will cause it to skip the release.
+
+The GitHub Actions workflow (`.github/workflows/release.yml`) reads the version from the TOC, checks whether that tag already exists on GitHub, and if not packages the addon and publishes the release automatically.
+
+---
+
 ## Git
 
 - No `Co-Authored-By` lines in commit messages — ever.

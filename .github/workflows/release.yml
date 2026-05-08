@@ -1,0 +1,71 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # needed so we can list all existing tags
+
+      - name: Read version from TOC
+        id: ver
+        run: |
+          VERSION=$(grep -m1 "^## Version:" CraftSage.toc | sed 's/## Version:[[:space:]]*//')
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Check whether this version is already released
+        id: check
+        run: |
+          if git tag | grep -qx "v${{ steps.ver.outputs.version }}"; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Extract changelog section for this version
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          python3 - <<'PYEOF'
+          import re
+          version = "${{ steps.ver.outputs.version }}"
+          content  = open("CHANGELOG.md").read()
+          pattern  = r"(## \[" + re.escape(version) + r"\].*?)(?=\n## \[|\Z)"
+          m = re.search(pattern, content, re.DOTALL)
+          body = m.group(1).strip() if m else f"Release v{version}"
+          open("release_body.md", "w").write(body)
+          PYEOF
+
+      - name: Package addon
+        if: steps.check.outputs.exists == 'false'
+        run: |
+          VERSION="${{ steps.ver.outputs.version }}"
+          mkdir -p dist/CraftSage
+
+          # Mirror the include list in build-release.ps1
+          for item in CraftSage.toc Core.lua UI Data Libs Locale; do
+            cp -r "$item" "dist/CraftSage/$item"
+          done
+          for tga in *.tga; do
+            [ -f "$tga" ] && cp "$tga" "dist/CraftSage/$tga"
+          done
+
+          cd dist
+          zip -r "../CraftSage-v${VERSION}.zip" CraftSage/
+
+      - name: Create GitHub release
+        if: steps.check.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.ver.outputs.version }}
+          name: CraftSage v${{ steps.ver.outputs.version }}
+          body_path: release_body.md
+          files: CraftSage-v${{ steps.ver.outputs.version }}.zip

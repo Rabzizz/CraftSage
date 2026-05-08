@@ -3,7 +3,7 @@
 > Profession leveling guide for WoW Classic Era & Hardcore — tells you exactly what to craft next, from skill 1 to 300.
 
 ![WoW Classic Era](https://img.shields.io/badge/WoW-Classic%20Era-c69b3a?style=flat-square)
-![Version](https://img.shields.io/badge/version-1.0.0-4ade80?style=flat-square)
+[![Version](https://img.shields.io/github/v/release/Rabzizz/CraftSage?label=version&color=4ade80&style=flat-square)](https://github.com/Rabzizz/CraftSage/releases/latest)
 ![Interface](https://img.shields.io/badge/interface-11504-4ade80?style=flat-square)
 
 ---

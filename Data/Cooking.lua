@@ -4,65 +4,53 @@ CraftSageData["Cooking"] = {
   hc_recommended = false,
   steps = {
     {
-      recipe      = "Spice Bread",
-      skill_up_to = 40,
-      qty         = 55,
+      recipe      = "Brilliant Smallfish",
+      skill_up_to = 50,
+      qty         = 50,
       mats = {
-        { item = "Simple Flour", count = 1 },
-        { item = "Mild Spices",  count = 1 },
+        { item = 6291, count = 1 },  -- Raw Brilliant Smallfish
       },
     },
     {
-      recipe      = "Roasted Boar Meat",
-      skill_up_to = 85,
-      qty         = 55,
+      recipe      = "Longjaw Mud Snapper",
+      skill_up_to = 100,
+      qty         = 50,
       mats = {
-        { item = "Raw Boar Meat", count = 1 },
+        { item = 6289, count = 1 },  -- Raw Longjaw Mud Snapper
       },
     },
     {
-      recipe      = "Crab Cake",
-      skill_up_to = 130,
+      recipe      = "Bristle Whisker Catfish",
+      skill_up_to = 175,
+      qty         = 120,
+      mats = {
+        { item = 6308, count = 1 },  -- Raw Bristle Whisker Catfish
+      },
+    },
+    {
+      recipe      = "Mithril Headed Trout",
+      skill_up_to = 225,
       qty         = 60,
       mats = {
-        { item = "Crawler Meat",            count = 1 },
-        { item = "Refreshing Spring Water", count = 1 },
+        { item = 8365, count = 1 },  -- Raw Mithril Head Trout
       },
     },
     {
-      recipe      = "Curiously Tasty Omelet",
-      skill_up_to = 175,
-      qty         = 65,
-      mats = {
-        { item = "Raptor Egg",  count = 2 },
-        { item = "Mild Spices", count = 1 },
-      },
-    },
-    {
-      recipe      = "Tender Wolf Steak",
-      skill_up_to = 225,
+      recipe      = "Spotted Yellowtail",
+      skill_up_to = 275,
       qty         = 70,
       mats = {
-        { item = "Tender Wolf Meat", count = 2 },
-        { item = "Soothing Spices",  count = 1 },
+        { item = 4603, count = 1 },  -- Raw Spotted Yellowtail
       },
     },
     {
-      recipe      = "Juicy Bear Burger",
-      skill_up_to = 285,
-      qty         = 80,
-      mats = {
-        { item = "Bear Flank",      count = 2 },
-        { item = "Soothing Spices", count = 1 },
-      },
-    },
-    {
-      recipe      = "Smoked Desert Dumplings",
+      recipe      = "Mightfish Steak",
       skill_up_to = 300,
       qty         = 25,
       mats = {
-        { item = "Sandworm Meat",   count = 1 },
-        { item = "Soothing Spices", count = 1 },
+        { item = 13893, count = 1 }, -- Large Raw Mightfish
+        { item = 2692,  count = 1 }, -- Hot Spices
+        { item = 3713,  count = 1 }, -- Soothing Spices
       },
     },
   },

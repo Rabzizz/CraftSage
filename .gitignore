@@ -39,6 +39,7 @@ luac.out
 *.x86_64
 *.hex
 
+/dist/
 /.superpowers/*
 /.claude
 /.playwright-mcp

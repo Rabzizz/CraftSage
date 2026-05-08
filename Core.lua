@@ -117,19 +117,5 @@ function CraftSage:SlashCommand(input)
       if NS.ShoppingList:IsVisible() then NS.ShoppingList:Refresh() end
       self:Print("Progress reset for " .. self.currentProf)
     end
-  elseif cmd:sub(1, 5) == "debug" then
-    local skill = tonumber(strtrim(cmd:sub(6)))
-    if not skill then
-      self:Print("Usage: /craftsage debug <skill>")
-      return
-    end
-    if not self.currentProf then
-      self:Print("Open a profession window first.")
-      return
-    end
-    self.currentSkill    = skill
-    self.activeStepIndex = self:ComputeActiveStep(self.currentData, skill)
-    NS.Panel:Refresh(self.currentProf, skill, self.currentMaxSkill, self.currentData, self.activeStepIndex, true)
-    self:Print("Debug: skill forced to " .. skill)
   end
 end

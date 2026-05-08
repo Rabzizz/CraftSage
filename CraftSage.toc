@@ -1,8 +1,9 @@
 ## Interface: 11504
 ## Title: CraftSage
 ## Notes: Profession leveling guide for WoW Classic Era / Hardcore
-## Author: CraftSage
+## Author: Rabzizz
 ## Version: 1.0.0
+## IconTexture: Interface\AddOns\CraftSage\CraftSage-logo
 ## SavedVariables: CraftSageDB
 
 Libs\LibStub\LibStub.lua

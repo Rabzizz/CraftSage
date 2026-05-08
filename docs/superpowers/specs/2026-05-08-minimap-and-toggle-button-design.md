@@ -56,7 +56,8 @@ local broker = LibStub("LibDataBroker-1.1"):NewDataObject("CraftSage", {
     -- toggle logic (see Data flow below)
   end,
   OnTooltipShow = function(tip)
-    tip:AddLine(L["MINIMAP_TOOLTIP"])
+    tip:AddLine("CraftSage", 1, 0.82, 0)
+    tip:AddLine(L["MINIMAP_TOOLTIP"], 1, 1, 1)
   end,
 })
 
@@ -158,7 +159,7 @@ Three new keys added to all three locale files (`Locale/enUS.lua`, `Locale/frFR.
 
 | Key | enUS value | frFR value | deDE value |
 |---|---|---|---|
-| `MINIMAP_TOOLTIP` | `"CraftSage\nClick to toggle guide"` | `"CraftSage\nCliquez pour afficher le guide"` | `"CraftSage\nKlicken zum Guide ein-/ausblenden"` |
+| `MINIMAP_TOOLTIP` | `"Click to toggle guide"` | `"Cliquez pour afficher le guide"` | `"Klicken zum Guide ein-/ausblenden"` |
 | `NO_PROFESSION_OPEN` | `"Open a profession window\nto use CraftSage"` | `"Ouvrez une fenêtre de métier\npour utiliser CraftSage"` | `"Öffne ein Berufsfenster\num CraftSage zu nutzen"` |
 | `GUIDE_BTN` | `"⚗ Guide"` | `"⚗ Guide"` | `"⚗ Guide"` |
 

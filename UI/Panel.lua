@@ -11,7 +11,7 @@ local frame, titleText, profText, hcText
 local skillBarBg, skillBarFill, skillText
 local stepsLabel, stepRows, divider
 local matsLabel, noteText, matRows, msgText
-local shopBtn, resetBtn, toggleBtn
+local shopBtn, resetBtn
 local highlightedIndex
 
 local function ShowAllMats(show)
@@ -154,19 +154,11 @@ local function _initialize()
   closeBtn:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 2, 2)
   closeBtn:SetScript("OnClick", function() frame:Hide() end)
 
-  toggleBtn = CreateFrame("Button", nil, TradeSkillFrame, "UIPanelButtonTemplate")
-  toggleBtn:SetSize(72, 16)
-  toggleBtn:SetText(L["PANEL_TITLE"])
-  toggleBtn:SetPoint("TOPRIGHT", TradeSkillFrame, "TOPRIGHT", -42, -6)
-  toggleBtn:SetScript("OnClick", function()
-    if frame:IsShown() then
-      frame:Hide()
-    else
-      frame:ClearAllPoints()
-      frame:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", 2, 0)
-      frame:Show()
-    end
-  end)
+  local guideBtn = CreateFrame("Button", nil, TradeSkillFrame, "UIPanelButtonTemplate")
+  guideBtn:SetSize(60, 22)
+  guideBtn:SetText(L["GUIDE_BTN"])
+  guideBtn:SetPoint("RIGHT", TradeSkillCreateButton, "LEFT", -4, 0)
+  guideBtn:SetScript("OnClick", function() Panel:Toggle() end)
 
   table.insert(UISpecialFrames, "CraftSagePanelFrame")
 
@@ -177,11 +169,26 @@ local function _initialize()
   function Panel:Refresh(profName, skillLevel, maxSkillLevel, data, activeStepIndex, stepChanged)
     if not frame then return end
     frame:ClearAllPoints()
-    frame:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", 2, 0)
+    if TradeSkillFrame:IsShown() then
+      frame:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", 2, 0)
+    else
+      frame:SetPoint("CENTER", UIParent, "CENTER", 200, 0)
+    end
     frame:Show()
 
     profText:SetText(profName or "")
     if data and data.hc_recommended then hcText:Show() else hcText:Hide() end
+
+    if not profName then
+      msgText:SetText(L["NO_PROFESSION_OPEN"])
+      msgText:Show()
+      stepsLabel:Hide(); divider:Hide(); matsLabel:Hide(); noteText:Hide()
+      ShowAllMats(false)
+      skillBarFill:SetWidth(1)
+      skillText:SetText("")
+      for i = 1, 3 do stepRows[i]:SetText("") end
+      return
+    end
 
     if not data then
       msgText:SetText(L["NO_GUIDE"])
@@ -256,6 +263,16 @@ local function _initialize()
   function Panel:Hide()  frame:Hide() end
   function Panel:IsVisible() return frame:IsShown() end
   function Panel:SetHighlightedRecipeIndex(idx) highlightedIndex = idx end
+end
+
+function Panel:Toggle()
+  if frame:IsShown() then
+    frame:Hide()
+  else
+    local cs = NS.CraftSage
+    Panel:Refresh(cs.currentProf, cs.currentSkill, cs.currentMaxSkill,
+      cs.currentData, cs.activeStepIndex)
+  end
 end
 
 _initOk, _initErr = pcall(_initialize)

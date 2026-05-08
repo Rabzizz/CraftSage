@@ -5,82 +5,131 @@ CraftSageData["Alchemy"] = {
   steps = {
     {
       recipe      = "Minor Healing Potion",
-      skill_up_to = 55,
-      qty         = 65,
+      skill_up_to = 60,
+      qty         = 59,
       mats = {
-        { item = "Peacebloom",  count = 1 },
-        { item = "Silverleaf",  count = 1 },
-        { item = "Empty Vial",  count = 1 },
+        { item = 2447, count = 1 },  -- Peacebloom
+        { item = 765,  count = 1 },  -- Silverleaf
+        { item = 3371, count = 1 },  -- Empty Vial
       },
     },
     {
       recipe      = "Lesser Healing Potion",
       skill_up_to = 110,
-      qty         = 70,
+      qty         = 59,
       mats = {
-        { item = "Briarthorn",  count = 1 },
-        { item = "Silverleaf",  count = 1 },
-        { item = "Leaded Vial", count = 1 },
-      },
-    },
-    {
-      recipe      = "Elixir of Wisdom",
-      skill_up_to = 140,
-      qty         = 40,
-      mats = {
-        { item = "Briarthorn",   count = 1 },
-        { item = "Swiftthistle", count = 1 },
-        { item = "Leaded Vial",  count = 1 },
+        { item = 118,  count = 1 },  -- Minor Healing Potion
+        { item = 2450, count = 1 },  -- Briarthorn
       },
     },
     {
       recipe      = "Healing Potion",
-      skill_up_to = 185,
-      qty         = 55,
+      skill_up_to = 140,
+      qty         = 30,
       mats = {
-        { item = "Bruiseweed",  count = 1 },
-        { item = "Briarthorn",  count = 1 },
-        { item = "Leaded Vial", count = 1 },
+        { item = 2453, count = 1 },  -- Bruiseweed
+        { item = 2450, count = 1 },  -- Briarthorn
+        { item = 3372, count = 1 },  -- Leaded Vial
+      },
+    },
+    {
+      recipe      = "Lesser Mana Potion",
+      skill_up_to = 155,
+      qty         = 15,
+      mats = {
+        { item = 785,  count = 1 },  -- Mageroyal
+        { item = 3820, count = 1 },  -- Stranglekelp
+        { item = 3371, count = 1 },  -- Empty Vial
       },
     },
     {
       recipe      = "Greater Healing Potion",
-      skill_up_to = 215,
-      qty         = 40,
+      skill_up_to = 185,
+      qty         = 30,
       mats = {
-        { item = "Kingsblood",   count = 1 },
-        { item = "Liferoot",     count = 1 },
-        { item = "Crystal Vial", count = 1 },
+        { item = 3357, count = 1 },  -- Liferoot
+        { item = 3356, count = 1 },  -- Kingsblood
+        { item = 3372, count = 1 },  -- Leaded Vial
+      },
+    },
+    {
+      recipe      = "Elixir of Agility",
+      skill_up_to = 210,
+      qty         = 25,
+      mats = {
+        { item = 3820, count = 1 },  -- Stranglekelp
+        { item = 3821, count = 1 },  -- Goldthorn
+        { item = 3372, count = 1 },  -- Leaded Vial
+      },
+    },
+    {
+      recipe      = "Elixir of Greater Defense",
+      skill_up_to = 215,
+      qty         = 10,
+      mats = {
+        { item = 3355, count = 1 },  -- Wild Steelbloom
+        { item = 3821, count = 1 },  -- Goldthorn
+        { item = 3372, count = 1 },  -- Leaded Vial
       },
     },
     {
       recipe      = "Superior Healing Potion",
-      skill_up_to = 250,
-      qty         = 50,
+      skill_up_to = 230,
+      qty         = 15,
       mats = {
-        { item = "Sungrass",     count = 1 },
-        { item = "Kingsblood",   count = 1 },
-        { item = "Crystal Vial", count = 1 },
+        { item = 8838, count = 1 },  -- Sungrass
+        { item = 3358, count = 1 },  -- Khadgar's Whisker
+        { item = 8925, count = 1 },  -- Crystal Vial
+      },
+    },
+    {
+      recipe      = "Philosophers' Stone",
+      skill_up_to = 231,
+      qty         = 1,
+      mats = {
+        { item = 3575, count = 4 },  -- Iron Bar
+        { item = 9262, count = 1 },  -- Black Vitriol
+        { item = 8831, count = 4 },  -- Purple Lotus
+        { item = 4625, count = 4 },  -- Firebloom
+      },
+    },
+    {
+      recipe      = "Elixir of Detect Undead",
+      skill_up_to = 250,
+      qty         = 19,
+      mats = {
+        { item = 8836, count = 1 },  -- Arthas' Tears
+        { item = 8925, count = 1 },  -- Crystal Vial
+      },
+    },
+    {
+      recipe      = "Elixir of Greater Agility",
+      skill_up_to = 265,
+      qty         = 15,
+      mats = {
+        { item = 8838, count = 1 },  -- Sungrass
+        { item = 3821, count = 1 },  -- Goldthorn
+        { item = 8925, count = 1 },  -- Crystal Vial
       },
     },
     {
       recipe      = "Superior Mana Potion",
-      skill_up_to = 265,
-      qty         = 25,
+      skill_up_to = 285,
+      qty         = 20,
       mats = {
-        { item = "Sungrass",     count = 2 },
-        { item = "Blindweed",    count = 1 },
-        { item = "Crystal Vial", count = 1 },
+        { item = 8838, count = 2 },  -- Sungrass
+        { item = 8839, count = 2 },  -- Blindweed
+        { item = 8925, count = 1 },  -- Crystal Vial
       },
     },
     {
       recipe      = "Major Healing Potion",
       skill_up_to = 300,
-      qty         = 40,
+      qty         = 18,
       mats = {
-        { item = "Golden Sansam",       count = 3 },
-        { item = "Mountain Silversage", count = 1 },
-        { item = "Crystal Vial",        count = 1 },
+        { item = 13464, count = 2 }, -- Golden Sansam
+        { item = 13465, count = 1 }, -- Mountain Silversage
+        { item = 8925,  count = 1 }, -- Crystal Vial
       },
     },
   },

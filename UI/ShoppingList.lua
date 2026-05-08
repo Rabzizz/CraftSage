@@ -73,22 +73,23 @@ copyBtn:SetText(L["COPY_TO_CHAT"])
 -- ── Category map ─────────────────────────────────────────────────────────────
 
 local CAT = {
-  ["Peacebloom"]="Herbs",["Silverleaf"]="Herbs",["Briarthorn"]="Herbs",
-  ["Bruiseweed"]="Herbs",["Mageroyal"]="Herbs",["Swiftthistle"]="Herbs",
-  ["Stranglekelp"]="Herbs",["Kingsblood"]="Herbs",["Liferoot"]="Herbs",
-  ["Goldthorn"]="Herbs",["Sungrass"]="Herbs",["Blindweed"]="Herbs",
-  ["Golden Sansam"]="Herbs",["Mountain Silversage"]="Herbs",
-  ["Rough Stone"]="Metals",["Coarse Stone"]="Metals",["Heavy Stone"]="Metals",
-  ["Solid Stone"]="Metals",["Dense Stone"]="Metals",
-  ["Copper Bar"]="Metals",["Bronze Bar"]="Metals",["Iron Bar"]="Metals",
-  ["Gold Bar"]="Metals",["Mithril Bar"]="Metals",["Thorium Bar"]="Metals",
-  ["Truesilver Bar"]="Metals",["Weak Flux"]="Metals",
-  ["Light Leather"]="Leather",["Medium Leather"]="Leather",
-  ["Heavy Leather"]="Leather",["Thick Leather"]="Leather",
-  ["Rugged Leather"]="Leather",["Cured Medium Hide"]="Leather",
-  ["Toughened Leather"]="Leather",
-  ["Linen Cloth"]="Cloth",["Wool Cloth"]="Cloth",["Silk Cloth"]="Cloth",
-  ["Mageweave Cloth"]="Cloth",["Runecloth"]="Cloth",
+  -- Herbs
+  [2447]="Herbs",[765]="Herbs",[2450]="Herbs",[2453]="Herbs",
+  [785]="Herbs",[3355]="Herbs",[3820]="Herbs",[3356]="Herbs",
+  [3357]="Herbs",[3358]="Herbs",[3821]="Herbs",[4625]="Herbs",
+  [8831]="Herbs",[8836]="Herbs",[8838]="Herbs",[8839]="Herbs",
+  [13464]="Herbs",[13465]="Herbs",
+  -- Metals / Stone
+  [2835]="Metals",[2836]="Metals",[2838]="Metals",[7912]="Metals",[12365]="Metals",
+  [2840]="Metals",[2841]="Metals",[2842]="Metals",[3575]="Metals",[3577]="Metals",
+  [3859]="Metals",[3860]="Metals",[12359]="Metals",
+  [2880]="Metals",[3470]="Metals",[3478]="Metals",[3486]="Metals",[7966]="Metals",
+  [11184]="Metals",[11185]="Metals",[11186]="Metals",[7910]="Metals",
+  -- Leather
+  [2318]="Leather",[2319]="Leather",[4234]="Leather",[4304]="Leather",[8170]="Leather",
+  [4233]="Leather",[4236]="Leather",
+  -- Cloth
+  [2589]="Cloth",[2592]="Cloth",[4306]="Cloth",[4338]="Cloth",[14047]="Cloth",
 }
 local CAT_ORDER = { "Herbs", "Metals", "Leather", "Cloth", "Other" }
 
@@ -174,7 +175,11 @@ local function AggregateMats(data, fromIdx, skillLevel)
     table.insert(groups[cat], { item = item, qty = qty })
   end
   for _, cat in ipairs(CAT_ORDER) do
-    table.sort(groups[cat], function(a, b) return a.item < b.item end)
+    table.sort(groups[cat], function(a, b)
+      local na = GetItemInfo(a.item) or tostring(a.item)
+      local nb = GetItemInfo(b.item) or tostring(b.item)
+      return na < nb
+    end)
   end
   return groups
 end
@@ -236,7 +241,7 @@ function ShoppingList:Refresh()
           r.name:SetTextColor(0.85, 0.85, 0.85, 1)
           r.qty:SetTextColor(0.7, 0.7, 1, 1)
         end
-        r.name:SetText(entry.item)
+        r.name:SetText(GetItemInfo(entry.item) or ("Item:" .. entry.item))
         r.qty:SetText("x" .. entry.qty)
         r.frame:Show()
         table.insert(activeRows, r.frame)
@@ -287,7 +292,8 @@ copyBtn:SetScript("OnClick", function()
   for _, cat in ipairs(CAT_ORDER) do
     for _, entry in ipairs(groups[cat]) do
       if not checks[entry.item] then
-        table.insert(parts, entry.item .. " x" .. entry.qty)
+        local name = GetItemInfo(entry.item) or ("Item:" .. entry.item)
+        table.insert(parts, name .. " x" .. entry.qty)
       end
     end
   end

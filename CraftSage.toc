@@ -14,6 +14,8 @@ Libs\AceDB-3.0\AceDB-3.0.lua
 Libs\AceConsole-3.0\AceConsole-3.0.lua
 Libs\AceHook-3.0\AceHook-3.0.lua
 Libs\AceLocale-3.0\AceLocale-3.0.lua
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
 Libs\SimpleSticky.lua
 
 Locale\enUS.lua
@@ -33,3 +35,4 @@ UI\Panel.lua
 UI\ShoppingList.lua
 
 Core.lua
+UI\MinimapButton.lua

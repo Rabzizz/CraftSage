@@ -11,6 +11,7 @@ NS.CraftSage = CraftSage
 local DB_DEFAULTS = {
   char = {
     checkmarks = {},
+    minimap    = { hide = false },
   }
 }
 

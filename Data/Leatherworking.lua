@@ -4,94 +4,177 @@ CraftSageData["Leatherworking"] = {
   hc_recommended = false,
   steps = {
     {
-      recipe      = "Handstitched Leather Belt",
-      skill_up_to = 55,
-      qty         = 65,
+      recipe      = "Light Leather",
+      skill_up_to = 30,
+      qty         = 30,
       mats = {
-        { item = "Light Leather", count = 3 },
-        { item = "Coarse Thread", count = 1 },
+        { item = 2934, count = 3 },  -- Ruined Leather Scraps
+      },
+    },
+    {
+      recipe      = "Light Armor Kit",
+      skill_up_to = 45,
+      qty         = 18,
+      mats = {
+        { item = 2318, count = 1 },  -- Light Leather
+      },
+    },
+    {
+      recipe      = "Cured Light Hide",
+      skill_up_to = 55,
+      qty         = 10,
+      mats = {
+        { item = 783,  count = 1 },  -- Light Hide
+        { item = 4289, count = 1 },  -- Salt
       },
     },
     {
       recipe      = "Embossed Leather Gloves",
-      skill_up_to = 100,
-      qty         = 55,
+      skill_up_to = 85,
+      qty         = 30,
       mats = {
-        { item = "Light Leather", count = 3 },
-        { item = "Coarse Thread", count = 1 },
+        { item = 2318, count = 3 },  -- Light Leather
+        { item = 2320, count = 2 },  -- Coarse Thread
       },
     },
     {
       recipe      = "Fine Leather Belt",
-      skill_up_to = 130,
-      qty         = 40,
+      skill_up_to = 100,
+      qty         = 15,
       mats = {
-        { item = "Light Leather", count = 6 },
-        { item = "Fine Thread",   count = 1 },
+        { item = 2318, count = 6 },  -- Light Leather
+        { item = 2320, count = 2 },  -- Coarse Thread
+      },
+    },
+    {
+      recipe      = "Cured Medium Hide",
+      skill_up_to = 115,
+      qty         = 15,
+      mats = {
+        { item = 4232, count = 1 },  -- Medium Hide
+        { item = 4289, count = 1 },  -- Salt
+      },
+    },
+    {
+      recipe      = "Dark Leather Boots",
+      skill_up_to = 135,
+      qty         = 22,
+      mats = {
+        { item = 2319, count = 4 },  -- Medium Leather
+        { item = 2321, count = 2 },  -- Fine Thread
+        { item = 4340, count = 1 },  -- Gray Dye
       },
     },
     {
       recipe      = "Dark Leather Belt",
-      skill_up_to = 155,
-      qty         = 35,
+      skill_up_to = 150,
+      qty         = 15,
       mats = {
-        { item = "Medium Leather",    count = 6 },
-        { item = "Fine Thread",       count = 1 },
-        { item = "Cured Medium Hide", count = 1 },
+        { item = 4246, count = 1 },  -- Fine Leather Belt
+        { item = 4233, count = 1 },  -- Cured Medium Hide
+        { item = 2321, count = 2 },  -- Fine Thread
+        { item = 4340, count = 1 },  -- Gray Dye
       },
     },
     {
-      recipe      = "Hillman's Leather Gloves",
-      skill_up_to = 185,
-      qty         = 40,
+      recipe      = "Heavy Leather",
+      skill_up_to = 155,
+      qty         = 5,
       mats = {
-        { item = "Heavy Leather", count = 6 },
-        { item = "Fine Thread",   count = 2 },
+        { item = 2319, count = 5 },  -- Medium Leather
+      },
+    },
+    {
+      recipe      = "Cured Heavy Hide",
+      skill_up_to = 160,
+      qty         = 5,
+      mats = {
+        { item = 4235, count = 1 },  -- Heavy Hide
+        { item = 4289, count = 3 },  -- Salt
+      },
+    },
+    {
+      recipe      = "Heavy Armor Kit",
+      skill_up_to = 180,
+      qty         = 22,
+      mats = {
+        { item = 4234, count = 5 },  -- Heavy Leather
+        { item = 2321, count = 1 },  -- Fine Thread
+      },
+    },
+    {
+      recipe      = "Barbaric Shoulders",
+      skill_up_to = 190,
+      qty         = 10,
+      mats = {
+        { item = 4234, count = 8 },  -- Heavy Leather
+        { item = 4236, count = 1 },  -- Cured Heavy Hide
+        { item = 2321, count = 2 },  -- Fine Thread
       },
     },
     {
       recipe      = "Guardian Gloves",
-      skill_up_to = 220,
-      qty         = 45,
+      skill_up_to = 200,
+      qty         = 10,
       mats = {
-        { item = "Thick Leather", count = 4 },
-        { item = "Silken Thread", count = 2 },
-        { item = "Iron Buckle",   count = 1 },
+        { item = 4234, count = 4 },  -- Heavy Leather
+        { item = 4236, count = 1 },  -- Cured Heavy Hide
+        { item = 4291, count = 1 },  -- Silken Thread
+      },
+    },
+    {
+      recipe      = "Thick Armor Kit",
+      skill_up_to = 220,
+      qty         = 20,
+      mats = {
+        { item = 4304, count = 5 },  -- Thick Leather
+        { item = 4291, count = 1 },  -- Silken Thread
       },
     },
     {
       recipe      = "Nightscape Headband",
-      skill_up_to = 250,
-      qty         = 40,
+      skill_up_to = 230,
+      qty         = 11,
       mats = {
-        { item = "Thick Leather", count = 4 },
-        { item = "Silken Thread", count = 2 },
+        { item = 4304, count = 5 },  -- Thick Leather
+        { item = 4291, count = 2 },  -- Silken Thread
       },
     },
     {
       recipe      = "Nightscape Pants",
-      skill_up_to = 265,
+      skill_up_to = 250,
       qty         = 20,
       mats = {
-        { item = "Thick Leather", count = 14 },
-        { item = "Silken Thread", count = 2 },
+        { item = 4304, count = 14 }, -- Thick Leather
+        { item = 4291, count = 4 },  -- Silken Thread
       },
     },
     {
       recipe      = "Rugged Armor Kit",
-      skill_up_to = 285,
-      qty         = 30,
+      skill_up_to = 260,
+      qty         = 12,
       mats = {
-        { item = "Rugged Leather", count = 3 },
+        { item = 8170, count = 5 },  -- Rugged Leather
       },
     },
     {
-      recipe      = "Wicked Leather Belt",
-      skill_up_to = 300,
-      qty         = 25,
+      recipe      = "Wicked Leather Gauntlets",
+      skill_up_to = 290,
+      qty         = 32,
       mats = {
-        { item = "Rugged Leather", count = 6 },
-        { item = "Rune Thread",    count = 2 },
+        { item = 8170,  count = 8 }, -- Rugged Leather
+        { item = 2325,  count = 1 }, -- Black Dye
+        { item = 14341, count = 1 }, -- Rune Thread
+      },
+    },
+    {
+      recipe      = "Wicked Leather Headband",
+      skill_up_to = 300,
+      qty         = 10,
+      mats = {
+        { item = 8170,  count = 12 }, -- Rugged Leather
+        { item = 2325,  count = 1 },  -- Black Dye
+        { item = 14341, count = 1 },  -- Rune Thread
       },
     },
   },

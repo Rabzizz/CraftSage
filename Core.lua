@@ -45,9 +45,17 @@ end
 local _craftFrame = CreateFrame("Frame")
 _craftFrame:RegisterEvent("BAG_UPDATE")
 _craftFrame:RegisterEvent("SKILL_LINES_CHANGED")
+_craftFrame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 _craftFrame:SetScript("OnEvent", function(self, event)
   local cs = NS.CraftSage
   if not cs.currentProf or not NS.Panel:IsVisible() then return end
+
+  if event == "GET_ITEM_INFO_RECEIVED" then
+    NS.Panel:Refresh(cs.currentProf, cs.currentSkill, cs.currentMaxSkill,
+      cs.currentData, cs.activeStepIndex)
+    if NS.ShoppingList:IsVisible() then NS.ShoppingList:Refresh() end
+    return
+  end
 
   if event == "SKILL_LINES_CHANGED" then
     local profName, skillLevel, maxSkillLevel = GetTradeSkillLine()

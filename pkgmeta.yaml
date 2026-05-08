@@ -1,0 +1,13 @@
+package-as: CraftSage
+
+ignore:
+  - .claude
+  - .github
+  - .gitignore
+  - .playwright-mcp
+  - .superpowers
+  - CLAUDE.md
+  - build-release.ps1
+  - dist
+  - docs
+  - pkgmeta.yaml

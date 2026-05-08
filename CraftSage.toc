@@ -16,6 +16,8 @@ Libs\AceLocale-3.0\AceLocale-3.0.lua
 Libs\SimpleSticky.lua
 
 Locale\enUS.lua
+Locale\frFR.lua
+Locale\deDE.lua
 
 Data\Alchemy.lua
 Data\Blacksmithing.lua

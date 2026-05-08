@@ -1,0 +1,22 @@
+local L = LibStub("AceLocale-3.0"):NewLocale("CraftSage", "deDE")
+if not L then return end
+
+L["PANEL_TITLE"]        = "CraftSage"
+L["HC_BADGE"]           = "HC Empfohlen"
+L["GUIDE_STEPS"]        = "Guide-Schritte"
+L["STEP_MATS"]          = "Schritt-Materialien:"
+L["SHOPPING_LIST_BTN"]  = "Einkaufsliste"
+L["RESET_BTN"]          = "Zurücksetzen"
+L["NO_GUIDE"]           = "Kein Guide verfügbar."
+L["MAXED"]              = "Maximiert! Glückwunsch!"
+L["SKILL_FMT"]          = "%d / %d"
+L["SHOPPING_TITLE"]     = "Einkaufsliste"
+L["SHOPPING_RANGE_FMT"] = "%s - Fertigkeit %d bis 300"
+L["GATHERED_FMT"]       = "%d von %d gesammelt (%d%%)"
+L["CLEAR_CHECKS"]       = "Auswahl aufheben"
+L["COPY_TO_CHAT"]       = "In Chat kopieren"
+L["Herbs"]              = "Kräuter"
+L["Metals"]             = "Metalle"
+L["Leather"]            = "Leder"
+L["Cloth"]              = "Stoff"
+L["Other"]              = "Sonstiges"

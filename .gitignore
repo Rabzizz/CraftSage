@@ -43,3 +43,5 @@ luac.out
 /.superpowers/*
 /.claude
 /.playwright-mcp
+/CLAUDE.md
+/docs/superpowers/

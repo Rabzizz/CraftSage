@@ -1,4 +1,4 @@
-## Interface: 11504
+## Interface: 11508
 ## Title: CraftSage
 ## Notes: Profession leveling guide for WoW Classic Era / Hardcore
 ## Author: Rabzizz

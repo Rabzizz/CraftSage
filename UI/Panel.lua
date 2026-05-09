@@ -32,15 +32,13 @@ local _guideBtn
 
 local function ShowAllMats(show)
   for i = 1, 6 do
-    matRows[i].name:SetShown(show)
-    matRows[i].count:SetShown(show)
+    matRows[i]:SetShown(show)
   end
 end
 
 local function HideUnusedMatRows(count)
   for i = count + 1, 6 do
-    matRows[i].name:Hide()
-    matRows[i].count:Hide()
+    matRows[i]:Hide()
   end
 end
 
@@ -140,17 +138,43 @@ local function _initialize()
   matRows = {}
   for i = 1, 6 do
     local yOff = -170 - (i - 1) * 14
-    local nm = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    nm:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, yOff)
-    nm:SetWidth(120)
-    nm:SetJustifyH("LEFT")
-    nm:SetTextColor(0.85, 0.85, 0.85, 1)
+    local r = CreateFrame("Frame", nil, frame)
+    r:SetPoint("TOPLEFT",  frame, "TOPLEFT",  10, yOff)
+    r:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -8, yOff)
+    r:SetHeight(14)
+    r:EnableMouse(true)
 
-    local ct = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-    ct:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -8, yOff)
-    ct:SetJustifyH("RIGHT")
+    r.name = r:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    r.name:SetPoint("LEFT", r, "LEFT", 0, 0)
+    r.name:SetWidth(110)
+    r.name:SetJustifyH("LEFT")
 
-    matRows[i] = { name = nm, count = ct }
+    r.buyTag = r:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    r.buyTag:SetPoint("LEFT", r.name, "RIGHT", 2, 0)
+    r.buyTag:SetTextColor(1, 0.8, 0.2, 1)
+    r.buyTag:Hide()
+
+    r.count = r:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    r.count:SetPoint("RIGHT", r, "RIGHT", 0, 0)
+    r.count:SetJustifyH("RIGHT")
+
+    r:SetScript("OnEnter", function(self)
+      if not self._itemId then return end
+      local link = GetItemLink(self._itemId)
+      if not link then return end
+      GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+      GameTooltip:SetHyperlink(link)
+      GameTooltip:Show()
+    end)
+    r:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    r:SetScript("OnMouseDown", function(self, button)
+      if button == "LeftButton" and IsControlKeyDown() and self._itemId then
+        StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK", nil, nil,
+          "https://www.wowhead.com/classic/item=" .. self._itemId)
+      end
+    end)
+
+    matRows[i] = r
   end
 
   msgText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
@@ -263,19 +287,29 @@ local function _initialize()
 
     for i, mat in ipairs(step.mats) do
       if i > 6 then break end
+      local r    = matRows[i]
       local have = GetItemCount(mat.item) or 0
       local need = mat.count * remaining
       local name = GetItemInfo(mat.item) or ("Item:" .. mat.item)
-      matRows[i].name:SetText(name)
-      matRows[i].name:Show()
-      if have >= need then
-        matRows[i].count:SetText(string.format("%d / %d", have, need))
-        matRows[i].count:SetTextColor(0.3, 1, 0.3, 1)
+      r._itemId = mat.item
+      r:Show()
+      if mat.source == "vendor" then
+        r.name:SetText(name)
+        r.name:SetTextColor(1, 0.8, 0.2, 1)
+        r.buyTag:SetText(L["MAT_SOURCE_VENDOR"])
+        r.buyTag:Show()
       else
-        matRows[i].count:SetText(string.format("|cffffff44%d|r / %d", have, need))
-        matRows[i].count:SetTextColor(1, 0.3, 0.3, 1)
+        r.name:SetText(name)
+        r.name:SetTextColor(0.85, 0.85, 0.85, 1)
+        r.buyTag:Hide()
       end
-      matRows[i].count:Show()
+      if have >= need then
+        r.count:SetText(string.format("%d / %d", have, need))
+        r.count:SetTextColor(0.3, 1, 0.3, 1)
+      else
+        r.count:SetText(string.format("|cffffff44%d|r / %d", have, need))
+        r.count:SetTextColor(1, 0.3, 0.3, 1)
+      end
     end
     HideUnusedMatRows(#step.mats)
   end

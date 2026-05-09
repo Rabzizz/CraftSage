@@ -138,8 +138,8 @@ local function AcquireRow(n)
       if not item then return end
       if button == "LeftButton" then
         if IsControlKeyDown() then
-          StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK", nil, nil,
-            "https://www.wowhead.com/classic/item=" .. item)
+          NS.wowheadUrl = "https://www.wowhead.com/classic/item=" .. item
+          StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK")
         else
           local prof   = NS.CraftSage.currentProf
           local checks = NS.CraftSage.db.char.checkmarks

@@ -1,15 +1,20 @@
 local AddonName, NS = ...
 local L = LibStub("AceLocale-3.0"):GetLocale("CraftSage")
 
+NS.wowheadUrl = ""
+
 StaticPopupDialogs["CRAFTSAGE_WOWHEAD_LINK"] = {
   text         = L["WOWHEAD_POPUP_TITLE"],
   button1      = CLOSE,
   hasEditBox   = 1,
   editBoxWidth = 260,
-  OnShow = function(self, data)
-    self.editBox:SetText(self.data or data or "")
-    self.editBox:SetFocus()
-    self.editBox:HighlightText()
+  OnShow = function(self)
+    local eb = self.editBox or _G[self:GetName() .. "EditBox"]
+    if eb then
+      eb:SetText(NS.wowheadUrl)
+      eb:SetFocus()
+      eb:HighlightText()
+    end
   end,
   timeout      = 0,
   whileDead    = true,
@@ -136,8 +141,8 @@ local function _initialize()
     local link    = GetTradeSkillRecipeLink(self._recipeIndex)
     local spellId = link and link:match("|Hspell:(%d+)|h")
     if spellId then
-      StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK", nil, nil,
-        "https://www.wowhead.com/classic/spell=" .. spellId)
+      NS.wowheadUrl = "https://www.wowhead.com/classic/spell=" .. spellId
+      StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK")
     end
   end)
   stepRows[1] = activeStepRow
@@ -239,8 +244,8 @@ local function _initialize()
     r:SetScript("OnLeave", function() GameTooltip:Hide() end)
     r:SetScript("OnMouseDown", function(self, button)
       if button == "LeftButton" and IsControlKeyDown() and self._itemId then
-        StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK", nil, nil,
-          "https://www.wowhead.com/classic/item=" .. self._itemId)
+        NS.wowheadUrl = "https://www.wowhead.com/classic/item=" .. self._itemId
+        StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK")
       end
     end)
 

@@ -1,5 +1,15 @@
 # CraftSage Changelog
 
+## [1.2.0] — 2026-05-09
+
+### Added
+- **Trainer steps** — data files now include trainer-visit steps (e.g. "Learn Expert Alchemy"). The active step renders as an amber callout block with faction-appropriate trainer location (Alliance vs. Horde via `UnitFactionGroup`). Dimmed upcoming steps show `[Trainer]` instead of a skill range.
+- **Mat source tags** — all materials now carry a `source` field (`gather` / `vendor` / `craft`). Vendor-bought items (vials, salt, rods, etc.) render their name in amber with a `[buy]` tag in both the panel and the shopping list.
+- **Item tooltips on hover** — hovering any mat row in the panel or shopping list shows the native WoW item tooltip. Hovering the active recipe row shows the recipe tooltip.
+- **Ctrl+Click → Wowhead popup** — Ctrl+clicking any mat row opens a dialog pre-filled with the Wowhead URL (`https://www.wowhead.com/classic/item=<id>`). Ctrl+clicking the active recipe row opens the spell URL (`https://www.wowhead.com/classic/spell=<id>`).
+
+---
+
 ## [1.1.0] — 2026-05-08
 
 ### Added

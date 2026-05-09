@@ -145,7 +145,7 @@ CraftSageData["Tailoring"] = {
       qty         = 25,
       mats = {
         { item = 4339,  count = 3, source = "craft" }, -- Bolt of Mageweave
-        { item = 8343,  count = 2 }, -- Heavy Silken Thread
+        { item = 8343,  count = 2, source = "vendor" }, -- Heavy Silken Thread
       },
     },
     {

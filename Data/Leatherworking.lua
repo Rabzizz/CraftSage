@@ -173,8 +173,8 @@ CraftSageData["Leatherworking"] = {
       qty         = 10,
       mats = {
         { item = 8170,  count = 12 }, -- Rugged Leather
-        { item = 2325,  count = 1 },  -- Black Dye
-        { item = 14341, count = 1 },  -- Rune Thread
+        { item = 2325,  count = 1, source = "vendor" },  -- Black Dye
+        { item = 14341, count = 1, source = "vendor" },  -- Rune Thread
       },
     },
   },

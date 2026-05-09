@@ -2,10 +2,11 @@
 
 > Profession leveling guide for WoW Classic Era & Hardcore — tells you exactly what to craft next, from skill 1 to 300.
 
-![WoW Classic Era](https://img.shields.io/badge/WoW-Classic%20Era-c69b3a?style=flat-square)
-[![Version](https://img.shields.io/github/v/release/Rabzizz/CraftSage?label=version&color=4ade80&style=flat-square)](https://github.com/Rabzizz/CraftSage/releases/latest)
-![Interface](https://img.shields.io/badge/interface-11504-4ade80?style=flat-square)
 
+![CurseForgeGameVersions](https://img.shields.io/curseforge/game-versions/1537185?style=flat-square&logo=battledotnet
+)
+![CurseForge Downloads](https://img.shields.io/curseforge/dt/1537185)
+[![Version](https://img.shields.io/github/v/release/Rabzizz/CraftSage?label=version&color=4ade80&style=flat-square)](https://github.com/Rabzizz/CraftSage/releases/latest)
 ---
 
 ## What it does
@@ -16,10 +17,14 @@ CraftSage attaches a side panel to the native TradeSkill window. It reads your c
 
 - **Auto-tracks skill level** — always in sync, no configuration required
 - **Step-by-step guide** — active recipe highlighted in your TradeSkill list, next two steps shown dimmed
+- **Trainer step callouts** — when you need to visit a trainer (Apprentice → Expert → Artisan), the panel shows an amber callout with the trainer's name and location for your faction
 - **Live mat counts** — green/red have/need counts pulled directly from your bags
+- **Vendor mat tags** — materials you buy from an NPC (vials, salt, rods, etc.) are highlighted in amber with a `[buy]` tag so you know not to farm them
+- **Item tooltips** — hover any material or the active recipe to see its native WoW tooltip
+- **Ctrl+Click → Wowhead** — Ctrl+click any mat or recipe to get a pre-filled Wowhead URL ready to copy
 - **Shopping list** — full material aggregation with checkboxes and one-click Copy to Chat
 - **Skill progress bar** — visual 0–300 bar at a glance
-- **HC Recommended badge** — marks professions with gold-efficient
+- **HC Recommended badge** — marks professions with gold-efficient leveling paths
 - **8 professions supported** — Alchemy, Blacksmithing, Engineering, Enchanting, Leatherworking, Tailoring, Cooking, First Aid
 
 **Localizations:** English (enUS), French (frFR), German (deDE)

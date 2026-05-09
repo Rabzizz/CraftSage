@@ -1,6 +1,21 @@
 local AddonName, NS = ...
 local L = LibStub("AceLocale-3.0"):GetLocale("CraftSage")
 
+StaticPopupDialogs["CRAFTSAGE_WOWHEAD_LINK"] = {
+  text         = L["WOWHEAD_POPUP_TITLE"],
+  button1      = CLOSE,
+  hasEditBox   = 1,
+  editBoxWidth = 260,
+  OnShow = function(self, data)
+    self.editBox:SetText(data or "")
+    self.editBox:SetFocus()
+    self.editBox:HighlightText()
+  end,
+  timeout      = 0,
+  whileDead    = true,
+  hideOnEscape = true,
+}
+
 local Panel = {}
 NS.Panel = Panel
 

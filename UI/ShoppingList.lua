@@ -177,6 +177,7 @@ end
 local function AggregateMats(data, fromIdx, skillLevel)
   local totals  = {}
   local stepStart = fromIdx > 1 and data.steps[fromIdx - 1].skill_up_to or 1
+  local firstCraftSeen = false
 
   for i = fromIdx, #data.steps do
     local step = data.steps[i]
@@ -184,7 +185,8 @@ local function AggregateMats(data, fromIdx, skillLevel)
       -- continue
     else
       local qty = step.qty
-      if i == fromIdx then
+      if not firstCraftSeen then
+        firstCraftSeen = true
         qty = math.ceil(qty * (step.skill_up_to - skillLevel) / (step.skill_up_to - stepStart))
         qty = math.max(0, qty)
       end

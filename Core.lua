@@ -93,7 +93,12 @@ function CraftSage:HighlightActiveRecipe()
     NS.Panel:SetHighlightedRecipeIndex(nil)
     return
   end
-  local target = self.currentData.steps[self.activeStepIndex].recipe
+  local step = self.currentData.steps[self.activeStepIndex]
+  if step and step.step_type == "trainer" then
+    NS.Panel:SetHighlightedRecipeIndex(nil)
+    return
+  end
+  local target = step.recipe
   local numSkills = GetNumTradeSkills()
   for i = 1, numSkills do
     local skillName = GetTradeSkillInfo(i)

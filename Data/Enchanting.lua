@@ -79,7 +79,7 @@ CraftSageData["Enchanting"] = {
       skill_up_to = 156,
       qty         = 1,
       mats = {
-        { item = 11128, count = 1 }, -- Golden Rod
+        { item = 11128, count = 1, source = "vendor" }, -- Golden Rod
         { item = 5500,  count = 1 }, -- Iridescent Pearl
         { item = 11082, count = 2 }, -- Greater Astral Essence
         { item = 11083, count = 2 }, -- Soul Dust
@@ -106,7 +106,7 @@ CraftSageData["Enchanting"] = {
       skill_up_to = 201,
       qty         = 1,
       mats = {
-        { item = 11144, count = 1 }, -- Truesilver Rod
+        { item = 11144, count = 1, source = "vendor" }, -- Truesilver Rod
         { item = 7971,  count = 1 }, -- Black Pearl
         { item = 11135, count = 2 }, -- Greater Mystic Essence
         { item = 11137, count = 2 }, -- Vision Dust
@@ -185,7 +185,7 @@ CraftSageData["Enchanting"] = {
       skill_up_to = 295,
       qty         = 1,
       mats = {
-        { item = 16206, count = 1 },  -- Arcanite Rod
+        { item = 16206, count = 1, source = "vendor" },  -- Arcanite Rod
         { item = 13926, count = 1 },  -- Golden Pearl
         { item = 16204, count = 10 }, -- Illusion Dust
         { item = 16203, count = 4 },  -- Greater Eternal Essence

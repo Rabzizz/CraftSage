@@ -126,7 +126,7 @@ local function AcquireRow(n)
     r.frame:SetScript("OnEnter", function(self)
       local item = self._item
       if not item then return end
-      local link = GetItemLink(item)
+      local _, link = GetItemInfo(item)
       if not link then return end
       GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
       GameTooltip:SetHyperlink(link)

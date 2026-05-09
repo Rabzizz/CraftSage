@@ -7,7 +7,7 @@ StaticPopupDialogs["CRAFTSAGE_WOWHEAD_LINK"] = {
   hasEditBox   = 1,
   editBoxWidth = 260,
   OnShow = function(self, data)
-    self.editBox:SetText(data or "")
+    self.editBox:SetText(self.data or data or "")
     self.editBox:SetFocus()
     self.editBox:HighlightText()
   end,
@@ -230,7 +230,7 @@ local function _initialize()
 
     r:SetScript("OnEnter", function(self)
       if not self._itemId then return end
-      local link = GetItemLink(self._itemId)
+      local _, link = GetItemInfo(self._itemId)
       if not link then return end
       GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
       GameTooltip:SetHyperlink(link)
@@ -352,7 +352,11 @@ local function _initialize()
         local idx = activeStepIndex + (i - 1)
         local s   = data.steps[idx]
         if s then
-          stepRows[i]:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, s.recipe, s.skill_up_to))
+          if s.step_type == "trainer" then
+            stepRows[i]:SetText(string.format("|cff555555%d. [Trainer] %s|r", idx, s.recipe))
+          else
+            stepRows[i]:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, s.recipe, s.skill_up_to))
+          end
         else
           stepRows[i]:SetText("")
         end
@@ -373,7 +377,11 @@ local function _initialize()
         if i == 1 then
           stepRows[1].text:SetText(string.format("|cff88ff88> %s (to %d)|r", s.recipe, s.skill_up_to))
         else
-          stepRows[i]:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, s.recipe, s.skill_up_to))
+          if s.step_type == "trainer" then
+            stepRows[i]:SetText(string.format("|cff555555%d. [Trainer] %s|r", idx, s.recipe))
+          else
+            stepRows[i]:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, s.recipe, s.skill_up_to))
+          end
         end
       else
         if i == 1 then

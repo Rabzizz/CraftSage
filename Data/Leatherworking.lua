@@ -68,7 +68,7 @@ CraftSageData["Leatherworking"] = {
     {
       step_type   = "trainer",
       recipe      = "Learn Expert Leatherworking",
-      skill_up_to = 150,
+      skill_up_to = 149,
       trainer_note = {
         alliance = "Telonis, Darnassus",
         horde    = "Una, Thunder Bluff",

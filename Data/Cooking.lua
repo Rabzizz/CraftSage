@@ -30,10 +30,10 @@ CraftSageData["Cooking"] = {
     {
       step_type   = "trainer",
       recipe      = "Learn Artisan Cooking",
-      skill_up_to = 225,
+      skill_up_to = 200,
       trainer_note = {
-        alliance = "Zamja, Orgrimmar or any major city cooking trainer",
-        horde    = "Zamja, Orgrimmar or any major city cooking trainer",
+        alliance = "Gremlock Pilsnor, Ironforge, or any city cooking trainer",
+        horde    = "Zamja, Orgrimmar, or any city cooking trainer",
       },
     },
     {

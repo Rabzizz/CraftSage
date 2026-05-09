@@ -123,7 +123,7 @@ CraftSageData["Enchanting"] = {
     {
       step_type   = "trainer",
       recipe      = "Learn Artisan Enchanting",
-      skill_up_to = 225,
+      skill_up_to = 221,
       trainer_note = {
         alliance = "Annora, Uldaman (dungeon)",
         horde    = "Annora, Uldaman (dungeon)",

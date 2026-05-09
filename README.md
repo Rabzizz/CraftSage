@@ -36,8 +36,7 @@ Use the CurseForge App or Wago App to install and keep CraftSage up to date auto
 
 1. Download the latest zip from the [Releases](../../releases) page
 2. Extract into `World of Warcraft\_classic_era_\Interface\AddOns\`
-3. The result should be `Interface\AddOns\CraftSage\CraftSage.toc`
-4. Reload the game or log in
+3. Reload the game or log in
 
 ---
 
@@ -54,7 +53,7 @@ Open any profession TradeSkill window — CraftSage appears automatically on the
 
 ## Compatibility
 
-- **Game version:** WoW Classic Era (Interface 11504)
+- **Game version:** WoW Classic Era (Interface 11508)
 - Does **not** support Wrath Classic, Cataclysm Classic, or Retail
 
 ---

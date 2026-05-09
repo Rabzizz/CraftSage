@@ -112,20 +112,42 @@ local function AcquireRow(n)
 
     r.name = r.frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     r.name:SetPoint("LEFT", r.frame, "LEFT", 18, 0)
-    r.name:SetWidth(148)
+    r.name:SetWidth(110)
     r.name:SetJustifyH("LEFT")
+
+    r.buyTag = r.frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    r.buyTag:SetPoint("LEFT", r.name, "RIGHT", 2, 0)
+    r.buyTag:SetTextColor(1, 0.8, 0.2, 1)
+    r.buyTag:Hide()
 
     r.qty = r.frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     r.qty:SetPoint("RIGHT", r.frame, "RIGHT", -4, 0)
 
-    r.frame:SetScript("OnMouseDown", function(self)
+    r.frame:SetScript("OnEnter", function(self)
       local item = self._item
       if not item then return end
-      local prof   = NS.CraftSage.currentProf
-      local checks = NS.CraftSage.db.char.checkmarks
-      if not checks[prof] then checks[prof] = {} end
-      checks[prof][item] = not checks[prof][item]
-      NS.ShoppingList:Refresh()
+      local link = GetItemLink(item)
+      if not link then return end
+      GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+      GameTooltip:SetHyperlink(link)
+      GameTooltip:Show()
+    end)
+    r.frame:SetScript("OnLeave", function() GameTooltip:Hide() end)
+    r.frame:SetScript("OnMouseDown", function(self, button)
+      local item = self._item
+      if not item then return end
+      if button == "LeftButton" then
+        if IsControlKeyDown() then
+          StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK", nil, nil,
+            "https://www.wowhead.com/classic/item=" .. item)
+        else
+          local prof   = NS.CraftSage.currentProf
+          local checks = NS.CraftSage.db.char.checkmarks
+          if not checks[prof] then checks[prof] = {} end
+          checks[prof][item] = not checks[prof][item]
+          NS.ShoppingList:Refresh()
+        end
+      end
     end)
 
     rowPool[n] = r
@@ -153,26 +175,35 @@ end
 -- ── Aggregation ───────────────────────────────────────────────────────────────
 
 local function AggregateMats(data, fromIdx, skillLevel)
-  local totals = {}
+  local totals  = {}
   local stepStart = fromIdx > 1 and data.steps[fromIdx - 1].skill_up_to or 1
 
   for i = fromIdx, #data.steps do
     local step = data.steps[i]
-    local qty  = step.qty
-    if i == fromIdx then
-      qty = math.ceil(qty * (step.skill_up_to - skillLevel) / (step.skill_up_to - stepStart))
-      qty = math.max(0, qty)
-    end
-    for _, mat in ipairs(step.mats) do
-      totals[mat.item] = (totals[mat.item] or 0) + mat.count * qty
+    if not step.mats then  -- trainer step: no mats, skip
+      -- continue
+    else
+      local qty = step.qty
+      if i == fromIdx then
+        qty = math.ceil(qty * (step.skill_up_to - skillLevel) / (step.skill_up_to - stepStart))
+        qty = math.max(0, qty)
+      end
+      for _, mat in ipairs(step.mats) do
+        local existing = totals[mat.item]
+        if existing then
+          existing.qty = existing.qty + mat.count * qty
+        else
+          totals[mat.item] = { qty = mat.count * qty, source = mat.source or "gather" }
+        end
+      end
     end
   end
 
   local groups = {}
   for _, cat in ipairs(CAT_ORDER) do groups[cat] = {} end
-  for item, qty in pairs(totals) do
+  for item, entry in pairs(totals) do
     local cat = CAT[item] or "Other"
-    table.insert(groups[cat], { item = item, qty = qty })
+    table.insert(groups[cat], { item = item, qty = entry.qty, source = entry.source })
   end
   for _, cat in ipairs(CAT_ORDER) do
     table.sort(groups[cat], function(a, b)
@@ -236,9 +267,17 @@ function ShoppingList:Refresh()
           r.check:SetText("|cff44aa44v|r")
           r.name:SetTextColor(0.4, 0.4, 0.4, 1)
           r.qty:SetTextColor(0.4, 0.4, 0.4, 1)
+          r.buyTag:Hide()
         else
           r.check:SetText("|cff666666o|r")
-          r.name:SetTextColor(0.85, 0.85, 0.85, 1)
+          if entry.source == "vendor" then
+            r.name:SetTextColor(1, 0.8, 0.2, 1)
+            r.buyTag:SetText(L["MAT_SOURCE_VENDOR"])
+            r.buyTag:Show()
+          else
+            r.name:SetTextColor(0.85, 0.85, 0.85, 1)
+            r.buyTag:Hide()
+          end
           r.qty:SetTextColor(0.7, 0.7, 1, 1)
         end
         r.name:SetText(GetItemInfo(entry.item) or ("Item:" .. entry.item))

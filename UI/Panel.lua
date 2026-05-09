@@ -25,6 +25,7 @@ local PANEL_H = 355
 local frame, titleText, profText, hcText
 local skillBarBg, skillBarFill, skillText
 local stepsLabel, stepRows, divider
+local trainerCallout, trainerLine1, trainerLine2, trainerLine3
 local matsLabel, noteText, matRows, msgText
 local shopBtn, resetBtn
 local highlightedIndex
@@ -149,6 +150,42 @@ local function _initialize()
     r:SetJustifyH("LEFT")
     stepRows[i] = r
   end
+
+  trainerCallout = CreateFrame("Frame", nil, frame, "BackdropTemplate")
+  trainerCallout:SetPoint("TOPLEFT",  frame, "TOPLEFT",  8, -93)
+  trainerCallout:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -8, -93)
+  trainerCallout:SetHeight(46)
+  trainerCallout:SetBackdrop({
+    bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
+    edgeFile = "", tile = false, tileSize = 0, edgeSize = 0,
+    insets = { left = 0, right = 0, top = 0, bottom = 0 },
+  })
+  trainerCallout:SetBackdropColor(0.1, 0.07, 0, 0.85)
+  trainerCallout:Hide()
+
+  local trainerBorder = trainerCallout:CreateTexture(nil, "ARTWORK")
+  trainerBorder:SetPoint("TOPLEFT",    trainerCallout, "TOPLEFT",    0, 0)
+  trainerBorder:SetPoint("BOTTOMLEFT", trainerCallout, "BOTTOMLEFT", 0, 0)
+  trainerBorder:SetWidth(3)
+  trainerBorder:SetColorTexture(1, 0.67, 0, 1)
+
+  trainerLine1 = trainerCallout:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+  trainerLine1:SetPoint("TOPLEFT",  trainerCallout, "TOPLEFT",  8, -4)
+  trainerLine1:SetPoint("TOPRIGHT", trainerCallout, "TOPRIGHT", -4, -4)
+  trainerLine1:SetJustifyH("LEFT")
+  trainerLine1:SetTextColor(1, 0.67, 0, 1)
+
+  trainerLine2 = trainerCallout:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+  trainerLine2:SetPoint("TOPLEFT",  trainerLine1, "BOTTOMLEFT",  0, -2)
+  trainerLine2:SetPoint("TOPRIGHT", trainerLine1, "BOTTOMRIGHT", 0, -2)
+  trainerLine2:SetJustifyH("LEFT")
+  trainerLine2:SetTextColor(0.8, 0.53, 0, 1)
+
+  trainerLine3 = trainerCallout:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+  trainerLine3:SetPoint("TOPLEFT",  trainerLine2, "BOTTOMLEFT",  0, -2)
+  trainerLine3:SetPoint("TOPRIGHT", trainerLine2, "BOTTOMRIGHT", 0, -2)
+  trainerLine3:SetJustifyH("LEFT")
+  trainerLine3:SetTextColor(0.6, 0.4, 0, 1)
 
   divider = frame:CreateTexture(nil, "ARTWORK")
   divider:SetPoint("TOPLEFT",  frame, "TOPLEFT",  5, -148)
@@ -295,14 +332,48 @@ local function _initialize()
       return
     end
 
+    local step = data.steps[activeStepIndex]
+
+    if step.step_type == "trainer" then
+      trainerCallout:Show()
+      stepRows[1]:Hide()
+      trainerLine1:SetText(string.format(L["TRAINER_STEP_PREFIX"], step.skill_up_to))
+      trainerLine2:SetText(step.recipe)
+      if step.trainer_note then
+        local faction = UnitFactionGroup("player")
+        local tbl  = step.trainer_note
+        local note = (faction == "Alliance" and tbl.alliance) or tbl.horde or tbl.alliance
+        trainerLine3:SetText(note or "")
+        trainerLine3:SetShown(note ~= nil)
+      else
+        trainerLine3:Hide()
+      end
+      for i = 2, 3 do
+        local idx = activeStepIndex + (i - 1)
+        local s   = data.steps[idx]
+        if s then
+          stepRows[i]:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, s.recipe, s.skill_up_to))
+        else
+          stepRows[i]:SetText("")
+        end
+      end
+      matsLabel:Hide()
+      noteText:Hide()
+      ShowAllMats(false)
+      return
+    end
+
+    trainerCallout:Hide()
+    stepRows[1]:Show()
+
     for i = 1, 3 do
       local idx  = activeStepIndex + (i - 1)
-      local step = data.steps[idx]
-      if step then
+      local s    = data.steps[idx]
+      if s then
         if i == 1 then
-          stepRows[1].text:SetText(string.format("|cff88ff88> %s (to %d)|r", step.recipe, step.skill_up_to))
+          stepRows[1].text:SetText(string.format("|cff88ff88> %s (to %d)|r", s.recipe, s.skill_up_to))
         else
-          stepRows[i]:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, step.recipe, step.skill_up_to))
+          stepRows[i]:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, s.recipe, s.skill_up_to))
         end
       else
         if i == 1 then
@@ -312,8 +383,6 @@ local function _initialize()
         end
       end
     end
-
-    local step      = data.steps[activeStepIndex]
     local stepStart = activeStepIndex > 1 and data.steps[activeStepIndex - 1].skill_up_to or 1
     local remaining = math.max(1, math.ceil(
       step.qty * (step.skill_up_to - skillLevel) / (step.skill_up_to - stepStart)

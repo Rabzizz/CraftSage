@@ -109,7 +109,40 @@ local function _initialize()
   stepsLabel:SetText(L["GUIDE_STEPS"])
 
   stepRows = {}
-  for i = 1, 3 do
+
+  -- stepRows[1]: active step — Frame with mouse interaction
+  local activeStepRow = CreateFrame("Frame", nil, frame)
+  activeStepRow:SetPoint("TOPLEFT",  frame, "TOPLEFT",  10, -95)
+  activeStepRow:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -10, -95)
+  activeStepRow:SetHeight(16)
+  activeStepRow:EnableMouse(true)
+  activeStepRow.text = activeStepRow:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+  activeStepRow.text:SetPoint("LEFT", activeStepRow, "LEFT", 0, 0)
+  activeStepRow.text:SetWidth(PANEL_W - 20)
+  activeStepRow.text:SetJustifyH("LEFT")
+  activeStepRow:SetScript("OnEnter", function(self)
+    if not self._recipeIndex then return end
+    local link = GetTradeSkillRecipeLink(self._recipeIndex)
+    if not link then return end
+    GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
+    GameTooltip:SetHyperlink(link)
+    GameTooltip:Show()
+  end)
+  activeStepRow:SetScript("OnLeave", function() GameTooltip:Hide() end)
+  activeStepRow:SetScript("OnMouseDown", function(self, button)
+    if button ~= "LeftButton" or not IsControlKeyDown() then return end
+    if not self._recipeIndex then return end
+    local link    = GetTradeSkillRecipeLink(self._recipeIndex)
+    local spellId = link and link:match("|Hspell:(%d+)|h")
+    if spellId then
+      StaticPopup_Show("CRAFTSAGE_WOWHEAD_LINK", nil, nil,
+        "https://www.wowhead.com/classic/spell=" .. spellId)
+    end
+  end)
+  stepRows[1] = activeStepRow
+
+  -- stepRows[2] and [3]: dimmed upcoming steps — plain FontStrings
+  for i = 2, 3 do
     local r = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     r:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -95 - (i - 1) * 16)
     r:SetWidth(PANEL_W - 20)
@@ -230,7 +263,7 @@ local function _initialize()
       ShowAllMats(false)
       skillBarFill:SetWidth(1)
       skillText:SetText("")
-      for i = 1, 3 do stepRows[i]:SetText("") end
+      stepRows[1].text:SetText(""); stepRows[2]:SetText(""); stepRows[3]:SetText("")
       return
     end
 
@@ -241,7 +274,7 @@ local function _initialize()
       ShowAllMats(false)
       skillBarFill:SetWidth(1)
       skillText:SetText("")
-      for i = 1, 3 do stepRows[i]:SetText("") end
+      stepRows[1].text:SetText(""); stepRows[2]:SetText(""); stepRows[3]:SetText("")
       return
     end
 
@@ -256,7 +289,7 @@ local function _initialize()
     if not activeStepIndex then
       msgText:SetText(L["MAXED"])
       msgText:Show()
-      for i = 1, 3 do stepRows[i]:SetText("") end
+      stepRows[1].text:SetText(""); stepRows[2]:SetText(""); stepRows[3]:SetText("")
       matsLabel:Hide(); noteText:Hide()
       ShowAllMats(false)
       return
@@ -267,12 +300,16 @@ local function _initialize()
       local step = data.steps[idx]
       if step then
         if i == 1 then
-          stepRows[i]:SetText(string.format("|cff88ff88> %s (to %d)|r", step.recipe, step.skill_up_to))
+          stepRows[1].text:SetText(string.format("|cff88ff88> %s (to %d)|r", step.recipe, step.skill_up_to))
         else
           stepRows[i]:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, step.recipe, step.skill_up_to))
         end
       else
-        stepRows[i]:SetText("")
+        if i == 1 then
+          stepRows[1].text:SetText("")
+        else
+          stepRows[i]:SetText("")
+        end
       end
     end
 
@@ -316,7 +353,12 @@ local function _initialize()
 
   function Panel:Hide()  frame:Hide() end
   function Panel:IsVisible() return frame:IsShown() end
-  function Panel:SetHighlightedRecipeIndex(idx) highlightedIndex = idx end
+  function Panel:SetHighlightedRecipeIndex(idx)
+    highlightedIndex = idx
+    if stepRows and stepRows[1] then
+      stepRows[1]._recipeIndex = idx
+    end
+  end
 end
 
 function Panel:Toggle()

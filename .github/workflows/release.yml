@@ -69,3 +69,37 @@ jobs:
           name: CraftSage v${{ steps.ver.outputs.version }}
           body_path: release_body.md
           files: CraftSage-v${{ steps.ver.outputs.version }}.zip
+
+      - name: Upload to CurseForge
+        if: steps.check.outputs.exists == 'false'
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+        run: |
+          VERSION="${{ steps.ver.outputs.version }}"
+
+          GAME_VERSION_ID=$(curl -sf \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            "https://wow.curseforge.com/api/game/versions" | python3 -c "
+          import json, sys
+          versions = json.load(sys.stdin)
+          matches = [v for v in versions if v.get('name', '').startswith('1.15')]
+          matches.sort(key=lambda v: v['id'], reverse=True)
+          print(matches[0]['id'])
+          ")
+
+          METADATA=$(python3 -c "
+          import json
+          print(json.dumps({
+            'changelog':     open('release_body.md').read(),
+            'changelogType': 'markdown',
+            'displayName':   'CraftSage v${VERSION}',
+            'gameVersions':  [int('$GAME_VERSION_ID')],
+            'releaseType':   'release',
+          }))
+          ")
+
+          curl -sf -X POST \
+            -H "X-Api-Token: $CURSEFORGE_TOKEN" \
+            -F "metadata=$METADATA" \
+            -F "file=@CraftSage-v${VERSION}.zip" \
+            "https://wow.curseforge.com/api/projects/1537185/upload-file"

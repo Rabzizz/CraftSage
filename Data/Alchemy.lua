@@ -23,6 +23,15 @@ CraftSageData["Alchemy"] = {
       },
     },
     {
+      step_type   = "trainer",
+      recipe      = "Learn Expert Alchemy",
+      skill_up_to = 125,
+      trainer_note = {
+        alliance = "Ghak Healtouch, Ironforge",
+        horde    = "Bena Winterhoof, Thunder Bluff",
+      },
+    },
+    {
       recipe      = "Healing Potion",
       skill_up_to = 140,
       qty         = 30,
@@ -50,6 +59,15 @@ CraftSageData["Alchemy"] = {
         { item = 3357, count = 1 },  -- Liferoot
         { item = 3356, count = 1 },  -- Kingsblood
         { item = 3372, count = 1, source = "vendor" },  -- Leaded Vial
+      },
+    },
+    {
+      step_type   = "trainer",
+      recipe      = "Learn Artisan Alchemy",
+      skill_up_to = 200,
+      trainer_note = {
+        alliance = "Kylanna Windwhisper, Feathermoon Stronghold, Feralas",
+        horde    = "Doctor Martin Felias, Stonard, Swamp of Sorrows",
       },
     },
     {

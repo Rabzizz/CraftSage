@@ -66,6 +66,15 @@ CraftSageData["Leatherworking"] = {
       },
     },
     {
+      step_type   = "trainer",
+      recipe      = "Learn Expert Leatherworking",
+      skill_up_to = 150,
+      trainer_note = {
+        alliance = "Telonis, Darnassus",
+        horde    = "Una, Thunder Bluff",
+      },
+    },
+    {
       recipe      = "Dark Leather Belt",
       skill_up_to = 150,
       qty         = 15,
@@ -120,6 +129,15 @@ CraftSageData["Leatherworking"] = {
         { item = 4234, count = 4 },  -- Heavy Leather
         { item = 4236, count = 1, source = "craft" },  -- Cured Heavy Hide
         { item = 4291, count = 1, source = "vendor" },  -- Silken Thread
+      },
+    },
+    {
+      step_type   = "trainer",
+      recipe      = "Learn Artisan Leatherworking",
+      skill_up_to = 201,
+      trainer_note = {
+        alliance = "Drakk Stonehand, Aerie Peak, Hinterlands",
+        horde    = "Brumn Winterhoof, Arathi Highlands",
       },
     },
     {

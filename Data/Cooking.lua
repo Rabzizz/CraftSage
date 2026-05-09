@@ -28,6 +28,15 @@ CraftSageData["Cooking"] = {
       },
     },
     {
+      step_type   = "trainer",
+      recipe      = "Learn Artisan Cooking",
+      skill_up_to = 225,
+      trainer_note = {
+        alliance = "Zamja, Orgrimmar or any major city cooking trainer",
+        horde    = "Zamja, Orgrimmar or any major city cooking trainer",
+      },
+    },
+    {
       recipe      = "Mithril Headed Trout",
       skill_up_to = 225,
       qty         = 60,

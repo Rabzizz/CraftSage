@@ -36,6 +36,15 @@ CraftSageData["First Aid"] = {
       },
     },
     {
+      step_type   = "trainer",
+      recipe      = "Learn Expert First Aid",
+      skill_up_to = 151,
+      trainer_note = {
+        alliance = "Bring 'Expert First Aid - Under Wraps' quest to Doctor Gustaf VanHowzen, Theramore",
+        horde    = "Bring 'Field Medic Penny' quest to Doctor Gregory Victor, Hammerfall, Arathi Highlands",
+      },
+    },
+    {
       recipe      = "Silk Bandage",
       skill_up_to = 180,
       qty         = 30,
@@ -49,6 +58,15 @@ CraftSageData["First Aid"] = {
       qty         = 30,
       mats = {
         { item = 4306, count = 2 },  -- Silk Cloth
+      },
+    },
+    {
+      step_type   = "trainer",
+      recipe      = "Learn Artisan First Aid",
+      skill_up_to = 225,
+      trainer_note = {
+        alliance = "Bring 'Triage' quest to Doctor Gustaf VanHowzen, Theramore",
+        horde    = "Bring 'Triage' quest to Doctor Gregory Victor, Hammerfall, Arathi Highlands",
       },
     },
     {

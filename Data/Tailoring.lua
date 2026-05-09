@@ -56,6 +56,15 @@ CraftSageData["Tailoring"] = {
       },
     },
     {
+      step_type   = "trainer",
+      recipe      = "Learn Expert Tailoring",
+      skill_up_to = 126,
+      trainer_note = {
+        alliance = "Joseph Moore, Darkshire, Duskwood",
+        horde    = "Tepa, Thunder Bluff",
+      },
+    },
+    {
       recipe      = "Bolt of Silk Cloth",
       skill_up_to = 145,
       qty         = 205,
@@ -108,6 +117,15 @@ CraftSageData["Tailoring"] = {
         { item = 4305, count = 4, source = "craft" },  -- Bolt of Silk Cloth
         { item = 2321, count = 2, source = "vendor" },  -- Fine Thread
         { item = 2604, count = 2, source = "vendor" },  -- Red Dye
+      },
+    },
+    {
+      step_type   = "trainer",
+      recipe      = "Learn Artisan Tailoring",
+      skill_up_to = 210,
+      trainer_note = {
+        alliance = "Daryl Stack, Hillsbrad Foothills",
+        horde    = "Meilosh, Felwood",
       },
     },
     {

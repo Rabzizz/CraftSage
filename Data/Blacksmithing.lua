@@ -69,6 +69,15 @@ CraftSageData["Blacksmithing"] = {
       },
     },
     {
+      step_type   = "trainer",
+      recipe      = "Learn Expert Blacksmithing",
+      skill_up_to = 126,
+      trainer_note = {
+        alliance = "Bengus Deepforge, Ironforge",
+        horde    = "Brikk Keencraft, Booty Bay (neutral)",
+      },
+    },
+    {
       recipe      = "Heavy Grinding Stone",
       skill_up_to = 140,
       qty         = 35,
@@ -120,6 +129,15 @@ CraftSageData["Blacksmithing"] = {
       mats = {
         { item = 3859, count = 5 },  -- Steel Bar
         { item = 3486, count = 2, source = "craft" },  -- Heavy Grinding Stone
+      },
+    },
+    {
+      step_type   = "trainer",
+      recipe      = "Learn Artisan Blacksmithing",
+      skill_up_to = 201,
+      trainer_note = {
+        alliance = "Brikk Keencraft, Booty Bay",
+        horde    = "Brikk Keencraft, Booty Bay",
       },
     },
     {

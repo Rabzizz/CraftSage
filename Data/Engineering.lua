@@ -73,6 +73,15 @@ CraftSageData["Engineering"] = {
       },
     },
     {
+      step_type   = "trainer",
+      recipe      = "Learn Expert Engineering",
+      skill_up_to = 126,
+      trainer_note = {
+        alliance = "Lilliam Sparkspindle, Stormwind",
+        horde    = "Roxxik, Orgrimmar",
+      },
+    },
+    {
       recipe      = "Standard Scope",
       skill_up_to = 135,
       qty         = 10,
@@ -141,6 +150,15 @@ CraftSageData["Engineering"] = {
       qty         = 7,
       mats = {
         { item = 3860, count = 3 },  -- Mithril Bar
+      },
+    },
+    {
+      step_type   = "trainer",
+      recipe      = "Learn Artisan Engineering",
+      skill_up_to = 201,
+      trainer_note = {
+        alliance = "Deek Fizzlebizz, Tanaris",
+        horde    = "Og'loc, Gadgetzan, Tanaris (neutral)",
       },
     },
     {

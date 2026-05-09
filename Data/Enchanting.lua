@@ -50,6 +50,15 @@ CraftSageData["Enchanting"] = {
       },
     },
     {
+      step_type   = "trainer",
+      recipe      = "Learn Expert Enchanting",
+      skill_up_to = 125,
+      trainer_note = {
+        alliance = "Kitta Firewind, Tower of Azora, Elwynn Forest",
+        horde    = "Hgarth, Sun Rock Retreat, Stonetalon Mountains",
+      },
+    },
+    {
       recipe      = "Enchant Cloak - Minor Agility",
       skill_up_to = 135,
       qty         = 25,
@@ -109,6 +118,15 @@ CraftSageData["Enchanting"] = {
       qty         = 25,
       mats = {
         { item = 11137, count = 1 }, -- Vision Dust
+      },
+    },
+    {
+      step_type   = "trainer",
+      recipe      = "Learn Artisan Enchanting",
+      skill_up_to = 225,
+      trainer_note = {
+        alliance = "Annora, Uldaman (dungeon)",
+        horde    = "Annora, Uldaman (dungeon)",
       },
     },
     {

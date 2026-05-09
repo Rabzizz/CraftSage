@@ -49,8 +49,8 @@ CraftSageData["Cooking"] = {
       qty         = 25,
       mats = {
         { item = 13893, count = 1 }, -- Large Raw Mightfish
-        { item = 2692,  count = 1 }, -- Hot Spices
-        { item = 3713,  count = 1 }, -- Soothing Spices
+        { item = 2692,  count = 1, source = "vendor" }, -- Hot Spices
+        { item = 3713,  count = 1, source = "vendor" }, -- Soothing Spices
       },
     },
   },

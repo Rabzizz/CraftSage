@@ -8,7 +8,7 @@ CraftSageData["Enchanting"] = {
       skill_up_to = 2,
       qty         = 1,
       mats = {
-        { item = 6217,  count = 1 }, -- Copper Rod
+        { item = 6217,  count = 1, source = "vendor" }, -- Copper Rod
         { item = 10940, count = 1 }, -- Strange Dust
         { item = 10938, count = 1 }, -- Lesser Magic Essence
       },
@@ -45,7 +45,7 @@ CraftSageData["Enchanting"] = {
       skill_up_to = 110,
       qty         = 9,
       mats = {
-        { item = 4470,  count = 1 }, -- Simple Wood
+        { item = 4470,  count = 1, source = "vendor" }, -- Simple Wood
         { item = 10939, count = 1 }, -- Greater Magic Essence
       },
     },
@@ -151,7 +151,7 @@ CraftSageData["Enchanting"] = {
       mats = {
         { item = 11176, count = 3 }, -- Dream Dust
         { item = 8831,  count = 2 }, -- Purple Lotus
-        { item = 8925,  count = 1 }, -- Crystal Vial
+        { item = 8925,  count = 1, source = "vendor" }, -- Crystal Vial
       },
     },
     {

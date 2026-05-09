@@ -25,7 +25,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 10,
       mats = {
         { item = 783,  count = 1 },  -- Light Hide
-        { item = 4289, count = 1 },  -- Salt
+        { item = 4289, count = 1, source = "vendor" },  -- Salt
       },
     },
     {
@@ -34,7 +34,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 30,
       mats = {
         { item = 2318, count = 3 },  -- Light Leather
-        { item = 2320, count = 2 },  -- Coarse Thread
+        { item = 2320, count = 2, source = "vendor" },  -- Coarse Thread
       },
     },
     {
@@ -43,7 +43,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 15,
       mats = {
         { item = 2318, count = 6 },  -- Light Leather
-        { item = 2320, count = 2 },  -- Coarse Thread
+        { item = 2320, count = 2, source = "vendor" },  -- Coarse Thread
       },
     },
     {
@@ -52,7 +52,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 15,
       mats = {
         { item = 4232, count = 1 },  -- Medium Hide
-        { item = 4289, count = 1 },  -- Salt
+        { item = 4289, count = 1, source = "vendor" },  -- Salt
       },
     },
     {
@@ -61,8 +61,8 @@ CraftSageData["Leatherworking"] = {
       qty         = 22,
       mats = {
         { item = 2319, count = 4 },  -- Medium Leather
-        { item = 2321, count = 2 },  -- Fine Thread
-        { item = 4340, count = 1 },  -- Gray Dye
+        { item = 2321, count = 2, source = "vendor" },  -- Fine Thread
+        { item = 4340, count = 1, source = "vendor" },  -- Gray Dye
       },
     },
     {
@@ -70,10 +70,10 @@ CraftSageData["Leatherworking"] = {
       skill_up_to = 150,
       qty         = 15,
       mats = {
-        { item = 4246, count = 1 },  -- Fine Leather Belt
-        { item = 4233, count = 1 },  -- Cured Medium Hide
-        { item = 2321, count = 2 },  -- Fine Thread
-        { item = 4340, count = 1 },  -- Gray Dye
+        { item = 4246, count = 1, source = "craft" },  -- Fine Leather Belt
+        { item = 4233, count = 1, source = "craft" },  -- Cured Medium Hide
+        { item = 2321, count = 2, source = "vendor" },  -- Fine Thread
+        { item = 4340, count = 1, source = "vendor" },  -- Gray Dye
       },
     },
     {
@@ -90,7 +90,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 5,
       mats = {
         { item = 4235, count = 1 },  -- Heavy Hide
-        { item = 4289, count = 3 },  -- Salt
+        { item = 4289, count = 3, source = "vendor" },  -- Salt
       },
     },
     {
@@ -99,7 +99,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 22,
       mats = {
         { item = 4234, count = 5 },  -- Heavy Leather
-        { item = 2321, count = 1 },  -- Fine Thread
+        { item = 2321, count = 1, source = "vendor" },  -- Fine Thread
       },
     },
     {
@@ -108,8 +108,8 @@ CraftSageData["Leatherworking"] = {
       qty         = 10,
       mats = {
         { item = 4234, count = 8 },  -- Heavy Leather
-        { item = 4236, count = 1 },  -- Cured Heavy Hide
-        { item = 2321, count = 2 },  -- Fine Thread
+        { item = 4236, count = 1, source = "craft" },  -- Cured Heavy Hide
+        { item = 2321, count = 2, source = "vendor" },  -- Fine Thread
       },
     },
     {
@@ -118,8 +118,8 @@ CraftSageData["Leatherworking"] = {
       qty         = 10,
       mats = {
         { item = 4234, count = 4 },  -- Heavy Leather
-        { item = 4236, count = 1 },  -- Cured Heavy Hide
-        { item = 4291, count = 1 },  -- Silken Thread
+        { item = 4236, count = 1, source = "craft" },  -- Cured Heavy Hide
+        { item = 4291, count = 1, source = "vendor" },  -- Silken Thread
       },
     },
     {
@@ -128,7 +128,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 20,
       mats = {
         { item = 4304, count = 5 },  -- Thick Leather
-        { item = 4291, count = 1 },  -- Silken Thread
+        { item = 4291, count = 1, source = "vendor" },  -- Silken Thread
       },
     },
     {
@@ -137,7 +137,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 11,
       mats = {
         { item = 4304, count = 5 },  -- Thick Leather
-        { item = 4291, count = 2 },  -- Silken Thread
+        { item = 4291, count = 2, source = "vendor" },  -- Silken Thread
       },
     },
     {
@@ -146,7 +146,7 @@ CraftSageData["Leatherworking"] = {
       qty         = 20,
       mats = {
         { item = 4304, count = 14 }, -- Thick Leather
-        { item = 4291, count = 4 },  -- Silken Thread
+        { item = 4291, count = 4, source = "vendor" },  -- Silken Thread
       },
     },
     {
@@ -163,8 +163,8 @@ CraftSageData["Leatherworking"] = {
       qty         = 32,
       mats = {
         { item = 8170,  count = 8 }, -- Rugged Leather
-        { item = 2325,  count = 1 }, -- Black Dye
-        { item = 14341, count = 1 }, -- Rune Thread
+        { item = 2325,  count = 1, source = "vendor" }, -- Black Dye
+        { item = 14341, count = 1, source = "vendor" }, -- Rune Thread
       },
     },
     {

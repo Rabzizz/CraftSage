@@ -49,7 +49,7 @@ CraftSageData["Blacksmithing"] = {
       qty         = 5,
       mats = {
         { item = 2842, count = 1 },  -- Silver Bar
-        { item = 3470, count = 2 },  -- Rough Grinding Stone
+        { item = 3470, count = 2, source = "craft" },  -- Rough Grinding Stone
       },
     },
     {
@@ -82,7 +82,7 @@ CraftSageData["Blacksmithing"] = {
       qty         = 10,
       mats = {
         { item = 2841, count = 5 },  -- Bronze Bar
-        { item = 3478, count = 2 },  -- Coarse Grinding Stone
+        { item = 3478, count = 2, source = "craft" },  -- Coarse Grinding Stone
       },
     },
     {
@@ -91,7 +91,7 @@ CraftSageData["Blacksmithing"] = {
       qty         = 5,
       mats = {
         { item = 3577, count = 1 },  -- Gold Bar
-        { item = 3478, count = 2 },  -- Coarse Grinding Stone
+        { item = 3478, count = 2, source = "craft" },  -- Coarse Grinding Stone
       },
     },
     {
@@ -100,8 +100,8 @@ CraftSageData["Blacksmithing"] = {
       qty         = 10,
       mats = {
         { item = 3575, count = 8 },  -- Iron Bar
-        { item = 3486, count = 1 },  -- Heavy Grinding Stone
-        { item = 2605, count = 1 },  -- Green Dye
+        { item = 3486, count = 1, source = "craft" },  -- Heavy Grinding Stone
+        { item = 2605, count = 1, source = "vendor" },  -- Green Dye
       },
     },
     {
@@ -110,7 +110,7 @@ CraftSageData["Blacksmithing"] = {
       qty         = 25,
       mats = {
         { item = 3575, count = 6 },  -- Iron Bar
-        { item = 2605, count = 1 },  -- Green Dye
+        { item = 2605, count = 1, source = "vendor" },  -- Green Dye
       },
     },
     {
@@ -119,7 +119,7 @@ CraftSageData["Blacksmithing"] = {
       qty         = 10,
       mats = {
         { item = 3859, count = 5 },  -- Steel Bar
-        { item = 3486, count = 2 },  -- Heavy Grinding Stone
+        { item = 3486, count = 2, source = "craft" },  -- Heavy Grinding Stone
       },
     },
     {
@@ -145,7 +145,7 @@ CraftSageData["Blacksmithing"] = {
       qty         = 10,
       mats = {
         { item = 3859, count = 14 }, -- Steel Bar
-        { item = 7966, count = 1 },  -- Solid Grinding Stone
+        { item = 7966, count = 1, source = "craft" },  -- Solid Grinding Stone
       },
     },
     {

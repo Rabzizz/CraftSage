@@ -33,8 +33,8 @@ CraftSageData["Engineering"] = {
       qty         = 30,
       mats = {
         { item = 2840, count = 1 },  -- Copper Bar
-        { item = 4359, count = 1 },  -- Handful of Copper Bolts
-        { item = 4357, count = 2 },  -- Rough Blasting Powder
+        { item = 4359, count = 1, source = "craft" },  -- Handful of Copper Bolts
+        { item = 4357, count = 2, source = "craft" },  -- Rough Blasting Powder
         { item = 2589, count = 1 },  -- Linen Cloth
       },
     },
@@ -51,7 +51,7 @@ CraftSageData["Engineering"] = {
       skill_up_to = 100,
       qty         = 20,
       mats = {
-        { item = 4364, count = 3 },  -- Coarse Blasting Powder
+        { item = 4364, count = 3, source = "craft" },  -- Coarse Blasting Powder
         { item = 2589, count = 1 },  -- Linen Cloth
       },
     },
@@ -69,7 +69,7 @@ CraftSageData["Engineering"] = {
       qty         = 25,
       mats = {
         { item = 2841, count = 2 },  -- Bronze Bar
-        { item = 2880, count = 1 },  -- Weak Flux
+        { item = 2880, count = 1, source = "vendor" },  -- Weak Flux
       },
     },
     {
@@ -77,7 +77,7 @@ CraftSageData["Engineering"] = {
       skill_up_to = 135,
       qty         = 10,
       mats = {
-        { item = 4371, count = 1 },  -- Bronze Tube
+        { item = 4371, count = 1, source = "craft" },  -- Bronze Tube
         { item = 1206, count = 1 },  -- Moss Agate
       },
     },
@@ -113,9 +113,9 @@ CraftSageData["Engineering"] = {
       skill_up_to = 175,
       qty         = 15,
       mats = {
-        { item = 4382, count = 1 },  -- Bronze Framework
-        { item = 4375, count = 1 },  -- Whirring Bronze Gizmo
-        { item = 4377, count = 2 },  -- Heavy Blasting Powder
+        { item = 4382, count = 1, source = "craft" },  -- Bronze Framework
+        { item = 4375, count = 1, source = "craft" },  -- Whirring Bronze Gizmo
+        { item = 4377, count = 2, source = "craft" },  -- Heavy Blasting Powder
         { item = 2592, count = 2 },  -- Wool Cloth
       },
     },
@@ -150,7 +150,7 @@ CraftSageData["Engineering"] = {
       mats = {
         { item = 3860,  count = 1 }, -- Mithril Bar
         { item = 4338,  count = 1 }, -- Mageweave Cloth
-        { item = 10505, count = 1 }, -- Solid Blasting Powder
+        { item = 10505, count = 1, source = "craft" }, -- Solid Blasting Powder
       },
     },
     {
@@ -166,9 +166,9 @@ CraftSageData["Engineering"] = {
       skill_up_to = 250,
       qty         = 20,
       mats = {
-        { item = 10561, count = 2 }, -- Mithril Casing
-        { item = 10560, count = 1 }, -- Unstable Trigger
-        { item = 10505, count = 2 }, -- Solid Blasting Powder
+        { item = 10561, count = 2, source = "craft" }, -- Mithril Casing
+        { item = 10560, count = 1, source = "craft" }, -- Unstable Trigger
+        { item = 10505, count = 2, source = "craft" }, -- Solid Blasting Powder
       },
     },
     {
@@ -194,7 +194,7 @@ CraftSageData["Engineering"] = {
       qty         = 15,
       mats = {
         { item = 12359, count = 2 }, -- Thorium Bar
-        { item = 15992, count = 1 }, -- Dense Blasting Powder
+        { item = 15992, count = 1, source = "craft" }, -- Dense Blasting Powder
       },
     },
   },

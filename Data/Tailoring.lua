@@ -16,8 +16,8 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 70,
       qty         = 25,
       mats = {
-        { item = 2996, count = 1 },  -- Bolt of Linen Cloth
-        { item = 2320, count = 1 },  -- Coarse Thread
+        { item = 2996, count = 1, source = "craft" },  -- Bolt of Linen Cloth
+        { item = 2320, count = 1, source = "vendor" },  -- Coarse Thread
       },
     },
     {
@@ -25,8 +25,8 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 75,
       qty         = 5,
       mats = {
-        { item = 2996, count = 2 },  -- Bolt of Linen Cloth
-        { item = 2320, count = 3 },  -- Coarse Thread
+        { item = 2996, count = 2, source = "craft" },  -- Bolt of Linen Cloth
+        { item = 2320, count = 3, source = "vendor" },  -- Coarse Thread
       },
     },
     {
@@ -42,8 +42,8 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 110,
       qty         = 15,
       mats = {
-        { item = 2996, count = 4 },  -- Bolt of Linen Cloth
-        { item = 2321, count = 1 },  -- Fine Thread
+        { item = 2996, count = 4, source = "craft" },  -- Bolt of Linen Cloth
+        { item = 2321, count = 1, source = "vendor" },  -- Fine Thread
       },
     },
     {
@@ -51,8 +51,8 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 125,
       qty         = 15,
       mats = {
-        { item = 2997, count = 3 },  -- Bolt of Woolen Cloth
-        { item = 2321, count = 2 },  -- Fine Thread
+        { item = 2997, count = 3, source = "craft" },  -- Bolt of Woolen Cloth
+        { item = 2321, count = 2, source = "vendor" },  -- Fine Thread
       },
     },
     {
@@ -68,9 +68,9 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 160,
       qty         = 20,
       mats = {
-        { item = 4305, count = 2 },  -- Bolt of Silk Cloth
-        { item = 2321, count = 1 },  -- Fine Thread
-        { item = 6260, count = 2 },  -- Blue Dye
+        { item = 4305, count = 2, source = "craft" },  -- Bolt of Silk Cloth
+        { item = 2321, count = 1, source = "vendor" },  -- Fine Thread
+        { item = 6260, count = 2, source = "vendor" },  -- Blue Dye
       },
     },
     {
@@ -78,8 +78,8 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 170,
       qty         = 10,
       mats = {
-        { item = 4305, count = 3 },  -- Bolt of Silk Cloth
-        { item = 2321, count = 2 },  -- Fine Thread
+        { item = 4305, count = 3, source = "craft" },  -- Bolt of Silk Cloth
+        { item = 2321, count = 2, source = "vendor" },  -- Fine Thread
       },
     },
     {
@@ -87,9 +87,9 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 175,
       qty         = 5,
       mats = {
-        { item = 4305, count = 3 },  -- Bolt of Silk Cloth
-        { item = 2321, count = 1 },  -- Fine Thread
-        { item = 2324, count = 2 },  -- Bleach
+        { item = 4305, count = 3, source = "craft" },  -- Bolt of Silk Cloth
+        { item = 2321, count = 1, source = "vendor" },  -- Fine Thread
+        { item = 2324, count = 2, source = "vendor" },  -- Bleach
       },
     },
     {
@@ -105,9 +105,9 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 205,
       qty         = 20,
       mats = {
-        { item = 4305, count = 4 },  -- Bolt of Silk Cloth
-        { item = 2321, count = 2 },  -- Fine Thread
-        { item = 2604, count = 2 },  -- Red Dye
+        { item = 4305, count = 4, source = "craft" },  -- Bolt of Silk Cloth
+        { item = 2321, count = 2, source = "vendor" },  -- Fine Thread
+        { item = 2604, count = 2, source = "vendor" },  -- Red Dye
       },
     },
     {
@@ -115,9 +115,9 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 215,
       qty         = 10,
       mats = {
-        { item = 4305, count = 4 },  -- Bolt of Silk Cloth
-        { item = 4291, count = 2 },  -- Silken Thread
-        { item = 2604, count = 2 },  -- Red Dye
+        { item = 4305, count = 4, source = "craft" },  -- Bolt of Silk Cloth
+        { item = 4291, count = 2, source = "vendor" },  -- Silken Thread
+        { item = 2604, count = 2, source = "vendor" },  -- Red Dye
       },
     },
     {
@@ -125,9 +125,9 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 220,
       qty         = 5,
       mats = {
-        { item = 4339, count = 1 },  -- Bolt of Mageweave
-        { item = 8343, count = 1 },  -- Heavy Silken Thread
-        { item = 6261, count = 1 },  -- Orange Dye
+        { item = 4339, count = 1, source = "craft" },  -- Bolt of Mageweave
+        { item = 8343, count = 1, source = "vendor" },  -- Heavy Silken Thread
+        { item = 6261, count = 1, source = "vendor" },  -- Orange Dye
       },
     },
     {
@@ -135,8 +135,8 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 230,
       qty         = 10,
       mats = {
-        { item = 4339, count = 2 },  -- Bolt of Mageweave
-        { item = 8343, count = 2 },  -- Heavy Silken Thread
+        { item = 4339, count = 2, source = "craft" },  -- Bolt of Mageweave
+        { item = 8343, count = 2, source = "vendor" },  -- Heavy Silken Thread
       },
     },
     {
@@ -144,7 +144,7 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 250,
       qty         = 25,
       mats = {
-        { item = 4339,  count = 3 }, -- Bolt of Mageweave
+        { item = 4339,  count = 3, source = "craft" }, -- Bolt of Mageweave
         { item = 8343,  count = 2 }, -- Heavy Silken Thread
       },
     },
@@ -161,8 +161,8 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 280,
       qty         = 25,
       mats = {
-        { item = 14048, count = 3 }, -- Bolt of Runecloth
-        { item = 14341, count = 1 }, -- Rune Thread
+        { item = 14048, count = 3, source = "craft" }, -- Bolt of Runecloth
+        { item = 14341, count = 1, source = "vendor" }, -- Rune Thread
       },
     },
     {
@@ -170,9 +170,9 @@ CraftSageData["Tailoring"] = {
       skill_up_to = 300,
       qty         = 20,
       mats = {
-        { item = 14048, count = 4 }, -- Bolt of Runecloth
+        { item = 14048, count = 4, source = "craft" }, -- Bolt of Runecloth
         { item = 8170,  count = 4 }, -- Rugged Leather
-        { item = 14341, count = 1 }, -- Rune Thread
+        { item = 14341, count = 1, source = "vendor" }, -- Rune Thread
       },
     },
   },

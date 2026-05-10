@@ -67,6 +67,7 @@ end
 -- ── Deferred init (called at PLAYER_LOGIN so errors are visible in chat) ──────
 
 local _initOk, _initErr
+local _flashActive = false
 
 local function _initialize()
   frame = CreateFrame("Frame", "CraftSagePanelFrame", UIParent, "BackdropTemplate")
@@ -143,6 +144,8 @@ local function _initialize()
   activeStepRow.text:SetWidth(PANEL_W - 20)
   activeStepRow.text:SetJustifyH("LEFT")
   activeStepRow:SetScript("OnEnter", function(self)
+    local cs = NS.CraftSage
+    if not cs or not cs.db or not cs.db.global.settings.show_tooltips then return end
     if not self._recipeIndex then return end
     local link = GetTradeSkillRecipeLink(self._recipeIndex)
     if not link then return end
@@ -254,6 +257,8 @@ local function _initialize()
     r.count:SetJustifyH("RIGHT")
 
     r:SetScript("OnEnter", function(self)
+      local cs = NS.CraftSage
+      if not cs or not cs.db or not cs.db.global.settings.show_tooltips then return end
       if not self._itemId then return end
       local _, link = GetItemInfo(self._itemId)
       if not link then return end
@@ -316,7 +321,7 @@ local function _initialize()
     end
 
     profText:SetText(profName or "")
-    if data and data.hc_recommended then hcText:Show() else hcText:Hide() end
+    hcText:Hide()
 
     if not profName then
       msgText:SetText(L["NO_PROFESSION_OPEN"])
@@ -326,6 +331,7 @@ local function _initialize()
       skillBarFill:SetWidth(1)
       skillText:SetText("")
       stepRows[1].text:SetText(""); stepRows[2].text:SetText(""); stepRows[3].text:SetText("")
+      Panel:ApplySettings()
       return
     end
 
@@ -337,6 +343,7 @@ local function _initialize()
       skillBarFill:SetWidth(1)
       skillText:SetText("")
       stepRows[1].text:SetText(""); stepRows[2].text:SetText(""); stepRows[3].text:SetText("")
+      Panel:ApplySettings()
       return
     end
 
@@ -354,6 +361,7 @@ local function _initialize()
       stepRows[1].text:SetText(""); stepRows[2].text:SetText(""); stepRows[3].text:SetText("")
       matsLabel:Hide(); noteText:Hide()
       ShowAllMats(false)
+      Panel:ApplySettings()
       return
     end
 
@@ -393,6 +401,7 @@ local function _initialize()
       matsLabel:Hide()
       noteText:Hide()
       ShowAllMats(false)
+      Panel:ApplySettings()
       return
     end
 
@@ -462,6 +471,20 @@ local function _initialize()
       end
     end
     HideUnusedMatRows(#step.mats)
+
+    if stepChanged and not _flashActive then
+      local cs = NS.CraftSage
+      local s  = cs and cs.db and cs.db.global.settings
+      if s and s.step_flash then
+        _flashActive = true
+        frame:SetBackdropBorderColor(0.5, 1, 0.5, 1)
+        C_Timer.After(0.6, function()
+          frame:SetBackdropBorderColor(0.2, 0.6, 0.2, 1)
+          _flashActive = false
+        end)
+      end
+    end
+    Panel:ApplySettings()
   end
 
   function Panel:Hide()  frame:Hide() end
@@ -516,6 +539,21 @@ function Panel:EnsureGuideBtn()
 end
 
 _initOk, _initErr = pcall(_initialize)
+
+function Panel:ApplySettings()
+  if not frame then return end
+  local cs = NS.CraftSage
+  if not cs or not cs.db then return end
+  local s = cs.db.global.settings
+  frame:SetScale(s.panel_scale)
+  frame:SetBackdropColor(0.05, 0.1, 0.05, s.panel_opacity)
+  if stepRows then
+    local n = s.upcoming_steps
+    if stepRows[2] then stepRows[2]:SetShown(n >= 1) end
+    if stepRows[3] then stepRows[3]:SetShown(n >= 2) end
+  end
+end
+
 if not _initOk then
   local _watcher = CreateFrame("Frame")
   _watcher:RegisterEvent("PLAYER_LOGIN")

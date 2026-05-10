@@ -61,15 +61,6 @@ jobs:
           cd dist
           zip -r "../CraftSage-v${VERSION}.zip" CraftSage/
 
-      - name: Create GitHub release
-        if: steps.check.outputs.exists == 'false'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v${{ steps.ver.outputs.version }}
-          name: CraftSage v${{ steps.ver.outputs.version }}
-          body_path: release_body.md
-          files: CraftSage-v${{ steps.ver.outputs.version }}.zip
-
       - name: Upload to CurseForge
         if: steps.check.outputs.exists == 'false'
         env:
@@ -120,3 +111,12 @@ jobs:
             exit 1
           fi
           echo "Upload successful (HTTP $HTTP_CODE): $BODY"
+
+      - name: Create GitHub release
+        if: steps.check.outputs.exists == 'false'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ steps.ver.outputs.version }}
+          name: CraftSage v${{ steps.ver.outputs.version }}
+          body_path: release_body.md
+          files: CraftSage-v${{ steps.ver.outputs.version }}.zip

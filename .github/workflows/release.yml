@@ -83,9 +83,16 @@ jobs:
           import json, sys
           versions = json.load(sys.stdin)
           matches = [v for v in versions if v.get('name', '').startswith('1.15')]
+          if not matches:
+              print('ERROR: no 1.15.x versions found. Available (top 20 by id):', file=sys.stderr)
+              for v in sorted(versions, key=lambda x: x['id'], reverse=True)[:20]:
+                  print(f\"  {v['id']}: {v['name']}\", file=sys.stderr)
+              sys.exit(1)
           matches.sort(key=lambda v: v['id'], reverse=True)
           print(matches[0]['id'])
           ")
+
+          echo "Resolved game version ID: $GAME_VERSION_ID"
 
           METADATA=$(python3 -c "
           import json
@@ -98,8 +105,18 @@ jobs:
           }))
           ")
 
-          curl -sf -X POST \
+          RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             -F "metadata=$METADATA" \
             -F "file=@CraftSage-v${VERSION}.zip" \
-            "https://wow.curseforge.com/api/projects/1537185/upload-file"
+            "https://wow.curseforge.com/api/projects/1537185/upload-file")
+
+          HTTP_CODE=$(echo "$RESPONSE" | tail -1)
+          BODY=$(echo "$RESPONSE" | head -n -1)
+
+          if [ "$HTTP_CODE" -ge 400 ]; then
+            echo "CurseForge upload failed — HTTP $HTTP_CODE"
+            echo "Response body: $BODY"
+            exit 1
+          fi
+          echo "Upload successful (HTTP $HTTP_CODE): $BODY"

@@ -1,5 +1,25 @@
 # CraftSage Changelog
 
+## [1.3.0] — 2026-05-10
+
+### Added
+- **Settings panel** — a full settings window is now accessible via Escape → Interface → AddOns → CraftSage, or by clicking the minimap button (click again to close).
+- **Panel scale** — slider to resize the guide panel (0.7× – 1.5×, default 1.0×).
+- **Panel opacity** — slider to adjust guide panel background transparency (0.3 – 1.0, default 0.97).
+- **Upcoming steps** — choose how many dimmed future steps to show below the active step (0 – 3, default 2).
+- **Auto-open panel** — toggle whether the guide panel opens automatically when a profession window opens (default on).
+- **Step flash** — toggle the green border flash when the active step advances (default on).
+- **Show tooltips** — toggle item/recipe tooltips on hover in the panel and shopping list (default on).
+- **Vendor highlight** — toggle the amber `[buy]` tag on vendor-bought materials (default on).
+- **Shopping list progress** — toggle the "X of Y gathered (Z%)" progress line in the shopping list (default on).
+- **Show minimap button** — toggle minimap icon visibility from within the settings panel (default on).
+- All display settings are account-wide (shared across characters); minimap visibility remains per-character.
+
+### Changed
+- Minimap button left-click now opens/closes the CraftSage settings window instead of toggling the guide panel.
+
+---
+
 ## [1.2.0] — 2026-05-09
 
 ### Added

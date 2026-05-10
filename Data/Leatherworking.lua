@@ -5,6 +5,7 @@ CraftSageData["Leatherworking"] = {
   steps = {
     {
       recipe      = "Light Leather",
+      spell_id    = 2881,
       skill_up_to = 30,
       qty         = 30,
       mats = {
@@ -13,6 +14,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Light Armor Kit",
+      spell_id    = 2152,
       skill_up_to = 45,
       qty         = 18,
       mats = {
@@ -21,6 +23,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Cured Light Hide",
+      spell_id    = 3816,
       skill_up_to = 55,
       qty         = 10,
       mats = {
@@ -30,6 +33,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Embossed Leather Gloves",
+      spell_id    = 3756,
       skill_up_to = 85,
       qty         = 30,
       mats = {
@@ -39,6 +43,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Fine Leather Belt",
+      spell_id    = 3763,
       skill_up_to = 100,
       qty         = 15,
       mats = {
@@ -48,6 +53,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Cured Medium Hide",
+      spell_id    = 3817,
       skill_up_to = 115,
       qty         = 15,
       mats = {
@@ -57,6 +63,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Dark Leather Boots",
+      spell_id    = 2167,
       skill_up_to = 135,
       qty         = 22,
       mats = {
@@ -76,6 +83,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Dark Leather Belt",
+      spell_id    = 3766,
       skill_up_to = 150,
       qty         = 15,
       mats = {
@@ -87,6 +95,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Heavy Leather",
+      spell_id    = 20649,
       skill_up_to = 155,
       qty         = 5,
       mats = {
@@ -95,6 +104,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Cured Heavy Hide",
+      spell_id    = 3818,
       skill_up_to = 160,
       qty         = 5,
       mats = {
@@ -104,6 +114,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Heavy Armor Kit",
+      spell_id    = 3780,
       skill_up_to = 180,
       qty         = 22,
       mats = {
@@ -113,6 +124,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Barbaric Shoulders",
+      spell_id    = 7151,
       skill_up_to = 190,
       qty         = 10,
       mats = {
@@ -123,6 +135,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Guardian Gloves",
+      spell_id    = 7156,
       skill_up_to = 200,
       qty         = 10,
       mats = {
@@ -142,6 +155,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Thick Armor Kit",
+      spell_id    = 10487,
       skill_up_to = 220,
       qty         = 20,
       mats = {
@@ -151,6 +165,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Nightscape Headband",
+      spell_id    = 10507,
       skill_up_to = 230,
       qty         = 11,
       mats = {
@@ -160,6 +175,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Nightscape Pants",
+      spell_id    = 10548,
       skill_up_to = 250,
       qty         = 20,
       mats = {
@@ -169,6 +185,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Rugged Armor Kit",
+      spell_id    = 19058,
       skill_up_to = 260,
       qty         = 12,
       mats = {
@@ -177,6 +194,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Wicked Leather Gauntlets",
+      spell_id    = 19049,
       skill_up_to = 290,
       qty         = 32,
       mats = {
@@ -187,6 +205,7 @@ CraftSageData["Leatherworking"] = {
     },
     {
       recipe      = "Wicked Leather Headband",
+      spell_id    = 19071,
       skill_up_to = 300,
       qty         = 10,
       mats = {

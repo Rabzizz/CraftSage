@@ -5,6 +5,7 @@ CraftSageData["Tailoring"] = {
   steps = {
     {
       recipe      = "Bolt of Linen Cloth",
+      spell_id    = 2963,
       skill_up_to = 45,
       qty         = 95,
       mats = {
@@ -13,6 +14,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Linen Belt",
+      spell_id    = 8776,
       skill_up_to = 70,
       qty         = 25,
       mats = {
@@ -22,6 +24,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Reinforced Linen Cape",
+      spell_id    = 2397,
       skill_up_to = 75,
       qty         = 5,
       mats = {
@@ -31,6 +34,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Bolt of Woolen Cloth",
+      spell_id    = 2964,
       skill_up_to = 100,
       qty         = 45,
       mats = {
@@ -39,6 +43,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Simple Kilt",
+      spell_id    = 12046,
       skill_up_to = 110,
       qty         = 15,
       mats = {
@@ -48,6 +53,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Double-stitched Woolen Shoulders",
+      spell_id    = 3848,
       skill_up_to = 125,
       qty         = 15,
       mats = {
@@ -66,6 +72,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Bolt of Silk Cloth",
+      spell_id    = 3839,
       skill_up_to = 145,
       qty         = 205,
       mats = {
@@ -74,6 +81,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Azure Silk Hood",
+      spell_id    = 8760,
       skill_up_to = 160,
       qty         = 20,
       mats = {
@@ -84,6 +92,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Silk Headband",
+      spell_id    = 8762,
       skill_up_to = 170,
       qty         = 10,
       mats = {
@@ -93,6 +102,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Formal White Shirt",
+      spell_id    = 3871,
       skill_up_to = 175,
       qty         = 5,
       mats = {
@@ -103,6 +113,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Bolt of Mageweave",
+      spell_id    = 3865,
       skill_up_to = 185,
       qty         = 100,
       mats = {
@@ -111,6 +122,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Crimson Silk Vest",
+      spell_id    = 8791,
       skill_up_to = 205,
       qty         = 20,
       mats = {
@@ -130,6 +142,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Crimson Silk Pantaloons",
+      spell_id    = 8799,
       skill_up_to = 215,
       qty         = 10,
       mats = {
@@ -140,6 +153,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Orange Mageweave Shirt",
+      spell_id    = 12061,
       skill_up_to = 220,
       qty         = 5,
       mats = {
@@ -150,6 +164,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Black Mageweave Gloves",
+      spell_id    = 12053,
       skill_up_to = 230,
       qty         = 10,
       mats = {
@@ -159,6 +174,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Black Mageweave Headband",
+      spell_id    = 12072,
       skill_up_to = 250,
       qty         = 25,
       mats = {
@@ -168,6 +184,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Bolt of Runecloth",
+      spell_id    = 18401,
       skill_up_to = 260,
       qty         = 155,
       mats = {
@@ -176,6 +193,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Runecloth Belt",
+      spell_id    = 18402,
       skill_up_to = 280,
       qty         = 25,
       mats = {
@@ -185,6 +203,7 @@ CraftSageData["Tailoring"] = {
     },
     {
       recipe      = "Runecloth Gloves",
+      spell_id    = 18417,
       skill_up_to = 300,
       qty         = 20,
       mats = {

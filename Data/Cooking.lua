@@ -5,6 +5,7 @@ CraftSageData["Cooking"] = {
   steps = {
     {
       recipe      = "Brilliant Smallfish",
+      spell_id    = 7751,
       skill_up_to = 50,
       qty         = 50,
       mats = {
@@ -13,6 +14,7 @@ CraftSageData["Cooking"] = {
     },
     {
       recipe      = "Longjaw Mud Snapper",
+      spell_id    = 7753,
       skill_up_to = 100,
       qty         = 50,
       mats = {
@@ -21,6 +23,7 @@ CraftSageData["Cooking"] = {
     },
     {
       recipe      = "Bristle Whisker Catfish",
+      spell_id    = 7755,
       skill_up_to = 175,
       qty         = 120,
       mats = {
@@ -38,6 +41,7 @@ CraftSageData["Cooking"] = {
     },
     {
       recipe      = "Mithril Headed Trout",
+      spell_id    = 20916,
       skill_up_to = 225,
       qty         = 60,
       mats = {
@@ -46,6 +50,7 @@ CraftSageData["Cooking"] = {
     },
     {
       recipe      = "Spotted Yellowtail",
+      spell_id    = 18238,
       skill_up_to = 275,
       qty         = 70,
       mats = {
@@ -54,6 +59,7 @@ CraftSageData["Cooking"] = {
     },
     {
       recipe      = "Mightfish Steak",
+      spell_id    = 18246,
       skill_up_to = 300,
       qty         = 25,
       mats = {

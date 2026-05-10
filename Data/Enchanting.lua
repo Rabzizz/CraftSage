@@ -5,6 +5,7 @@ CraftSageData["Enchanting"] = {
   steps = {
     {
       recipe      = "Runed Copper Rod",
+      spell_id    = 7421,
       skill_up_to = 2,
       qty         = 1,
       mats = {
@@ -15,6 +16,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Bracer - Minor Health",
+      spell_id    = 7418,
       skill_up_to = 90,
       qty         = 108,
       mats = {
@@ -23,6 +25,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Bracer - Minor Stamina",
+      spell_id    = 7457,
       skill_up_to = 100,
       qty         = 10,
       mats = {
@@ -31,6 +34,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Runed Silver Rod",
+      spell_id    = 7795,
       skill_up_to = 101,
       qty         = 1,
       mats = {
@@ -42,6 +46,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Greater Magic Wand",
+      spell_id    = 14807,
       skill_up_to = 110,
       qty         = 9,
       mats = {
@@ -60,6 +65,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Cloak - Minor Agility",
+      spell_id    = 13419,
       skill_up_to = 135,
       qty         = 25,
       mats = {
@@ -68,6 +74,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Bracer - Lesser Stamina",
+      spell_id    = 13501,
       skill_up_to = 155,
       qty         = 20,
       mats = {
@@ -76,6 +83,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Runed Golden Rod",
+      spell_id    = 13628,
       skill_up_to = 156,
       qty         = 1,
       mats = {
@@ -87,6 +95,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Bracer - Lesser Strength",
+      spell_id    = 13536,
       skill_up_to = 185,
       qty         = 40,
       mats = {
@@ -95,6 +104,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Bracer - Strength",
+      spell_id    = 20010,
       skill_up_to = 200,
       qty         = 15,
       mats = {
@@ -103,6 +113,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Runed Truesilver Rod",
+      spell_id    = 13702,
       skill_up_to = 201,
       qty         = 1,
       mats = {
@@ -114,6 +125,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Bracer - Strength",
+      spell_id    = 20010,
       skill_up_to = 220,
       qty         = 25,
       mats = {
@@ -131,6 +143,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Cloak - Greater Defense",
+      spell_id    = 13746,
       skill_up_to = 225,
       qty         = 5,
       mats = {
@@ -139,6 +152,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Gloves - Agility",
+      spell_id    = 25080,
       skill_up_to = 230,
       qty         = 5,
       mats = {
@@ -148,6 +162,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Boots - Stamina",
+      spell_id    = 20020,
       skill_up_to = 235,
       qty         = 5,
       mats = {
@@ -156,6 +171,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Chest - Superior Health",
+      spell_id    = 13858,
       skill_up_to = 250,
       qty         = 25,
       mats = {
@@ -164,6 +180,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Lesser Mana Oil",
+      spell_id    = 25127,
       skill_up_to = 265,
       qty         = 20,
       mats = {
@@ -174,6 +191,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Shield - Greater Stamina",
+      spell_id    = 20017,
       skill_up_to = 294,
       qty         = 30,
       mats = {
@@ -182,6 +200,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Runed Arcanite Rod",
+      spell_id    = 20051,
       skill_up_to = 295,
       qty         = 1,
       mats = {
@@ -195,6 +214,7 @@ CraftSageData["Enchanting"] = {
     },
     {
       recipe      = "Enchant Cloak - Superior Defense",
+      spell_id    = 20015,
       skill_up_to = 300,
       qty         = 5,
       mats = {

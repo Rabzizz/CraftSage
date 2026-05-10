@@ -5,6 +5,7 @@ CraftSageData["First Aid"] = {
   steps = {
     {
       recipe      = "Linen Bandage",
+      spell_id    = 3275,
       skill_up_to = 40,
       qty         = 40,
       mats = {
@@ -13,6 +14,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Heavy Linen Bandage",
+      spell_id    = 3276,
       skill_up_to = 80,
       qty         = 40,
       mats = {
@@ -21,6 +23,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Wool Bandage",
+      spell_id    = 3277,
       skill_up_to = 115,
       qty         = 35,
       mats = {
@@ -29,6 +32,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Heavy Wool Bandage",
+      spell_id    = 3278,
       skill_up_to = 150,
       qty         = 35,
       mats = {
@@ -46,6 +50,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Silk Bandage",
+      spell_id    = 7928,
       skill_up_to = 180,
       qty         = 30,
       mats = {
@@ -54,6 +59,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Heavy Silk Bandage",
+      spell_id    = 7929,
       skill_up_to = 210,
       qty         = 30,
       mats = {
@@ -71,6 +77,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Mageweave Bandage",
+      spell_id    = 10840,
       skill_up_to = 240,
       qty         = 30,
       mats = {
@@ -79,6 +86,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Heavy Mageweave Bandage",
+      spell_id    = 10841,
       skill_up_to = 260,
       qty         = 20,
       mats = {
@@ -87,6 +95,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Runecloth Bandage",
+      spell_id    = 18629,
       skill_up_to = 290,
       qty         = 30,
       mats = {
@@ -95,6 +104,7 @@ CraftSageData["First Aid"] = {
     },
     {
       recipe      = "Heavy Runecloth Bandage",
+      spell_id    = 18630,
       skill_up_to = 300,
       qty         = 10,
       mats = {

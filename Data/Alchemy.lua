@@ -5,6 +5,7 @@ CraftSageData["Alchemy"] = {
   steps = {
     {
       recipe      = "Minor Healing Potion",
+      spell_id    = 2330,
       skill_up_to = 60,
       qty         = 59,
       mats = {
@@ -15,6 +16,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Lesser Healing Potion",
+      spell_id    = 2337,
       skill_up_to = 110,
       qty         = 59,
       mats = {
@@ -33,6 +35,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Healing Potion",
+      spell_id    = 3447,
       skill_up_to = 140,
       qty         = 30,
       mats = {
@@ -43,6 +46,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Lesser Mana Potion",
+      spell_id    = 3173,
       skill_up_to = 155,
       qty         = 15,
       mats = {
@@ -53,6 +57,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Greater Healing Potion",
+      spell_id    = 7181,
       skill_up_to = 185,
       qty         = 30,
       mats = {
@@ -72,6 +77,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Elixir of Agility",
+      spell_id    = 11449,
       skill_up_to = 210,
       qty         = 25,
       mats = {
@@ -82,6 +88,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Elixir of Greater Defense",
+      spell_id    = 11450,
       skill_up_to = 215,
       qty         = 10,
       mats = {
@@ -92,6 +99,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Superior Healing Potion",
+      spell_id    = 11457,
       skill_up_to = 230,
       qty         = 15,
       mats = {
@@ -102,6 +110,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Philosophers' Stone",
+      spell_id    = 11459,
       skill_up_to = 231,
       qty         = 1,
       mats = {
@@ -113,6 +122,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Elixir of Detect Undead",
+      spell_id    = 11460,
       skill_up_to = 250,
       qty         = 19,
       mats = {
@@ -122,6 +132,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Elixir of Greater Agility",
+      spell_id    = 11467,
       skill_up_to = 265,
       qty         = 15,
       mats = {
@@ -132,6 +143,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Superior Mana Potion",
+      spell_id    = 17553,
       skill_up_to = 285,
       qty         = 20,
       mats = {
@@ -142,6 +154,7 @@ CraftSageData["Alchemy"] = {
     },
     {
       recipe      = "Major Healing Potion",
+      spell_id    = 17556,
       skill_up_to = 300,
       qty         = 18,
       mats = {

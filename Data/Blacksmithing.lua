@@ -5,6 +5,7 @@ CraftSageData["Blacksmithing"] = {
   steps = {
     {
       recipe      = "Rough Sharpening Stone",
+      spell_id    = 2660,
       skill_up_to = 30,
       qty         = 40,
       mats = {
@@ -13,6 +14,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Rough Grinding Stone",
+      spell_id    = 3320,
       skill_up_to = 65,
       qty         = 60,
       mats = {
@@ -21,6 +23,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Coarse Sharpening Stone",
+      spell_id    = 2665,
       skill_up_to = 75,
       qty         = 25,
       mats = {
@@ -29,6 +32,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Coarse Grinding Stone",
+      spell_id    = 3326,
       skill_up_to = 90,
       qty         = 35,
       mats = {
@@ -37,6 +41,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Runed Copper Belt",
+      spell_id    = 2666,
       skill_up_to = 100,
       qty         = 10,
       mats = {
@@ -45,6 +50,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Silver Rod",
+      spell_id    = 7818,
       skill_up_to = 105,
       qty         = 5,
       mats = {
@@ -54,6 +60,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Runed Copper Belt",
+      spell_id    = 2666,
       skill_up_to = 110,
       qty         = 5,
       mats = {
@@ -62,6 +69,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Rough Bronze Leggings",
+      spell_id    = 2668,
       skill_up_to = 125,
       qty         = 15,
       mats = {
@@ -79,6 +87,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Heavy Grinding Stone",
+      spell_id    = 3348,
       skill_up_to = 140,
       qty         = 35,
       mats = {
@@ -87,6 +96,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Patterned Bronze Bracers",
+      spell_id    = 2672,
       skill_up_to = 150,
       qty         = 10,
       mats = {
@@ -96,6 +106,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Golden Rod",
+      spell_id    = 14379,
       skill_up_to = 155,
       qty         = 5,
       mats = {
@@ -105,6 +116,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Green Iron Leggings",
+      spell_id    = 3506,
       skill_up_to = 165,
       qty         = 10,
       mats = {
@@ -115,6 +127,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Green Iron Bracers",
+      spell_id    = 3501,
       skill_up_to = 190,
       qty         = 25,
       mats = {
@@ -124,6 +137,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Golden Scale Bracers",
+      spell_id    = 7223,
       skill_up_to = 200,
       qty         = 10,
       mats = {
@@ -142,6 +156,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Solid Grinding Stone",
+      spell_id    = 9920,
       skill_up_to = 210,
       qty         = 30,
       mats = {
@@ -150,6 +165,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Heavy Mithril Gauntlet",
+      spell_id    = 9928,
       skill_up_to = 225,
       qty         = 15,
       mats = {
@@ -159,6 +175,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Steel Plate Helm",
+      spell_id    = 9935,
       skill_up_to = 235,
       qty         = 10,
       mats = {
@@ -168,6 +185,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Mithril Coif",
+      spell_id    = 9961,
       skill_up_to = 250,
       qty         = 15,
       mats = {
@@ -177,6 +195,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Dense Sharpening Stone",
+      spell_id    = 16641,
       skill_up_to = 260,
       qty         = 20,
       mats = {
@@ -185,6 +204,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Thorium Belt",
+      spell_id    = 16643,
       skill_up_to = 270,
       qty         = 10,
       mats = {
@@ -194,6 +214,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Thorium Bracers",
+      spell_id    = 16644,
       skill_up_to = 275,
       qty         = 5,
       mats = {
@@ -203,6 +224,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Imperial Plate Bracers",
+      spell_id    = 16649,
       skill_up_to = 290,
       qty         = 15,
       mats = {
@@ -212,6 +234,7 @@ CraftSageData["Blacksmithing"] = {
     },
     {
       recipe      = "Thorium Boots",
+      spell_id    = 16652,
       skill_up_to = 300,
       qty         = 10,
       mats = {

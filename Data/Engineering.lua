@@ -5,6 +5,7 @@ CraftSageData["Engineering"] = {
   steps = {
     {
       recipe      = "Rough Blasting Powder",
+      spell_id    = 3918,
       skill_up_to = 30,
       qty         = 60,
       mats = {
@@ -13,6 +14,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Handful of Copper Bolts",
+      spell_id    = 3922,
       skill_up_to = 50,
       qty         = 30,
       mats = {
@@ -21,6 +23,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Arclight Spanner",
+      spell_id    = 7430,
       skill_up_to = 51,
       qty         = 1,
       mats = {
@@ -29,6 +32,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Rough Copper Bomb",
+      spell_id    = 3923,
       skill_up_to = 75,
       qty         = 30,
       mats = {
@@ -40,6 +44,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Coarse Blasting Powder",
+      spell_id    = 3929,
       skill_up_to = 90,
       qty         = 60,
       mats = {
@@ -48,6 +53,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Coarse Dynamite",
+      spell_id    = 3931,
       skill_up_to = 100,
       qty         = 20,
       mats = {
@@ -57,6 +63,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Silver Contact",
+      spell_id    = 3973,
       skill_up_to = 105,
       qty         = 5,
       mats = {
@@ -65,6 +72,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Bronze Tube",
+      spell_id    = 3938,
       skill_up_to = 125,
       qty         = 25,
       mats = {
@@ -83,6 +91,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Standard Scope",
+      spell_id    = 3978,
       skill_up_to = 135,
       qty         = 10,
       mats = {
@@ -92,6 +101,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Heavy Blasting Powder",
+      spell_id    = 3945,
       skill_up_to = 145,
       qty         = 30,
       mats = {
@@ -100,6 +110,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Whirring Bronze Gizmo",
+      spell_id    = 3942,
       skill_up_to = 150,
       qty         = 15,
       mats = {
@@ -109,6 +120,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Bronze Framework",
+      spell_id    = 3953,
       skill_up_to = 160,
       qty         = 15,
       mats = {
@@ -119,6 +131,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Explosive Sheep",
+      spell_id    = 3955,
       skill_up_to = 175,
       qty         = 15,
       mats = {
@@ -130,6 +143,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Gyromatic Micro-Adjustor",
+      spell_id    = 12590,
       skill_up_to = 176,
       qty         = 1,
       mats = {
@@ -138,6 +152,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Solid Blasting Powder",
+      spell_id    = 12585,
       skill_up_to = 195,
       qty         = 60,
       mats = {
@@ -146,6 +161,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Mithril Tube",
+      spell_id    = 12589,
       skill_up_to = 200,
       qty         = 7,
       mats = {
@@ -163,6 +179,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Unstable Trigger",
+      spell_id    = 12591,
       skill_up_to = 215,
       qty         = 20,
       mats = {
@@ -173,6 +190,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Mithril Casing",
+      spell_id    = 12599,
       skill_up_to = 238,
       qty         = 40,
       mats = {
@@ -181,6 +199,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Hi-Explosive Bomb",
+      spell_id    = 12619,
       skill_up_to = 250,
       qty         = 20,
       mats = {
@@ -191,6 +210,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Dense Blasting Powder",
+      spell_id    = 19788,
       skill_up_to = 260,
       qty         = 30,
       mats = {
@@ -199,6 +219,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Thorium Widget",
+      spell_id    = 19791,
       skill_up_to = 285,
       qty         = 35,
       mats = {
@@ -208,6 +229,7 @@ CraftSageData["Engineering"] = {
     },
     {
       recipe      = "Thorium Shells",
+      spell_id    = 19800,
       skill_up_to = 300,
       qty         = 15,
       mats = {

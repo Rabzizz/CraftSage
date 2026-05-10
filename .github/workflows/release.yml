@@ -85,20 +85,21 @@ jobs:
 
           echo "Resolved game version ID: $GAME_VERSION_ID"
 
-          METADATA=$(python3 -c "
-          import json
-          print(json.dumps({
-            'changelog':     open('release_body.md').read(),
-            'changelogType': 'markdown',
-            'displayName':   'CraftSage v${VERSION}',
-            'gameVersions':  [int('$GAME_VERSION_ID')],
-            'releaseType':   'release',
-          }))
-          ")
+          jq -n \
+            --rawfile changelog release_body.md \
+            --arg version "$VERSION" \
+            --argjson gv "$GAME_VERSION_ID" \
+            '{changelog:$changelog,changelogType:"markdown",displayName:("CraftSage v"+$version),gameVersions:[$gv],releaseType:"release"}' \
+            > metadata.json
+
+          echo "--- metadata.json ---"
+          cat metadata.json
+          echo ""
+          echo "--- end metadata ---"
 
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
-            -F "metadata=$METADATA" \
+            -F "metadata=<metadata.json" \
             -F "file=@CraftSage-v${VERSION}.zip" \
             "https://wow.curseforge.com/api/projects/1537185/upload-file")
 

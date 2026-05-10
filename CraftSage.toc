@@ -38,3 +38,4 @@ UI\ShoppingList.lua
 
 Core.lua
 UI\MinimapButton.lua
+UI\Settings.lua

@@ -115,7 +115,10 @@ local options = {
           order = 1,
           width = "full",
           get   = function() return S().vendor_highlight end,
-          set   = function(_, v) S().vendor_highlight = v end,
+          set   = function(_, v)
+            S().vendor_highlight = v
+            if NS.ShoppingList:IsVisible() then NS.ShoppingList:Refresh() end
+          end,
         },
         shopping_progress = {
           type  = "toggle",
@@ -124,7 +127,10 @@ local options = {
           order = 2,
           width = "full",
           get   = function() return S().shopping_progress end,
-          set   = function(_, v) S().shopping_progress = v end,
+          set   = function(_, v)
+            S().shopping_progress = v
+            if NS.ShoppingList:IsVisible() then NS.ShoppingList:Refresh() end
+          end,
         },
       },
     },

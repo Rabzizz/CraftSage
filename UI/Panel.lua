@@ -452,7 +452,8 @@ local function _initialize()
       local name = GetItemInfo(mat.item) or ("Item:" .. mat.item)
       r._itemId = mat.item
       r:Show()
-      if mat.source == "vendor" then
+      local vhl = NS.CraftSage.db.global.settings.vendor_highlight
+      if mat.source == "vendor" and vhl then
         r.name:SetText(name)
         r.name:SetTextColor(1, 0.8, 0.2, 1)
         r.buyTag:SetText(L["MAT_SOURCE_VENDOR"])

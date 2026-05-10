@@ -48,6 +48,7 @@ local _craftFrame = CreateFrame("Frame")
 _craftFrame:RegisterEvent("BAG_UPDATE")
 _craftFrame:RegisterEvent("SKILL_LINES_CHANGED")
 _craftFrame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
+_craftFrame:RegisterEvent("TRADE_SKILL_UPDATE")
 _craftFrame:SetScript("OnEvent", function(self, event)
   local cs = NS.CraftSage
   if not cs.currentProf or not NS.Panel:IsVisible() then return end

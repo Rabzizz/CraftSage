@@ -12,6 +12,18 @@ local DB_DEFAULTS = {
   char = {
     checkmarks = {},
     minimap    = { hide = false },
+  },
+  global = {
+    settings = {
+      panel_scale       = 1.0,
+      panel_opacity     = 0.97,
+      upcoming_steps    = 2,
+      auto_open_panel   = true,
+      step_flash        = true,
+      show_tooltips     = true,
+      vendor_highlight  = true,
+      shopping_progress = true,
+    }
   }
 }
 
@@ -33,7 +45,9 @@ function CraftSage:OnTradeSkillShow()
   self.currentMaxSkill = maxSkillLevel
   self.currentData     = CraftSageData and CraftSageData[profName]
   self.activeStepIndex = self:ComputeActiveStep(self.currentData, skillLevel)
-  NS.Panel:Refresh(profName, skillLevel, maxSkillLevel, self.currentData, self.activeStepIndex)
+  if self.db.global.settings.auto_open_panel then
+    NS.Panel:Refresh(profName, skillLevel, maxSkillLevel, self.currentData, self.activeStepIndex)
+  end
   self:HighlightActiveRecipe()
 end
 

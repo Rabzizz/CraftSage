@@ -7,7 +7,12 @@ local broker = LibStub("LibDataBroker-1.1"):NewDataObject("CraftSage", {
   icon  = "Interface\\AddOns\\CraftSage\\CraftSage-logo",
   OnClick = function(_, button)
     if button == "LeftButton" then
-      LibStub("AceConfigDialog-3.0"):Open("CraftSage")
+      local ACD = LibStub("AceConfigDialog-3.0")
+      if ACD.OpenFrames["CraftSage"] then
+        ACD:Close("CraftSage")
+      else
+        ACD:Open("CraftSage")
+      end
     end
   end,
   OnTooltipShow = function(tip)

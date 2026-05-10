@@ -8,6 +8,7 @@ local broker = LibStub("LibDataBroker-1.1"):NewDataObject("CraftSage", {
   OnClick = function(_, button)
     if button == "LeftButton" then
       InterfaceOptionsFrame_OpenToCategory("CraftSage")
+      InterfaceOptionsFrame_OpenToCategory("CraftSage")
     end
   end,
   OnTooltipShow = function(tip)

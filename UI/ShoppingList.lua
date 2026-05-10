@@ -124,6 +124,8 @@ local function AcquireRow(n)
     r.qty:SetPoint("RIGHT", r.frame, "RIGHT", -4, 0)
 
     r.frame:SetScript("OnEnter", function(self)
+      local cs = NS.CraftSage
+      if not cs or not cs.db or not cs.db.global.settings.show_tooltips then return end
       local item = self._item
       if not item then return end
       local _, link = GetItemInfo(item)
@@ -272,7 +274,8 @@ function ShoppingList:Refresh()
           r.buyTag:Hide()
         else
           r.check:SetText("|cff666666o|r")
-          if entry.source == "vendor" then
+          local vhl = NS.CraftSage.db.global.settings.vendor_highlight
+          if entry.source == "vendor" and vhl then
             r.name:SetTextColor(1, 0.8, 0.2, 1)
             r.buyTag:SetText(L["MAT_SOURCE_VENDOR"])
             r.buyTag:Show()
@@ -294,6 +297,7 @@ function ShoppingList:Refresh()
   scrollChild:SetHeight(math.max(scrollY, 1))
   local pct = total > 0 and math.floor(checked / total * 100) or 0
   progressText:SetText(string.format(L["GATHERED_FMT"], checked, total, pct))
+  progressText:SetShown(NS.CraftSage.db.global.settings.shopping_progress)
 end
 
 function ShoppingList:Toggle()

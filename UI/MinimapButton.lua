@@ -7,7 +7,7 @@ local broker = LibStub("LibDataBroker-1.1"):NewDataObject("CraftSage", {
   icon  = "Interface\\AddOns\\CraftSage\\CraftSage-logo",
   OnClick = function(_, button)
     if button == "LeftButton" then
-      NS.Panel:Toggle()
+      InterfaceOptionsFrame_OpenToCategory("CraftSage")
     end
   end,
   OnTooltipShow = function(tip)

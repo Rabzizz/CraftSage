@@ -142,7 +142,12 @@ local function _initialize()
     local cs = NS.CraftSage
     if not cs or not cs.db or not cs.db.global.settings.show_tooltips then return end
     if not self._recipeIndex then return end
-    local link = GetTradeSkillRecipeLink(self._recipeIndex)
+    local link
+    if NS.CraftSage and NS.CraftSage.usesCraftFrame then
+      link = GetCraftItemLink(self._recipeIndex)
+    else
+      link = GetTradeSkillRecipeLink(self._recipeIndex)
+    end
     if not link then return end
     GameTooltip:SetOwner(self, "ANCHOR_RIGHT")
     GameTooltip:SetHyperlink(link)

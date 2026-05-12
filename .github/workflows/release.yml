@@ -21,24 +21,31 @@ jobs:
         run: |
           BRANCH="${{ github.ref_name }}"
           if [ "$BRANCH" = "main" ]; then
-            echo "type=release"    >> "$GITHUB_OUTPUT"
+            echo "type=release"     >> "$GITHUB_OUTPUT"
             echo "prerelease=false" >> "$GITHUB_OUTPUT"
-            echo "suffix="         >> "$GITHUB_OUTPUT"
           elif [ "$BRANCH" = "beta" ]; then
-            echo "type=beta"       >> "$GITHUB_OUTPUT"
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-            echo "suffix=-beta"    >> "$GITHUB_OUTPUT"
+            echo "type=beta"        >> "$GITHUB_OUTPUT"
+            echo "prerelease=true"  >> "$GITHUB_OUTPUT"
           else
-            echo "type=alpha"      >> "$GITHUB_OUTPUT"
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-            echo "suffix=-alpha"   >> "$GITHUB_OUTPUT"
+            echo "type=alpha"       >> "$GITHUB_OUTPUT"
+            echo "prerelease=true"  >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Read version from TOC
+      - name: Read version and resolve full version
         id: ver
         run: |
           VERSION=$(grep -m1 "^## Version:" CraftSage.toc | sed 's/## Version:[[:space:]]*//')
-          FULL_VERSION="${VERSION}${{ steps.rel.outputs.suffix }}"
+          BRANCH="${{ github.ref_name }}"
+
+          if [ "$BRANCH" = "main" ]; then
+            FULL_VERSION="$VERSION"
+          else
+            TYPE="${{ steps.rel.outputs.type }}"
+            EXISTING=$(git tag | grep -E "^v${VERSION}-${TYPE}\.[0-9]+$" | wc -l | tr -d ' ')
+            BUILD=$((EXISTING + 1))
+            FULL_VERSION="${VERSION}-${TYPE}.${BUILD}"
+          fi
+
           echo "version=$VERSION"           >> "$GITHUB_OUTPUT"
           echo "full_version=$FULL_VERSION" >> "$GITHUB_OUTPUT"
 

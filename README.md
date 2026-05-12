@@ -16,7 +16,7 @@ CraftSage attaches a side panel to the native TradeSkill window. It reads your c
 ## Features
 
 - **Auto-tracks skill level** — always in sync, no configuration required
-- **Step-by-step guide** — active recipe highlighted in your TradeSkill list, next two steps shown dimmed
+- **Step-by-step guide** — active recipe highlighted in your TradeSkill list, upcoming steps shown dimmed (configurable: 0–3)
 - **Trainer step callouts** — when you need to visit a trainer (Apprentice → Expert → Artisan), the panel shows an amber callout with the trainer's name and location for your faction
 - **Live mat counts** — green/red have/need counts pulled directly from your bags
 - **Vendor mat tags** — materials you buy from an NPC (vials, salt, rods, etc.) are highlighted in amber with a `[buy]` tag so you know not to farm them
@@ -25,6 +25,8 @@ CraftSage attaches a side panel to the native TradeSkill window. It reads your c
 - **Shopping list** — full material aggregation with checkboxes and one-click Copy to Chat
 - **Skill progress bar** — visual 0–300 bar at a glance
 - **HC Recommended badge** — marks professions with gold-efficient leveling paths
+- **Settings panel** — customize panel scale, opacity, number of upcoming steps, auto-open behavior, step flash, tooltips, vendor highlights, and more. Access via Escape → Interface → AddOns → CraftSage, or the minimap button
+- **Minimap button** — click to open the settings panel from anywhere; position is draggable and saved between sessions
 - **8 professions supported** — Alchemy, Blacksmithing, Engineering, Enchanting, Leatherworking, Tailoring, Cooking, First Aid
 
 **Localizations:** English (enUS), French (frFR), German (deDE)
@@ -47,12 +49,14 @@ Use the CurseForge App or Wago App to install and keep CraftSage up to date auto
 
 ## Usage
 
-Open any profession TradeSkill window — CraftSage appears automatically on the right side. It hides when you close the window.
+Open any profession TradeSkill window — CraftSage appears automatically on the right side. The panel is freely movable; drag it anywhere. It hides when you close the window.
 
 | Command            | Effect                                                    |
 | ------------------ | --------------------------------------------------------- |
 | `/craftsage`       | Toggle the panel open/closed                              |
 | `/craftsage reset` | Clear shopping list checkmarks for the current profession |
+
+Access settings via **Escape → Interface → AddOns → CraftSage** or click the minimap button.
 
 ---
 
@@ -74,12 +78,6 @@ C:\Program Files (x86)\World of Warcraft\_classic_era_\Interface\AddOns\CraftSag
 
 Symlink or copy the repo folder there. After code changes, reload in-game with `/reload`.
 
-**Build a release zip:**
-```powershell
-.\build-release.ps1
-# Output: dist/CraftSage-<version>.zip
-```
-
 **Project structure:**
 
 ```
@@ -92,8 +90,14 @@ CraftSage/
 │   └── Frames.xml
 ├── Data/               # Pure data files, one per profession
 ├── Locale/             # AceLocale-3.0 strings (enUS, frFR, deDE)
-└── Libs/               # Ace3 suite + SimpleSticky
+└── Libs/               # Ace3 suite + LibDBIcon + SimpleSticky
 ```
+
+---
+
+## Feedback & Contributing
+
+CraftSage is actively being developed — new features and improvements are on the way. If you run into a bug or have a suggestion, feel free to open an issue on GitHub or leave a comment on CurseForge. All feedback is welcome!
 
 ---
 
@@ -101,4 +105,6 @@ CraftSage/
 
 Crafting step order, quantities, and material lists are based on guides from [Wowhead](https://www.wowhead.com). All data has been verified against WoW Classic Era recipes and adjusted with ~30% buffer quantities for yellow-quality RNG.
 
-Built with [Ace3](https://www.wowace.com/projects/ace3) and [SimpleSticky](https://www.wowinterface.com/downloads/info7118).
+Built with [Ace3](https://www.wowace.com/projects/ace3), [LibDBIcon](https://www.wowace.com/projects/libdbicon-1-0), and [SimpleSticky](https://www.wowinterface.com/downloads/info7118).
+
+*This addon was built with the assistance of AI tools.*

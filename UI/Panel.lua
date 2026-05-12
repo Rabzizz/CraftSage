@@ -35,6 +35,7 @@ local matsLabel, noteText, matRows, msgText
 local shopBtn, resetBtn
 local highlightedIndex
 local _guideBtn
+local _craftGuideBtn
 
 local function ShowAllMats(show)
   for i = 1, 6 do
@@ -306,7 +307,9 @@ local function _initialize()
     if not frame then return end
     if not frame:IsShown() then
       frame:ClearAllPoints()
-      if TradeSkillFrame and TradeSkillFrame:IsShown() then
+      if CraftFrame and CraftFrame:IsShown() then
+        frame:SetPoint("TOPLEFT", CraftFrame, "TOPRIGHT", 2, 0)
+      elseif TradeSkillFrame and TradeSkillFrame:IsShown() then
         frame:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", 2, 0)
       else
         frame:SetPoint("CENTER", UIParent, "CENTER", 200, 0)
@@ -503,8 +506,9 @@ function Panel:Toggle()
 end
 
 function Panel:UpdateGuideBtnLabel()
-  if not _guideBtn then return end
-  _guideBtn:SetText(frame and frame:IsShown() and "< Guide" or "Guide >")
+  local label = frame and frame:IsShown() and "< Guide" or "Guide >"
+  if _guideBtn then _guideBtn:SetText(label) end
+  if _craftGuideBtn then _craftGuideBtn:SetText(label) end
 end
 
 local _guideBtnReady = false
@@ -529,6 +533,30 @@ function Panel:EnsureGuideBtn()
   end
   btn:SetScript("OnClick", function() Panel:Toggle() end)
   _guideBtn = btn
+  Panel:UpdateGuideBtnLabel()
+end
+
+local _craftGuideBtnReady = false
+function Panel:EnsureCraftGuideBtn()
+  if _craftGuideBtnReady then return end
+  _craftGuideBtnReady = true
+
+  CraftFrame:HookScript("OnHide", function()
+    NS.CraftSage.currentProf = nil
+    NS.CraftSage.usesCraftFrame = false
+    if frame then frame:Hide() end
+  end)
+
+  local btn = CreateFrame("Button", nil, CraftFrame, "UIPanelButtonTemplate")
+  btn:SetSize(72, 18)
+  local closeBtn = _G["CraftFrameCloseButton"]
+  if closeBtn then
+    btn:SetPoint("RIGHT", closeBtn, "LEFT", -4, 0)
+  else
+    btn:SetPoint("TOPRIGHT", CraftFrame, "TOPRIGHT", -25, -3)
+  end
+  btn:SetScript("OnClick", function() Panel:Toggle() end)
+  _craftGuideBtn = btn
   Panel:UpdateGuideBtnLabel()
 end
 

@@ -2,7 +2,6 @@ local L = LibStub("AceLocale-3.0"):NewLocale("CraftSage", "frFR")
 if not L then return end
 
 L["PANEL_TITLE"]        = "CraftSage"
-L["HC_BADGE"]           = "HC Recommandé"
 L["GUIDE_STEPS"]        = "Étapes du guide"
 L["STEP_MATS"]          = "Matériaux de l'étape :"
 L["SHOPPING_LIST_BTN"]  = "Liste de courses"

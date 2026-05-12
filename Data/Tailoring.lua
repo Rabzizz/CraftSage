@@ -1,7 +1,6 @@
 CraftSageData = CraftSageData or {}
 
 CraftSageData["Tailoring"] = {
-  hc_recommended = false,
   steps = {
     {
       recipe      = "Bolt of Linen Cloth",

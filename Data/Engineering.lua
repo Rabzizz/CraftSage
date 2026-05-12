@@ -1,7 +1,6 @@
 CraftSageData = CraftSageData or {}
 
 CraftSageData["Engineering"] = {
-  hc_recommended = true,
   steps = {
     {
       recipe      = "Rough Blasting Powder",

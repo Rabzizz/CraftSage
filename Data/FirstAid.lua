@@ -1,7 +1,6 @@
 CraftSageData = CraftSageData or {}
 
 CraftSageData["First Aid"] = {
-  hc_recommended = true,
   steps = {
     {
       recipe      = "Linen Bandage",

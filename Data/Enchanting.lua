@@ -1,7 +1,6 @@
 CraftSageData = CraftSageData or {}
 
 CraftSageData["Enchanting"] = {
-  hc_recommended = false,
   steps = {
     {
       recipe      = "Runed Copper Rod",

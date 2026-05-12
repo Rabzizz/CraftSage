@@ -1,7 +1,6 @@
 CraftSageData = CraftSageData or {}
 
 CraftSageData["Alchemy"] = {
-  hc_recommended = true,
   steps = {
     {
       recipe      = "Minor Healing Potion",

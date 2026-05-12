@@ -1,7 +1,6 @@
 local L = LibStub("AceLocale-3.0"):NewLocale("CraftSage", "enUS", true)
 
 L["PANEL_TITLE"]         = "CraftSage"
-L["HC_BADGE"]            = "HC Recommended"
 L["GUIDE_STEPS"]         = "Guide Steps"
 L["STEP_MATS"]           = "Step materials:"
 L["SHOPPING_LIST_BTN"]   = "Shopping List"

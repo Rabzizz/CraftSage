@@ -27,7 +27,7 @@ NS.Panel = Panel
 local PANEL_W = 185
 local PANEL_H = 355
 
-local frame, titleText, profText, hcText
+local frame, titleText, profText
 local skillBarBg, skillBarFill, skillText
 local stepsLabel, stepRows, divider
 local trainerCallout, trainerLine1, trainerLine2, trainerLine3
@@ -103,12 +103,6 @@ local function _initialize()
   profText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
   profText:SetPoint("TOP", frame, "TOP", 0, -31)
   profText:SetTextColor(1, 0.82, 0, 1)
-
-  hcText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
-  hcText:SetPoint("TOP", profText, "BOTTOM", 0, -2)
-  hcText:SetTextColor(1, 0.5, 0.1, 1)
-  hcText:SetText(L["HC_BADGE"])
-  hcText:Hide()
 
   skillBarBg = frame:CreateTexture(nil, "BACKGROUND")
   skillBarBg:SetPoint("TOPLEFT",  frame, "TOPLEFT",  10, -58)
@@ -321,7 +315,6 @@ local function _initialize()
     end
 
     profText:SetText(profName or "")
-    hcText:Hide()
 
     if not profName then
       msgText:SetText(L["NO_PROFESSION_OPEN"])

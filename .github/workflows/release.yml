@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    branches: [main]
+    branches: [main, beta, alpha]
 
 permissions:
   contents: write
@@ -16,38 +16,67 @@ jobs:
         with:
           fetch-depth: 0  # needed so we can list all existing tags
 
+      - name: Determine release type from branch
+        id: rel
+        run: |
+          BRANCH="${{ github.ref_name }}"
+          if [ "$BRANCH" = "main" ]; then
+            echo "type=release"    >> "$GITHUB_OUTPUT"
+            echo "prerelease=false" >> "$GITHUB_OUTPUT"
+            echo "suffix="         >> "$GITHUB_OUTPUT"
+          elif [ "$BRANCH" = "beta" ]; then
+            echo "type=beta"       >> "$GITHUB_OUTPUT"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            echo "suffix=-beta"    >> "$GITHUB_OUTPUT"
+          else
+            echo "type=alpha"      >> "$GITHUB_OUTPUT"
+            echo "prerelease=true" >> "$GITHUB_OUTPUT"
+            echo "suffix=-alpha"   >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Read version from TOC
         id: ver
         run: |
           VERSION=$(grep -m1 "^## Version:" CraftSage.toc | sed 's/## Version:[[:space:]]*//')
-          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          FULL_VERSION="${VERSION}${{ steps.rel.outputs.suffix }}"
+          echo "version=$VERSION"           >> "$GITHUB_OUTPUT"
+          echo "full_version=$FULL_VERSION" >> "$GITHUB_OUTPUT"
 
       - name: Check whether this version is already released
         id: check
         run: |
-          if git tag | grep -qx "v${{ steps.ver.outputs.version }}"; then
-            echo "exists=true" >> "$GITHUB_OUTPUT"
+          if git tag | grep -qx "v${{ steps.ver.outputs.full_version }}"; then
+            echo "exists=true"  >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Extract changelog section for this version
+      - name: Extract changelog section
         if: steps.check.outputs.exists == 'false'
         run: |
           python3 - <<'PYEOF'
           import re
           version = "${{ steps.ver.outputs.version }}"
-          content  = open("CHANGELOG.md").read()
-          pattern  = r"(## \[" + re.escape(version) + r"\].*?)(?=\n## \[|\Z)"
-          m = re.search(pattern, content, re.DOTALL)
-          body = m.group(1).strip() if m else f"Release v{version}"
+          branch  = "${{ github.ref_name }}"
+          content = open("CHANGELOG.md").read()
+
+          # alpha/beta: prefer [Unreleased] block, fall back to versioned block
+          if branch in ("alpha", "beta"):
+              m = re.search(r"(## \[Unreleased\].*?)(?=\n## \[|\Z)", content, re.DOTALL)
+              if not m:
+                  m = re.search(r"(## \[" + re.escape(version) + r"\].*?)(?=\n## \[|\Z)", content, re.DOTALL)
+          else:
+              m = re.search(r"(## \[" + re.escape(version) + r"\].*?)(?=\n## \[|\Z)", content, re.DOTALL)
+
+          full_version = "${{ steps.ver.outputs.full_version }}"
+          body = m.group(1).strip() if m else f"Release v{full_version}"
           open("release_body.md", "w").write(body)
           PYEOF
 
       - name: Package addon
         if: steps.check.outputs.exists == 'false'
         run: |
-          VERSION="${{ steps.ver.outputs.version }}"
+          VERSION="${{ steps.ver.outputs.full_version }}"
           mkdir -p dist/CraftSage
 
           # Mirror the include list in build-release.ps1
@@ -66,7 +95,7 @@ jobs:
         env:
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
         run: |
-          VERSION="${{ steps.ver.outputs.version }}"
+          VERSION="${{ steps.ver.outputs.full_version }}"
 
           GAME_VERSION_ID=$(curl -sf \
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
@@ -89,7 +118,8 @@ jobs:
             --rawfile changelog release_body.md \
             --arg version "$VERSION" \
             --argjson gv "$GAME_VERSION_ID" \
-            '{changelog:$changelog,changelogType:"markdown",displayName:("CraftSage v"+$version),gameVersions:[$gv],releaseType:"release"}' \
+            --arg reltype "${{ steps.rel.outputs.type }}" \
+            '{changelog:$changelog,changelogType:"markdown",displayName:("CraftSage v"+$version),gameVersions:[$gv],releaseType:$reltype}' \
             > metadata.json
 
           echo "--- metadata.json ---"
@@ -117,7 +147,8 @@ jobs:
         if: steps.check.outputs.exists == 'false'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: v${{ steps.ver.outputs.version }}
-          name: CraftSage v${{ steps.ver.outputs.version }}
+          tag_name: v${{ steps.ver.outputs.full_version }}
+          name: CraftSage v${{ steps.ver.outputs.full_version }}
           body_path: release_body.md
-          files: CraftSage-v${{ steps.ver.outputs.version }}.zip
+          prerelease: ${{ steps.rel.outputs.prerelease }}
+          files: CraftSage-v${{ steps.ver.outputs.full_version }}.zip

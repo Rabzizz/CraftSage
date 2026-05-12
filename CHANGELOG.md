@@ -1,5 +1,18 @@
 # CraftSage Changelog
 
+## [Unreleased]
+
+### Added
+- Enchanting profession support via CraftFrame API
+
+### Changed
+- Step display now shows craft counts (`×remaining/total` for active step, `×total` for upcoming) instead of skill targets
+
+### Removed
+- HC Recommended badge and `hc_recommended` data field
+
+---
+
 ## [1.3.0] — 2026-05-10
 
 ### Added
@@ -17,9 +30,6 @@
 
 ### Changed
 - Minimap button left-click now opens/closes the CraftSage settings window instead of toggling the guide panel.
-
-### Removed
-- HC Recommended badge and `hc_recommended` data field
 
 ---
 

@@ -35,6 +35,8 @@ end
 function CraftSage:OnEnable()
   self:RegisterEvent("TRADE_SKILL_SHOW", "OnTradeSkillShow")
   self:RegisterEvent("TRADE_SKILL_HIDE", "OnTradeSkillHide")
+  self:RegisterEvent("CRAFT_SHOW", "OnCraftShow")
+  self:RegisterEvent("CRAFT_HIDE", "OnCraftHide")
 end
 
 function CraftSage:OnTradeSkillShow()
@@ -56,6 +58,27 @@ function CraftSage:OnTradeSkillHide()
   NS.Panel:Hide()
 end
 
+function CraftSage:OnCraftShow()
+  self.usesCraftFrame = true
+  NS.Panel:EnsureCraftGuideBtn()
+  local profName, skillLevel, maxSkillLevel = GetCraftLine()
+  self.currentProf     = profName
+  self.currentSkill    = skillLevel
+  self.currentMaxSkill = maxSkillLevel
+  self.currentData     = CraftSageData and CraftSageData[profName]
+  self.activeStepIndex = self:ComputeActiveStep(self.currentData, skillLevel)
+  if self.db.global.settings.auto_open_panel then
+    NS.Panel:Refresh(profName, skillLevel, maxSkillLevel, self.currentData, self.activeStepIndex)
+  end
+  self:HighlightActiveRecipe()
+end
+
+function CraftSage:OnCraftHide()
+  self.usesCraftFrame = false
+  self.currentProf = nil
+  NS.Panel:Hide()
+end
+
 -- AceEvent RegisterEvent is unreliable for high-frequency events in Classic Era.
 -- Use a raw frame for BAG_UPDATE (mat count refresh) and SKILL_LINES_CHANGED (skill-ups).
 local _craftFrame = CreateFrame("Frame")
@@ -63,6 +86,7 @@ _craftFrame:RegisterEvent("BAG_UPDATE")
 _craftFrame:RegisterEvent("SKILL_LINES_CHANGED")
 _craftFrame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 _craftFrame:RegisterEvent("TRADE_SKILL_UPDATE")
+_craftFrame:RegisterEvent("CRAFT_UPDATE")
 _craftFrame:SetScript("OnEvent", function(self, event)
   local cs = NS.CraftSage
   if not cs.currentProf or not NS.Panel:IsVisible() then return end
@@ -75,7 +99,12 @@ _craftFrame:SetScript("OnEvent", function(self, event)
   end
 
   if event == "SKILL_LINES_CHANGED" then
-    local profName, skillLevel, maxSkillLevel = GetTradeSkillLine()
+    local profName, skillLevel, maxSkillLevel
+    if cs.usesCraftFrame then
+      profName, skillLevel, maxSkillLevel = GetCraftLine()
+    else
+      profName, skillLevel, maxSkillLevel = GetTradeSkillLine()
+    end
     if profName == cs.currentProf then
       cs.currentSkill    = skillLevel
       cs.currentMaxSkill = maxSkillLevel
@@ -114,12 +143,23 @@ function CraftSage:HighlightActiveRecipe()
     return
   end
   local target = step.recipe
-  local numSkills = GetNumTradeSkills()
-  for i = 1, numSkills do
-    local skillName = GetTradeSkillInfo(i)
-    if skillName == target then
-      NS.Panel:SetHighlightedRecipeIndex(i)
-      return
+  if self.usesCraftFrame then
+    local n = GetNumCrafts()
+    for i = 1, n do
+      local skillName = GetCraftInfo(i)
+      if skillName == target then
+        NS.Panel:SetHighlightedRecipeIndex(i)
+        return
+      end
+    end
+  else
+    local numSkills = GetNumTradeSkills()
+    for i = 1, numSkills do
+      local skillName = GetTradeSkillInfo(i)
+      if skillName == target then
+        NS.Panel:SetHighlightedRecipeIndex(i)
+        return
+      end
     end
   end
   NS.Panel:SetHighlightedRecipeIndex(nil)

@@ -40,6 +40,7 @@ function CraftSage:OnEnable()
 end
 
 function CraftSage:OnTradeSkillShow()
+  self.usesCraftFrame = false
   NS.Panel:EnsureGuideBtn()
   local profName, skillLevel, maxSkillLevel = GetTradeSkillLine()
   self.currentProf     = profName
@@ -60,7 +61,7 @@ end
 
 function CraftSage:OnCraftShow()
   self.usesCraftFrame = true
-  NS.Panel:EnsureCraftGuideBtn()
+  if NS.Panel.EnsureCraftGuideBtn then NS.Panel:EnsureCraftGuideBtn() end
   local profName, skillLevel, maxSkillLevel = GetCraftLine()
   self.currentProf     = profName
   self.currentSkill    = skillLevel

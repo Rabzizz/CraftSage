@@ -385,7 +385,7 @@ local function _initialize()
             stepRows[i].text:SetText(string.format("|cff555555%d. [Trainer] %s|r", idx, s.recipe))
             stepRows[i]._recipeName = nil; stepRows[i]._wowheadUrl = nil
           else
-            stepRows[i].text:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, s.recipe, s.skill_up_to))
+            stepRows[i].text:SetText(string.format("|cff555555%d. %s ×%d|r", idx, s.recipe, s.qty))
             stepRows[i]._recipeName = s.recipe
             stepRows[i]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
           end

@@ -24,7 +24,6 @@ CraftSage attaches a side panel to the native TradeSkill window. It reads your c
 - **Ctrl+Click → Wowhead** — Ctrl+click any mat or recipe to get a pre-filled Wowhead URL ready to copy
 - **Shopping list** — full material aggregation with checkboxes and one-click Copy to Chat
 - **Skill progress bar** — visual 0–300 bar at a glance
-- **HC Recommended badge** — marks professions with gold-efficient leveling paths
 - **Settings panel** — customize panel scale, opacity, number of upcoming steps, auto-open behavior, step flash, tooltips, vendor highlights, and more. Access via Escape → Interface → AddOns → CraftSage, or the minimap button
 - **Minimap button** — click to open the settings panel from anywhere; position is draggable and saved between sessions
 - **8 professions supported** — Alchemy, Blacksmithing, Engineering, Enchanting, Leatherworking, Tailoring, Cooking, First Aid

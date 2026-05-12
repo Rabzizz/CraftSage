@@ -18,6 +18,9 @@
 ### Changed
 - Minimap button left-click now opens/closes the CraftSage settings window instead of toggling the guide panel.
 
+### Removed
+- HC Recommended badge and `hc_recommended` data field
+
 ---
 
 ## [1.2.0] — 2026-05-09

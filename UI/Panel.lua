@@ -404,12 +404,17 @@ local function _initialize()
     trainerCallout:Hide()
     stepRows[1]:Show()
 
+    local stepStart = activeStepIndex > 1 and data.steps[activeStepIndex - 1].skill_up_to or 1
+    local remaining = math.max(1, math.ceil(
+      step.qty * (step.skill_up_to - skillLevel) / (step.skill_up_to - stepStart)
+    ))
+
     for i = 1, 3 do
       local idx  = activeStepIndex + (i - 1)
       local s    = data.steps[idx]
       if s then
         if i == 1 then
-          stepRows[1].text:SetText(string.format("|cff88ff88> %s (to %d)|r", s.recipe, s.skill_up_to))
+          stepRows[1].text:SetText(string.format("|cff88ff88> %s ×%d/%d|r", s.recipe, remaining, step.qty))
           stepRows[1]._recipeName = s.recipe
           stepRows[1]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
         else
@@ -417,7 +422,7 @@ local function _initialize()
             stepRows[i].text:SetText(string.format("|cff555555%d. [Trainer] %s|r", idx, s.recipe))
             stepRows[i]._recipeName = nil; stepRows[i]._wowheadUrl = nil
           else
-            stepRows[i].text:SetText(string.format("|cff555555%d. %s (to %d)|r", idx, s.recipe, s.skill_up_to))
+            stepRows[i].text:SetText(string.format("|cff555555%d. %s ×%d|r", idx, s.recipe, s.qty))
             stepRows[i]._recipeName = s.recipe
             stepRows[i]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
           end
@@ -432,10 +437,6 @@ local function _initialize()
         end
       end
     end
-    local stepStart = activeStepIndex > 1 and data.steps[activeStepIndex - 1].skill_up_to or 1
-    local remaining = math.max(1, math.ceil(
-      step.qty * (step.skill_up_to - skillLevel) / (step.skill_up_to - stepStart)
-    ))
 
     if step.note then noteText:SetText(step.note); noteText:Show()
     else noteText:Hide() end

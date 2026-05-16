@@ -35,8 +35,7 @@ end
 function CraftSage:OnEnable()
   self:RegisterEvent("TRADE_SKILL_SHOW", "OnTradeSkillShow")
   self:RegisterEvent("TRADE_SKILL_HIDE", "OnTradeSkillHide")
-  self:RegisterEvent("CRAFT_SHOW", "OnCraftShow")
-  self:RegisterEvent("CRAFT_HIDE", "OnCraftHide")
+  -- CRAFT_SHOW/CRAFT_HIDE handled by raw frame below (same reason as CRAFT_UPDATE)
 end
 
 function CraftSage:OnTradeSkillShow()
@@ -61,7 +60,6 @@ end
 
 function CraftSage:OnCraftShow()
   self.usesCraftFrame = true
-  if NS.Panel.EnsureCraftGuideBtn then NS.Panel:EnsureCraftGuideBtn() end
   local profName, skillLevel, maxSkillLevel = GetCraftLine()
   self.currentProf     = profName
   self.currentSkill    = skillLevel
@@ -72,6 +70,8 @@ function CraftSage:OnCraftShow()
     NS.Panel:Refresh(profName, skillLevel, maxSkillLevel, self.currentData, self.activeStepIndex)
   end
   self:HighlightActiveRecipe()
+  -- Guide button setup after panel show so any error here can't block showing
+  if NS.Panel.EnsureCraftGuideBtn then NS.Panel:EnsureCraftGuideBtn() end
 end
 
 function CraftSage:OnCraftHide()
@@ -80,16 +80,21 @@ function CraftSage:OnCraftHide()
   NS.Panel:Hide()
 end
 
--- AceEvent RegisterEvent is unreliable for high-frequency events in Classic Era.
--- Use a raw frame for BAG_UPDATE (mat count refresh) and SKILL_LINES_CHANGED (skill-ups).
+-- AceEvent is unreliable for several Classic Era events; use a raw frame for all of them.
 local _craftFrame = CreateFrame("Frame")
 _craftFrame:RegisterEvent("BAG_UPDATE")
 _craftFrame:RegisterEvent("SKILL_LINES_CHANGED")
 _craftFrame:RegisterEvent("GET_ITEM_INFO_RECEIVED")
 _craftFrame:RegisterEvent("TRADE_SKILL_UPDATE")
 _craftFrame:RegisterEvent("CRAFT_UPDATE")
+_craftFrame:RegisterEvent("CRAFT_SHOW")
+_craftFrame:RegisterEvent("CRAFT_HIDE")
 _craftFrame:SetScript("OnEvent", function(self, event)
   local cs = NS.CraftSage
+
+  if event == "CRAFT_SHOW" then cs:OnCraftShow(); return end
+  if event == "CRAFT_HIDE" then cs:OnCraftHide(); return end
+
   if not cs.currentProf or not NS.Panel:IsVisible() then return end
 
   if event == "GET_ITEM_INFO_RECEIVED" then

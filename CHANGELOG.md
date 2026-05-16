@@ -1,6 +1,6 @@
 # CraftSage Changelog
 
-## [Unreleased]
+## [1.4.0] — 2026-05-16
 
 ### Fixed
 - Enchanting guide not appearing: `GetCraftLine()` was removed in Classic Era 11508; replaced with `GetCraftLineSafe()` using `GetSkillLineInfo()` fallback

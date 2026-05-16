@@ -2,6 +2,11 @@
 
 ## [Unreleased]
 
+### Fixed
+- Enchanting guide not appearing: `GetCraftLine()` was removed in Classic Era 11508; replaced with `GetCraftLineSafe()` using `GetSkillLineInfo()` fallback
+- Enchanting panel anchor race condition: use `usesCraftFrame` flag instead of `CraftFrame:IsShown()` to determine anchor target
+- `CRAFT_SHOW` / `CRAFT_HIDE` events do not fire in Classic Era 11508; detection now uses `CraftFrame:HookScript("OnShow")` with demand-load guards via `PLAYER_LOGIN`, `ADDON_LOADED`, and `CRAFT_UPDATE`
+
 ### Added
 - Enchanting profession support via CraftFrame API
 

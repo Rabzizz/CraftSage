@@ -312,7 +312,8 @@ local function _initialize()
     if not frame then return end
     if not frame:IsShown() then
       frame:ClearAllPoints()
-      if CraftFrame and CraftFrame:IsShown() then
+      local cs = NS.CraftSage
+      if cs and cs.usesCraftFrame and CraftFrame then
         frame:SetPoint("TOPLEFT", CraftFrame, "TOPRIGHT", 2, 0)
       elseif TradeSkillFrame and TradeSkillFrame:IsShown() then
         frame:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", 2, 0)

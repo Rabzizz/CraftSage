@@ -89,6 +89,18 @@ local function UpsertAltProf(profName, rank, maxRank)
   })
 end
 
+local function UpsertAltMeta()
+  local key  = AltKey()
+  local alts = NS.CraftSage.db.global.alts
+  if not alts[key] then
+    alts[key] = { name = UnitName("player"), realm = GetRealmName(), last_seen = time(), professions = {} }
+  end
+  alts[key].last_seen = time()
+  alts[key].faction   = UnitFactionGroup("player")
+  local _, classFile  = UnitClass("player")
+  alts[key].class     = classFile
+end
+
 function CraftSage:OnInitialize()
   self.db = LibStub("AceDB-3.0"):New("CraftSageDB", DB_DEFAULTS, true)
   self:RegisterChatCommand("craftsage", "SlashCommand")
@@ -117,6 +129,7 @@ function CraftSage:OnTradeSkillShow()
   end
   self:HighlightActiveRecipe()
   UpsertAltProf(profName, skillLevel, maxSkillLevel)
+  UpsertAltMeta()
 end
 
 function CraftSage:OnTradeSkillHide()
@@ -138,6 +151,7 @@ function CraftSage:OnCraftShow()
   self:HighlightActiveRecipe()
   if NS.Panel.EnsureCraftGuideBtn then NS.Panel:EnsureCraftGuideBtn() end
   UpsertAltProf(profName, skillLevel, maxSkillLevel)
+  UpsertAltMeta()
 end
 
 function CraftSage:OnCraftHide()
@@ -173,18 +187,7 @@ _craftFrame:SetScript("OnEvent", function(self, event, arg1)
   if event == "PLAYER_LOGIN" then
     self:UnregisterEvent("PLAYER_LOGIN")
     TryHookCraftFrame()
-    local key  = AltKey()
-    local alts = cs.db.global.alts
-    if not alts[key] then
-      alts[key] = {
-        name        = UnitName("player"),
-        realm       = GetRealmName(),
-        last_seen   = time(),
-        professions = {},
-      }
-    else
-      alts[key].last_seen = time()
-    end
+    UpsertAltMeta()
     for i = 1, GetNumSkillLines() do
       local name, isHeader, _, rank, _, _, maxRank = GetSkillLineInfo(i)
       if not isHeader then UpsertAltProf(name, rank, maxRank) end

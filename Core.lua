@@ -36,6 +36,7 @@ local DB_DEFAULTS = {
       vendor_highlight  = true,
       shopping_progress = true,
       theme             = "default",
+      alt_filter        = "all",
     },
     alts = {},
   }

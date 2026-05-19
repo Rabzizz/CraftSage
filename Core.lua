@@ -8,6 +8,18 @@ local CraftSage = LibStub("AceAddon-3.0"):NewAddon("CraftSage",
 )
 NS.CraftSage = CraftSage
 
+NS.PRIMARY_PROFESSIONS = {
+  ["Alchemy"]        = "Interface\\Icons\\Trade_Alchemy",
+  ["Blacksmithing"]  = "Interface\\Icons\\Trade_BlackSmithing",
+  ["Enchanting"]     = "Interface\\Icons\\Trade_Engraving",
+  ["Engineering"]    = "Interface\\Icons\\Trade_Engineering",
+  ["Herbalism"]      = "Interface\\Icons\\Spell_Nature_Naturetouchgrow",
+  ["Leatherworking"] = "Interface\\Icons\\Trade_LeatherWorking",
+  ["Mining"]         = "Interface\\Icons\\Trade_Mining",
+  ["Skinning"]       = "Interface\\Icons\\INV_Misc_Pelt_Wolf_01",
+  ["Tailoring"]      = "Interface\\Icons\\Trade_Tailoring",
+}
+
 local DB_DEFAULTS = {
   char = {
     checkmarks = {},
@@ -24,7 +36,8 @@ local DB_DEFAULTS = {
       vendor_highlight  = true,
       shopping_progress = true,
       theme             = "default",
-    }
+    },
+    alts = {},
   }
 }
 
@@ -42,6 +55,37 @@ local function GetCraftLineSafe()
     end
   end
   return nil, 0, 0
+end
+
+local function AltKey()
+  return UnitName("player") .. "-" .. GetRealmName()
+end
+
+local function UpsertAltProf(profName, rank, maxRank)
+  local icon = NS.PRIMARY_PROFESSIONS[profName]
+  if not icon then return end
+  local key  = AltKey()
+  local alts = NS.CraftSage.db.global.alts
+  if not alts[key] then
+    alts[key] = {
+      name        = UnitName("player"),
+      realm       = GetRealmName(),
+      last_seen   = time(),
+      professions = {},
+    }
+  end
+  for _, p in ipairs(alts[key].professions) do
+    if p.name == profName then
+      p.rank = rank; p.maxRank = maxRank
+      return
+    end
+  end
+  table.insert(alts[key].professions, {
+    name    = profName,
+    icon    = icon,
+    rank    = rank,
+    maxRank = maxRank,
+  })
 end
 
 function CraftSage:OnInitialize()
@@ -71,6 +115,7 @@ function CraftSage:OnTradeSkillShow()
     NS.Panel:Refresh(profName, skillLevel, maxSkillLevel, self.currentData, self.activeStepIndex)
   end
   self:HighlightActiveRecipe()
+  UpsertAltProf(profName, skillLevel, maxSkillLevel)
 end
 
 function CraftSage:OnTradeSkillHide()
@@ -91,6 +136,7 @@ function CraftSage:OnCraftShow()
   end
   self:HighlightActiveRecipe()
   if NS.Panel.EnsureCraftGuideBtn then NS.Panel:EnsureCraftGuideBtn() end
+  UpsertAltProf(profName, skillLevel, maxSkillLevel)
 end
 
 function CraftSage:OnCraftHide()

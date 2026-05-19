@@ -743,6 +743,9 @@ function Panel:ApplyTheme(name)
   if NS.ShoppingList.ApplyTheme then
     NS.ShoppingList:ApplyTheme(name)
   end
+  if NS.AltTracker and NS.AltTracker.ApplyTheme then
+    NS.AltTracker:ApplyTheme(name)
+  end
 end
 
 if not _initOk then

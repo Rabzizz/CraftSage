@@ -1,0 +1,197 @@
+local AddonName, NS = ...
+local L = LibStub("AceLocale-3.0"):GetLocale("CraftSage")
+
+local AltTracker = {}
+NS.AltTracker = AltTracker
+
+local AT_W, AT_H = 260, 320
+
+-- ── Frame ────────────────────────────────────────────────────────────────────
+
+local frame = CreateFrame("Frame", "CraftSageAltTrackerFrame", UIParent, "BackdropTemplate")
+frame:SetSize(AT_W, AT_H)
+frame:SetPoint("CENTER")
+frame:Hide()
+frame:SetMovable(true)
+frame:EnableMouse(true)
+frame:RegisterForDrag("LeftButton")
+frame:SetScript("OnDragStart", frame.StartMoving)
+frame:SetScript("OnDragStop",  frame.StopMovingOrSizing)
+frame:SetFrameStrata("DIALOG")
+frame:SetBackdrop({
+  bgFile   = "Interface\\Tooltips\\UI-Tooltip-Background",
+  edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+  tile = true, tileSize = 16, edgeSize = 16,
+  insets = { left = 4, right = 4, top = 4, bottom = 4 },
+})
+
+table.insert(UISpecialFrames, "CraftSageAltTrackerFrame")
+
+-- Close button
+local closeBtn = CreateFrame("Button", nil, frame, "UIPanelCloseButton")
+closeBtn:SetPoint("TOPRIGHT", frame, "TOPRIGHT", 2, 2)
+closeBtn:SetScript("OnClick", function() frame:Hide() end)
+
+-- Title
+local titleText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+titleText:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -12)
+
+-- ── Scroll frame ─────────────────────────────────────────────────────────────
+
+local scrollFrame = CreateFrame("ScrollFrame", nil, frame, "UIPanelScrollFrameTemplate")
+scrollFrame:SetPoint("TOPLEFT",     frame, "TOPLEFT",     8,  -30)
+scrollFrame:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -26,  8)
+scrollFrame:EnableMouseWheel(true)
+scrollFrame:SetScript("OnMouseWheel", function(self, delta)
+  local cur = self:GetVerticalScroll()
+  local max = self:GetVerticalScrollRange()
+  self:SetVerticalScroll(math.max(0, math.min(max, cur - delta * 20)))
+end)
+
+local scrollChild = CreateFrame("Frame", nil, scrollFrame)
+scrollChild:SetWidth(AT_W - 34)
+scrollChild:SetHeight(1)
+scrollFrame:SetScrollChild(scrollChild)
+
+-- Empty state
+local emptyText = scrollChild:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+emptyText:SetPoint("TOP", scrollChild, "TOP", 0, -20)
+emptyText:SetTextColor(0.6, 0.6, 0.6, 1)
+emptyText:SetJustifyH("CENTER")
+emptyText:Hide()
+
+-- ── Widget pools ─────────────────────────────────────────────────────────────
+
+local _nameLabels  = {}
+local _profIcons   = {}
+local _profLabels  = {}
+
+local function GetNameLabel(i)
+  if not _nameLabels[i] then
+    _nameLabels[i] = scrollChild:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  end
+  return _nameLabels[i]
+end
+
+local function GetProfIcon(i)
+  if not _profIcons[i] then
+    local tex = scrollChild:CreateTexture(nil, "ARTWORK")
+    tex:SetSize(14, 14)
+    _profIcons[i] = tex
+  end
+  return _profIcons[i]
+end
+
+local function GetProfLabel(i)
+  if not _profLabels[i] then
+    _profLabels[i] = scrollChild:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+  end
+  return _profLabels[i]
+end
+
+local function HideAll()
+  for _, v in ipairs(_nameLabels) do v:Hide() end
+  for _, v in ipairs(_profIcons)  do v:Hide() end
+  for _, v in ipairs(_profLabels) do v:Hide() end
+end
+
+-- ── Render ───────────────────────────────────────────────────────────────────
+
+function AltTracker:Render()
+  HideAll()
+  emptyText:Hide()
+
+  local db    = NS.CraftSage.db.global.alts
+  local myKey = UnitName("player") .. "-" .. GetRealmName()
+
+  local chars = {}
+  for k, v in pairs(db) do
+    if v.professions and #v.professions > 0 then
+      table.insert(chars, { key = k, data = v, isCurrent = (k == myKey) })
+    end
+  end
+  table.sort(chars, function(a, b)
+    if a.isCurrent ~= b.isCurrent then return a.isCurrent end
+    return a.data.name < b.data.name
+  end)
+
+  if #chars == 0 then
+    emptyText:SetText(L["ALT_TRACKER_EMPTY"])
+    emptyText:Show()
+    scrollChild:SetHeight(80)
+    return
+  end
+
+  local y        = -6
+  local nameIdx  = 1
+  local profIdx  = 1
+
+  for _, entry in ipairs(chars) do
+    -- Character name header
+    local label = GetNameLabel(nameIdx)
+    nameIdx = nameIdx + 1
+    local displayName = entry.data.name
+    if entry.isCurrent then
+      displayName = displayName .. " |cffaaaaaa(" .. L["ALT_TRACKER_YOU"] .. ")|r"
+    end
+    label:SetText(displayName)
+    label:SetTextColor(1, 0.82, 0, 1)
+    label:ClearAllPoints()
+    label:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 6, y)
+    label:Show()
+    y = y - 18
+
+    -- Profession rows
+    for _, prof in ipairs(entry.data.professions) do
+      local icon = GetProfIcon(profIdx)
+      icon:SetTexture(prof.icon)
+      icon:ClearAllPoints()
+      icon:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 16, y + 1)
+      icon:Show()
+
+      local pl = GetProfLabel(profIdx)
+      pl:SetText(string.format(
+        "%s |cff4dff6e%d|r|cff555555/%d|r",
+        prof.name, prof.rank, prof.maxRank
+      ))
+      pl:ClearAllPoints()
+      pl:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 34, y)
+      pl:Show()
+
+      profIdx = profIdx + 1
+      y = y - 16
+    end
+
+    y = y - 6
+  end
+
+  scrollChild:SetHeight(math.abs(y) + 8)
+end
+
+-- ── Public API ───────────────────────────────────────────────────────────────
+
+function AltTracker:ApplyTheme(name)
+  local t = NS.THEMES[name] or NS.THEMES["default"]
+  frame:SetBackdrop({
+    bgFile   = t.bgFile,
+    edgeFile = t.edgeFile,
+    tile     = true,
+    tileSize = t.tileSize,
+    edgeSize = t.edgeSize,
+    insets   = t.insets,
+  })
+  frame:SetBackdropColor(t.slBg[1], t.slBg[2], t.slBg[3], 0.97)
+  frame:SetBackdropBorderColor(unpack(t.slBorder))
+  titleText:SetText(L["ALT_TRACKER_TITLE"])
+  titleText:SetTextColor(unpack(t.slTitle))
+end
+
+function AltTracker:Toggle()
+  if frame:IsShown() then
+    frame:Hide()
+  else
+    self:ApplyTheme(NS.CraftSage.db.global.settings.theme)
+    self:Render()
+    frame:Show()
+  end
+end

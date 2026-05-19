@@ -172,6 +172,22 @@ _craftFrame:SetScript("OnEvent", function(self, event, arg1)
   if event == "PLAYER_LOGIN" then
     self:UnregisterEvent("PLAYER_LOGIN")
     TryHookCraftFrame()
+    local key  = AltKey()
+    local alts = cs.db.global.alts
+    if not alts[key] then
+      alts[key] = {
+        name        = UnitName("player"),
+        realm       = GetRealmName(),
+        last_seen   = time(),
+        professions = {},
+      }
+    else
+      alts[key].last_seen = time()
+    end
+    for i = 1, GetNumSkillLines() do
+      local name, isHeader, _, rank, _, _, maxRank = GetSkillLineInfo(i)
+      if not isHeader then UpsertAltProf(name, rank, maxRank) end
+    end
     return
   end
 

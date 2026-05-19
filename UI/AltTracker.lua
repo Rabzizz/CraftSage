@@ -171,7 +171,7 @@ local function GetBlockFrame(i)
     xBtn:SetPoint("TOPRIGHT", bf, "TOPRIGHT", -2, -2)
     local xTxt = xBtn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     xTxt:SetPoint("CENTER")
-    xTxt:SetText("|cffff4444\226\156\149|r")
+    xTxt:SetText("|cffff4444x|r")
     xBtn:Hide()
 
     bf:SetScript("OnEnter", function(self)
@@ -233,8 +233,7 @@ function AltTracker:Render()
   for k, v in pairs(db) do
     if v.professions and #v.professions > 0 then
       local isCurrent = (k == myKey)
-      local match = isCurrent
-        or (filter == "all")
+      local match = (filter == "all")
         or (filter == "alliance" and v.faction == "Alliance")
         or (filter == "horde"    and v.faction == "Horde")
       if match then
@@ -280,7 +279,7 @@ function AltTracker:Render()
     label:ClearAllPoints()
     label:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 30, y - 3)
     label:Show()
-    y = y - 22
+    y = y - 26
 
     -- Profession rows
     for _, prof in ipairs(entry.data.professions) do
@@ -300,7 +299,7 @@ function AltTracker:Render()
       pl:Show()
 
       profIdx = profIdx + 1
-      y = y - 16
+      y = y - 18
     end
 
     -- Block frame (mouse zone for hover-reveal delete)
@@ -314,7 +313,7 @@ function AltTracker:Render()
     bf._altName   = entry.data.name
     bf:Show()
 
-    y = y - 6
+    y = y - 10
   end
 
   scrollChild:SetHeight(math.abs(y) + 8)

@@ -438,6 +438,9 @@ local function _initialize()
         frame:SetPoint("CENTER", UIParent, "CENTER", 200, 0)
       end
       frame:Show()
+      if cs and cs.db then
+        Panel:ApplyTheme(cs.db.global.settings.theme)
+      end
     end
 
     profText:SetText(profName or "")

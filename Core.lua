@@ -110,6 +110,7 @@ function CraftSage:OnEnable()
   self:RegisterEvent("TRADE_SKILL_SHOW", "OnTradeSkillShow")
   self:RegisterEvent("TRADE_SKILL_HIDE", "OnTradeSkillHide")
   NS.Panel:ApplyTheme(self.db.global.settings.theme)
+  UpsertAltMeta()
   -- Enchanting / CraftFrame: CRAFT_SHOW does not fire in Classic Era 11508,
   -- and GetCraftLine() no longer exists. Detection via CraftFrame:HookScript("OnShow")
   -- registered at PLAYER_LOGIN / ADDON_LOADED, with GetCraftLineSafe() for skill data.

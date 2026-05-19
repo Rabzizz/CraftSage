@@ -167,6 +167,7 @@ local function GetBlockFrame(i)
 
     local xBtn = CreateFrame("Button", nil, bf)
     xBtn:SetSize(16, 16)
+    xBtn:RegisterForClicks("LeftButtonUp")
     xBtn:SetPoint("TOPRIGHT", bf, "TOPRIGHT", -2, -2)
     local xTxt = xBtn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
     xTxt:SetPoint("CENTER")

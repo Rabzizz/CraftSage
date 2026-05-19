@@ -564,6 +564,7 @@ local function _initialize()
     if step.note then noteText:SetText(step.note); noteText:Show()
     else noteText:Hide() end
 
+    local _t = NS.THEMES[NS.CraftSage.db.global.settings.theme] or NS.THEMES["default"]
     for i, mat in ipairs(step.mats) do
       if i > 6 then break end
       local r    = matRows[i]
@@ -572,7 +573,6 @@ local function _initialize()
       local name = GetItemInfo(mat.item) or ("Item:" .. mat.item)
       r._itemId = mat.item
       r:Show()
-      local _t = NS.THEMES[NS.CraftSage.db.global.settings.theme] or NS.THEMES["default"]
       local vhl = NS.CraftSage.db.global.settings.vendor_highlight
       if mat.source == "vendor" and vhl then
         r.name:SetText(name)
@@ -737,7 +737,9 @@ function Panel:ApplyTheme(name)
   NS._themeActiveStep = "|cff" .. hex(t.activeStep[1], t.activeStep[2], t.activeStep[3])
   NS._themeUpcoming   = "|cff" .. hex(t.upcoming[1],   t.upcoming[2],   t.upcoming[3])
   Panel:ApplySettings()
-  NS.ShoppingList:ApplyTheme(name)
+  if NS.ShoppingList.ApplyTheme then
+    NS.ShoppingList:ApplyTheme(name)
+  end
 end
 
 if not _initOk then

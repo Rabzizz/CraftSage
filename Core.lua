@@ -23,6 +23,7 @@ local DB_DEFAULTS = {
       show_tooltips     = true,
       vendor_highlight  = true,
       shopping_progress = true,
+      theme             = "default",
     }
   }
 }

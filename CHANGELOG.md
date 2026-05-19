@@ -1,6 +1,6 @@
 # CraftSage Changelog
 
-## [Unreleased]
+## [1.5.0] — 2026-05-19
 
 ### Added
 - **Visual themes** — four predefined colour schemes selectable from Settings: Default (classic green), Blizzard Classic (gold/brown, ornate WoW-style border), Dark (near-black, minimal), and Arcane (blue/purple mage aesthetic).

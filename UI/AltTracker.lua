@@ -36,10 +36,64 @@ closeBtn:SetScript("OnClick", function() frame:Hide() end)
 local titleText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
 titleText:SetPoint("TOPLEFT", frame, "TOPLEFT", 10, -12)
 
+-- ── Filter bar ───────────────────────────────────────────────────────────────
+
+local activeFilter = "all"
+
+local FILTER_OPTS = {
+  { value = "all",      label = L["ALT_FILTER_ALL"]      },
+  { value = "alliance", label = L["ALT_FILTER_ALLIANCE"] },
+  { value = "horde",    label = L["ALT_FILTER_HORDE"]    },
+}
+local filterBtns = {}
+
+local filterBar = CreateFrame("Frame", nil, frame)
+filterBar:SetPoint("TOPLEFT",  frame, "TOPLEFT",  8,  -30)
+filterBar:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -26, -30)
+filterBar:SetHeight(24)
+
+local bw = math.floor((AT_W - 36) / 3)
+for i, opt in ipairs(FILTER_OPTS) do
+  local btn = CreateFrame("Button", nil, filterBar, "BackdropTemplate")
+  btn:SetSize(bw, 20)
+  btn:SetPoint("TOPLEFT", filterBar, "TOPLEFT", (i - 1) * (bw + 1), -2)
+  btn:SetBackdrop({
+    bgFile   = "Interface\\Tooltips\\UI-Tooltip-Background",
+    edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+    tile = true, tileSize = 16, edgeSize = 8,
+    insets = { left = 2, right = 2, top = 2, bottom = 2 },
+  })
+  btn:SetBackdropColor(0.1, 0.1, 0.1, 0.9)
+  btn:SetBackdropBorderColor(0.3, 0.3, 0.3, 1)
+  local txt = btn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+  txt:SetAllPoints()
+  txt:SetText(opt.label)
+  txt:SetTextColor(0.6, 0.6, 0.6, 1)
+  btn._value = opt.value
+  btn._txt   = txt
+  filterBtns[i]         = btn
+  filterBtns[opt.value] = btn
+  local v = opt.value
+  btn:SetScript("OnClick", function() NS.AltTracker:SetFilter(v) end)
+end
+
+local function UpdateFilterButtons()
+  for _, opt in ipairs(FILTER_OPTS) do
+    local btn = filterBtns[opt.value]
+    if opt.value == activeFilter then
+      btn:SetBackdropBorderColor(1, 0.82, 0, 1)
+      btn._txt:SetTextColor(1, 0.82, 0, 1)
+    else
+      btn:SetBackdropBorderColor(0.3, 0.3, 0.3, 1)
+      btn._txt:SetTextColor(0.6, 0.6, 0.6, 1)
+    end
+  end
+end
+
 -- ── Scroll frame ─────────────────────────────────────────────────────────────
 
 local scrollFrame = CreateFrame("ScrollFrame", nil, frame, "UIPanelScrollFrameTemplate")
-scrollFrame:SetPoint("TOPLEFT",     frame, "TOPLEFT",     8,  -30)
+scrollFrame:SetPoint("TOPLEFT",     frame, "TOPLEFT",     8,  -58)
 scrollFrame:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -26,  8)
 scrollFrame:EnableMouseWheel(true)
 scrollFrame:SetScript("OnMouseWheel", function(self, delta)
@@ -122,9 +176,17 @@ function AltTracker:Render()
   local myKey = UnitName("player") .. "-" .. GetRealmName()
 
   local chars = {}
+  local filter = activeFilter or "all"
   for k, v in pairs(db) do
     if v.professions and #v.professions > 0 then
-      table.insert(chars, { key = k, data = v, isCurrent = (k == myKey) })
+      local isCurrent = (k == myKey)
+      local match = isCurrent
+        or (filter == "all")
+        or (filter == "alliance" and v.faction == "Alliance")
+        or (filter == "horde"    and v.faction == "Horde")
+      if match then
+        table.insert(chars, { key = k, data = v, isCurrent = isCurrent })
+      end
     end
   end
   table.sort(chars, function(a, b)
@@ -194,6 +256,13 @@ end
 
 -- ── Public API ───────────────────────────────────────────────────────────────
 
+function AltTracker:SetFilter(value)
+  activeFilter = value
+  NS.CraftSage.db.global.settings.alt_filter = value
+  UpdateFilterButtons()
+  self:Render()
+end
+
 function AltTracker:ApplyTheme(name)
   local t = NS.THEMES[name] or NS.THEMES["default"]
   frame:SetBackdrop({
@@ -215,6 +284,8 @@ function AltTracker:Toggle()
     frame:Hide()
   else
     self:ApplyTheme(NS.CraftSage.db.global.settings.theme)
+    activeFilter = NS.CraftSage.db.global.settings.alt_filter or "all"
+    UpdateFilterButtons()
     self:Render()
     frame:Show()
   end

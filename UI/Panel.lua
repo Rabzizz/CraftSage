@@ -135,6 +135,7 @@ local shopBtn, resetBtn
 local highlightedIndex
 local _guideBtn
 local _craftGuideBtn
+local _themeRefs = {}
 
 local function ShowAllMats(show)
   for i = 1, 6 do
@@ -400,6 +401,23 @@ local function _initialize()
 
   table.insert(UISpecialFrames, "CraftSagePanelFrame")
 
+  _themeRefs.titleBg      = titleBg
+  _themeRefs.titleText    = titleText
+  _themeRefs.profText     = profText
+  _themeRefs.skillBarBg   = skillBarBg
+  _themeRefs.skillBarFill = skillBarFill
+  _themeRefs.skillText    = skillText
+  _themeRefs.stepsLabel   = stepsLabel
+  _themeRefs.divider      = divider
+  _themeRefs.matsLabel    = matsLabel
+  _themeRefs.noteText     = noteText
+  _themeRefs.matRowNames  = {}
+  _themeRefs.matRowCounts = {}
+  for i = 1, 6 do
+    _themeRefs.matRowNames[i]  = matRows[i].name
+    _themeRefs.matRowCounts[i] = matRows[i].count
+  end
+
   frame:SetScript("OnShow", function() Panel:UpdateGuideBtnLabel() end)
   frame:SetScript("OnHide", function() Panel:UpdateGuideBtnLabel() end)
 
@@ -487,10 +505,10 @@ local function _initialize()
         local s   = data.steps[idx]
         if s then
           if s.step_type == "trainer" then
-            stepRows[i].text:SetText(string.format("|cff555555%d. [Trainer] %s|r", idx, s.recipe))
+            stepRows[i].text:SetText((NS._themeUpcoming or "|cff555555") .. string.format("%d. [Trainer] %s|r", idx, s.recipe))
             stepRows[i]._recipeName = nil; stepRows[i]._wowheadUrl = nil
           else
-            stepRows[i].text:SetText(string.format("|cff555555%d. %s ×%d|r", idx, s.recipe, s.qty))
+            stepRows[i].text:SetText((NS._themeUpcoming or "|cff555555") .. string.format("%d. %s ×%d|r", idx, s.recipe, s.qty))
             stepRows[i]._recipeName = s.recipe
             stepRows[i]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
           end
@@ -519,15 +537,15 @@ local function _initialize()
       local s    = data.steps[idx]
       if s then
         if i == 1 then
-          stepRows[1].text:SetText(string.format("|cff88ff88> %s ×%d/%d|r", s.recipe, remaining, step.qty))
+          stepRows[1].text:SetText((NS._themeActiveStep or "|cff88ff88") .. string.format("> %s ×%d/%d|r", s.recipe, remaining, step.qty))
           stepRows[1]._recipeName = s.recipe
           stepRows[1]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
         else
           if s.step_type == "trainer" then
-            stepRows[i].text:SetText(string.format("|cff555555%d. [Trainer] %s|r", idx, s.recipe))
+            stepRows[i].text:SetText((NS._themeUpcoming or "|cff555555") .. string.format("%d. [Trainer] %s|r", idx, s.recipe))
             stepRows[i]._recipeName = nil; stepRows[i]._wowheadUrl = nil
           else
-            stepRows[i].text:SetText(string.format("|cff555555%d. %s ×%d|r", idx, s.recipe, s.qty))
+            stepRows[i].text:SetText((NS._themeUpcoming or "|cff555555") .. string.format("%d. %s ×%d|r", idx, s.recipe, s.qty))
             stepRows[i]._recipeName = s.recipe
             stepRows[i]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
           end
@@ -554,15 +572,16 @@ local function _initialize()
       local name = GetItemInfo(mat.item) or ("Item:" .. mat.item)
       r._itemId = mat.item
       r:Show()
+      local _t = NS.THEMES[NS.CraftSage.db.global.settings.theme] or NS.THEMES["default"]
       local vhl = NS.CraftSage.db.global.settings.vendor_highlight
       if mat.source == "vendor" and vhl then
         r.name:SetText(name)
-        r.name:SetTextColor(1, 0.8, 0.2, 1)
+        r.name:SetTextColor(unpack(_t.vendor))
         r.buyTag:SetText(L["MAT_SOURCE_VENDOR"])
         r.buyTag:Show()
       else
         r.name:SetText(name)
-        r.name:SetTextColor(0.85, 0.85, 0.85, 1)
+        r.name:SetTextColor(unpack(_t.matText))
         r.buyTag:Hide()
       end
       if have >= need then
@@ -582,7 +601,11 @@ local function _initialize()
         _flashActive = true
         frame:SetBackdropBorderColor(0.5, 1, 0.5, 1)
         C_Timer.After(0.6, function()
-          frame:SetBackdropBorderColor(0.2, 0.6, 0.2, 1)
+          local cs2 = NS.CraftSage
+          if cs2 and cs2.db then
+            local t2 = NS.THEMES[cs2.db.global.settings.theme] or NS.THEMES["default"]
+            frame:SetBackdropBorderColor(unpack(t2.borderColor))
+          end
           _flashActive = false
         end)
       end
@@ -674,12 +697,47 @@ function Panel:ApplySettings()
   if not cs or not cs.db then return end
   local s = cs.db.global.settings
   frame:SetScale(s.panel_scale)
-  frame:SetBackdropColor(0.05, 0.1, 0.05, s.panel_opacity)
+  local t = NS.THEMES[s.theme] or NS.THEMES["default"]
+  frame:SetBackdropColor(t.bgColor[1], t.bgColor[2], t.bgColor[3], s.panel_opacity)
   if stepRows then
     local n = s.upcoming_steps
     if stepRows[2] then stepRows[2]:SetShown(n >= 1) end
     if stepRows[3] then stepRows[3]:SetShown(n >= 2) end
   end
+end
+
+function Panel:ApplyTheme(name)
+  if not _themeRefs.titleBg then return end
+  local t = NS.THEMES[name] or NS.THEMES["default"]
+  frame:SetBackdrop({
+    bgFile   = t.bgFile,
+    edgeFile = t.edgeFile,
+    tile     = true,
+    tileSize = t.tileSize,
+    edgeSize = t.edgeSize,
+    insets   = t.insets,
+  })
+  frame:SetBackdropBorderColor(unpack(t.borderColor))
+  _themeRefs.titleBg:SetColorTexture(t.titleBg[1], t.titleBg[2], t.titleBg[3], t.titleBg[4])
+  _themeRefs.titleText:SetTextColor(unpack(t.titleText))
+  _themeRefs.profText:SetTextColor(unpack(t.profText))
+  _themeRefs.skillBarBg:SetColorTexture(t.barBg[1], t.barBg[2], t.barBg[3], t.barBg[4])
+  _themeRefs.skillBarFill:SetColorTexture(t.barFill[1], t.barFill[2], t.barFill[3], t.barFill[4])
+  _themeRefs.skillText:SetTextColor(unpack(t.skillText))
+  _themeRefs.stepsLabel:SetTextColor(unpack(t.skillText))
+  _themeRefs.divider:SetColorTexture(t.divider[1], t.divider[2], t.divider[3], 0.5)
+  _themeRefs.matsLabel:SetTextColor(unpack(t.skillText))
+  _themeRefs.noteText:SetTextColor(unpack(t.matText))
+  for i = 1, 6 do
+    _themeRefs.matRowNames[i]:SetTextColor(unpack(t.matText))
+  end
+  local function hex(r, g, b)
+    return string.format("%02x%02x%02x", math.floor(r*255), math.floor(g*255), math.floor(b*255))
+  end
+  NS._themeActiveStep = "|cff" .. hex(t.activeStep[1], t.activeStep[2], t.activeStep[3])
+  NS._themeUpcoming   = "|cff" .. hex(t.upcoming[1],   t.upcoming[2],   t.upcoming[3])
+  Panel:ApplySettings()
+  NS.ShoppingList:ApplyTheme(name)
 end
 
 if not _initOk then

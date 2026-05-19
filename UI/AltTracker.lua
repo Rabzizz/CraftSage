@@ -4,6 +4,20 @@ local L = LibStub("AceLocale-3.0"):GetLocale("CraftSage")
 local AltTracker = {}
 NS.AltTracker = AltTracker
 
+StaticPopupDialogs["CRAFTSAGE_CONFIRM_DELETE_ALT"] = {
+  text         = L["ALT_CONFIRM_DELETE"],
+  button1      = ACCEPT,
+  button2      = CANCEL,
+  OnAccept     = function(self, data)
+    NS.CraftSage.db.global.alts[data] = nil
+    NS.AltTracker:Render()
+  end,
+  timeout      = 0,
+  whileDead    = true,
+  hideOnEscape = true,
+  showAlert    = true,
+}
+
 local AT_W, AT_H = 260, 320
 
 -- ── Frame ────────────────────────────────────────────────────────────────────
@@ -144,6 +158,43 @@ local function GetProfLabel(i)
   return _profLabels[i]
 end
 
+local _blockFrames = {}
+
+local function GetBlockFrame(i)
+  if not _blockFrames[i] then
+    local bf = CreateFrame("Frame", nil, scrollChild)
+    bf:EnableMouse(true)
+
+    local xBtn = CreateFrame("Button", nil, bf)
+    xBtn:SetSize(16, 16)
+    xBtn:SetPoint("TOPRIGHT", bf, "TOPRIGHT", -2, -2)
+    local xTxt = xBtn:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall")
+    xTxt:SetPoint("CENTER")
+    xTxt:SetText("|cffff4444\226\156\149|r")
+    xBtn:Hide()
+
+    bf:SetScript("OnEnter", function(self)
+      if self._canDelete then self.xBtn:Show() end
+    end)
+    bf:SetScript("OnLeave", function(self)
+      if not MouseIsOver(self.xBtn) then
+        self.xBtn:Hide()
+      end
+    end)
+    xBtn:SetScript("OnLeave", function(self)
+      self:Hide()
+    end)
+    xBtn:SetScript("OnClick", function(self)
+      local p = self:GetParent()
+      StaticPopup_Show("CRAFTSAGE_CONFIRM_DELETE_ALT", p._altName, nil, p._altKey)
+    end)
+
+    bf.xBtn = xBtn
+    _blockFrames[i] = bf
+  end
+  return _blockFrames[i]
+end
+
 local function ClassIconPath(classFile)
   if not classFile then return nil end
   return "Interface\\Icons\\ClassIcon_"
@@ -160,10 +211,11 @@ local function GetClassIcon(i)
 end
 
 local function HideAll()
-  for _, v in ipairs(_nameLabels) do v:Hide() end
-  for _, v in ipairs(_classIcons) do v:Hide() end
-  for _, v in ipairs(_profIcons)  do v:Hide() end
-  for _, v in ipairs(_profLabels) do v:Hide() end
+  for _, v in ipairs(_nameLabels)  do v:Hide() end
+  for _, v in ipairs(_classIcons)  do v:Hide() end
+  for _, v in ipairs(_profIcons)   do v:Hide() end
+  for _, v in ipairs(_profLabels)  do v:Hide() end
+  for _, v in ipairs(_blockFrames) do v:Hide(); v.xBtn:Hide() end
 end
 
 -- ── Render ───────────────────────────────────────────────────────────────────
@@ -204,8 +256,10 @@ function AltTracker:Render()
   local y        = -6
   local nameIdx  = 1
   local profIdx  = 1
+  local blockIdx = 1
 
   for _, entry in ipairs(chars) do
+    local blockStartY = y
     -- Class icon
     local ci = GetClassIcon(nameIdx)
     ci:SetTexture(ClassIconPath(entry.data.class))
@@ -247,6 +301,17 @@ function AltTracker:Render()
       profIdx = profIdx + 1
       y = y - 16
     end
+
+    -- Block frame (mouse zone for hover-reveal delete)
+    local bf = GetBlockFrame(blockIdx)
+    blockIdx = blockIdx + 1
+    bf:ClearAllPoints()
+    bf:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 0, blockStartY)
+    bf:SetSize(AT_W - 34, math.abs(y - blockStartY))
+    bf._canDelete = not entry.isCurrent
+    bf._altKey    = entry.key
+    bf._altName   = entry.data.name
+    bf:Show()
 
     y = y - 6
   end

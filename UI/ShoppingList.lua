@@ -59,6 +59,32 @@ local progressText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormalSmall
 progressText:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", 10, 33)
 progressText:SetTextColor(0.6, 0.6, 0.6, 1)
 
+local _slThemeRefs = {
+  frame        = frame,
+  titleText    = titleText,
+  subtitleText = subtitleText,
+  progressText = progressText,
+}
+
+function ShoppingList:ApplyTheme(name)
+  local t = NS.THEMES[name] or NS.THEMES["default"]
+  frame:SetBackdrop({
+    bgFile   = t.bgFile,
+    edgeFile = t.edgeFile,
+    tile     = true,
+    tileSize = t.tileSize,
+    edgeSize = t.edgeSize,
+    insets   = t.insets,
+  })
+  local cs = NS.CraftSage
+  local opacity = (cs and cs.db and cs.db.global.settings.panel_opacity) or 0.97
+  frame:SetBackdropColor(t.slBg[1], t.slBg[2], t.slBg[3], opacity)
+  frame:SetBackdropBorderColor(unpack(t.slBorder))
+  _slThemeRefs.titleText:SetTextColor(unpack(t.slTitle))
+  _slThemeRefs.subtitleText:SetTextColor(unpack(t.slSubtitle))
+  _slThemeRefs.progressText:SetTextColor(unpack(t.slSubtitle))
+end
+
 -- Buttons
 local clearBtn = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
 clearBtn:SetSize(100, 20)
@@ -274,16 +300,17 @@ function ShoppingList:Refresh()
           r.buyTag:Hide()
         else
           r.check:SetText("|cff666666o|r")
+          local _t  = NS.THEMES[NS.CraftSage.db.global.settings.theme] or NS.THEMES["default"]
           local vhl = NS.CraftSage.db.global.settings.vendor_highlight
           if entry.source == "vendor" and vhl then
-            r.name:SetTextColor(1, 0.8, 0.2, 1)
+            r.name:SetTextColor(unpack(_t.vendor))
             r.buyTag:SetText(L["MAT_SOURCE_VENDOR"])
             r.buyTag:Show()
           else
-            r.name:SetTextColor(0.85, 0.85, 0.85, 1)
+            r.name:SetTextColor(unpack(_t.matText))
             r.buyTag:Hide()
           end
-          r.qty:SetTextColor(0.7, 0.7, 1, 1)
+          r.qty:SetTextColor(unpack(_t.activeStep))
         end
         r.name:SetText(GetItemInfo(entry.item) or ("Item:" .. entry.item))
         r.qty:SetText("x" .. entry.qty)

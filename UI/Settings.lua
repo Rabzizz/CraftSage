@@ -9,6 +9,31 @@ local options = {
   type = "group",
   name = "CraftSage",
   args = {
+    theme_group = {
+      type   = "group",
+      name   = L["SETTINGS_THEME"],
+      inline = true,
+      order  = 0,
+      args   = {
+        theme = {
+          type   = "select",
+          name   = L["SETTINGS_THEME"],
+          desc   = L["SETTINGS_THEME_TIP"],
+          order  = 1,
+          values = {
+            default  = L["THEME_DEFAULT"],
+            blizzard = L["THEME_BLIZZARD"],
+            dark     = L["THEME_DARK"],
+            arcane   = L["THEME_ARCANE"],
+          },
+          get = function() return S().theme end,
+          set = function(_, v)
+            S().theme = v
+            NS.Panel:ApplyTheme(v)
+          end,
+        },
+      },
+    },
     display = {
       type   = "group",
       name   = L["SETTINGS_DISPLAY"],

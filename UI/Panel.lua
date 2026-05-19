@@ -3,6 +3,105 @@ local L = LibStub("AceLocale-3.0"):GetLocale("CraftSage")
 
 NS.wowheadUrl = ""
 
+NS.THEMES = {
+  default = {
+    bgFile      = "Interface\\Tooltips\\UI-Tooltip-Background",
+    edgeFile    = "Interface\\Tooltips\\UI-Tooltip-Border",
+    edgeSize    = 16, tileSize = 16,
+    insets      = { left=4, right=4, top=4, bottom=4 },
+    bgColor     = { 0.05, 0.10, 0.05 },
+    borderColor = { 0.20, 0.60, 0.20, 1 },
+    titleBg     = { 0.10, 0.30, 0.10, 0.8 },
+    titleText   = { 0.50, 1.00, 0.50, 1 },
+    profText    = { 1.00, 0.82, 0.00, 1 },
+    barFill     = { 0.20, 0.80, 0.20, 1 },
+    barBg       = { 0.00, 0.00, 0.00, 0.7 },
+    skillText   = { 0.80, 0.80, 0.80, 1 },
+    activeStep  = { 0.53, 1.00, 0.53, 1 },
+    activeStepBg= { 0.05, 0.13, 0.05, 1 },
+    upcoming    = { 0.27, 0.27, 0.27, 1 },
+    divider     = { 0.20, 0.60, 0.20, 1 },
+    matText     = { 0.85, 0.85, 0.85, 1 },
+    vendor      = { 1.00, 0.80, 0.20, 1 },
+    slTitle     = { 0.60, 0.60, 1.00, 1 },
+    slBorder    = { 0.30, 0.30, 0.80, 1 },
+    slBg        = { 0.05, 0.05, 0.12 },
+    slSubtitle  = { 0.60, 0.60, 0.60, 1 },
+  },
+  blizzard = {
+    bgFile      = "Interface\\DialogFrame\\UI-DialogBox-Background",
+    edgeFile    = "Interface\\DialogFrame\\UI-DialogBox-Border",
+    edgeSize    = 32, tileSize = 32,
+    insets      = { left=11, right=12, top=12, bottom=11 },
+    bgColor     = { 0.00, 0.00, 0.00 },
+    borderColor = { 1.00, 1.00, 1.00, 1 },
+    titleBg     = { 0.10, 0.08, 0.03, 0.9 },
+    titleText   = { 1.00, 0.82, 0.00, 1 },
+    profText    = { 1.00, 1.00, 1.00, 1 },
+    barFill     = { 0.78, 0.56, 0.06, 1 },
+    barBg       = { 0.04, 0.03, 0.01, 1 },
+    skillText   = { 0.69, 0.56, 0.42, 1 },
+    activeStep  = { 1.00, 0.82, 0.00, 1 },
+    activeStepBg= { 0.10, 0.08, 0.03, 0.9 },
+    upcoming    = { 0.33, 0.27, 0.20, 1 },
+    divider     = { 0.48, 0.36, 0.16, 1 },
+    matText     = { 0.83, 0.77, 0.63, 1 },
+    vendor      = { 1.00, 0.67, 0.00, 1 },
+    slTitle     = { 1.00, 0.82, 0.00, 1 },
+    slBorder    = { 0.48, 0.36, 0.16, 1 },
+    slBg        = { 0.07, 0.05, 0.02 },
+    slSubtitle  = { 0.69, 0.56, 0.42, 1 },
+  },
+  dark = {
+    bgFile      = "Interface\\Tooltips\\UI-Tooltip-Background",
+    edgeFile    = "Interface\\Tooltips\\UI-Tooltip-Border",
+    edgeSize    = 16, tileSize = 16,
+    insets      = { left=4, right=4, top=4, bottom=4 },
+    bgColor     = { 0.04, 0.04, 0.04 },
+    borderColor = { 0.20, 0.20, 0.20, 1 },
+    titleBg     = { 0.08, 0.08, 0.08, 0.9 },
+    titleText   = { 0.87, 0.87, 0.87, 1 },
+    profText    = { 0.67, 0.67, 0.67, 1 },
+    barFill     = { 0.33, 0.33, 0.33, 1 },
+    barBg       = { 0.00, 0.00, 0.00, 1 },
+    skillText   = { 0.40, 0.40, 0.40, 1 },
+    activeStep  = { 1.00, 1.00, 1.00, 1 },
+    activeStepBg= { 0.10, 0.10, 0.10, 1 },
+    upcoming    = { 0.27, 0.27, 0.27, 1 },
+    divider     = { 0.20, 0.20, 0.20, 1 },
+    matText     = { 0.53, 0.53, 0.53, 1 },
+    vendor      = { 0.80, 0.53, 0.00, 1 },
+    slTitle     = { 0.80, 0.80, 0.80, 1 },
+    slBorder    = { 0.25, 0.25, 0.25, 1 },
+    slBg        = { 0.04, 0.04, 0.04 },
+    slSubtitle  = { 0.40, 0.40, 0.40, 1 },
+  },
+  arcane = {
+    bgFile      = "Interface\\Tooltips\\UI-Tooltip-Background",
+    edgeFile    = "Interface\\Tooltips\\UI-Tooltip-Border",
+    edgeSize    = 16, tileSize = 16,
+    insets      = { left=4, right=4, top=4, bottom=4 },
+    bgColor     = { 0.05, 0.06, 0.11 },
+    borderColor = { 0.23, 0.17, 0.43, 1 },
+    titleBg     = { 0.07, 0.08, 0.16, 0.9 },
+    titleText   = { 0.63, 0.50, 1.00, 1 },
+    profText    = { 0.77, 0.67, 1.00, 1 },
+    barFill     = { 0.53, 0.40, 1.00, 1 },
+    barBg       = { 0.02, 0.03, 0.06, 1 },
+    skillText   = { 0.40, 0.33, 0.67, 1 },
+    activeStep  = { 0.77, 0.67, 1.00, 1 },
+    activeStepBg= { 0.07, 0.08, 0.16, 1 },
+    upcoming    = { 0.20, 0.13, 0.27, 1 },
+    divider     = { 0.23, 0.17, 0.43, 1 },
+    matText     = { 0.60, 0.53, 0.80, 1 },
+    vendor      = { 1.00, 0.67, 0.27, 1 },
+    slTitle     = { 0.77, 0.67, 1.00, 1 },
+    slBorder    = { 0.30, 0.20, 0.60, 1 },
+    slBg        = { 0.05, 0.04, 0.10 },
+    slSubtitle  = { 0.40, 0.33, 0.67, 1 },
+  },
+}
+
 StaticPopupDialogs["CRAFTSAGE_WOWHEAD_LINK"] = {
   text         = L["WOWHEAD_POPUP_TITLE"],
   button1      = CLOSE,
@@ -36,6 +135,7 @@ local shopBtn, resetBtn
 local highlightedIndex
 local _guideBtn
 local _craftGuideBtn
+local _themeRefs = {}
 
 local function ShowAllMats(show)
   for i = 1, 6 do
@@ -301,6 +401,23 @@ local function _initialize()
 
   table.insert(UISpecialFrames, "CraftSagePanelFrame")
 
+  _themeRefs.titleBg      = titleBg
+  _themeRefs.titleText    = titleText
+  _themeRefs.profText     = profText
+  _themeRefs.skillBarBg   = skillBarBg
+  _themeRefs.skillBarFill = skillBarFill
+  _themeRefs.skillText    = skillText
+  _themeRefs.stepsLabel   = stepsLabel
+  _themeRefs.divider      = divider
+  _themeRefs.matsLabel    = matsLabel
+  _themeRefs.noteText     = noteText
+  _themeRefs.matRowNames  = {}
+  _themeRefs.matRowCounts = {}
+  for i = 1, 6 do
+    _themeRefs.matRowNames[i]  = matRows[i].name
+    _themeRefs.matRowCounts[i] = matRows[i].count
+  end
+
   frame:SetScript("OnShow", function() Panel:UpdateGuideBtnLabel() end)
   frame:SetScript("OnHide", function() Panel:UpdateGuideBtnLabel() end)
 
@@ -312,7 +429,8 @@ local function _initialize()
     if not frame then return end
     if not frame:IsShown() then
       frame:ClearAllPoints()
-      if CraftFrame and CraftFrame:IsShown() then
+      local cs = NS.CraftSage
+      if cs and cs.usesCraftFrame and CraftFrame then
         frame:SetPoint("TOPLEFT", CraftFrame, "TOPRIGHT", 2, 0)
       elseif TradeSkillFrame and TradeSkillFrame:IsShown() then
         frame:SetPoint("TOPLEFT", TradeSkillFrame, "TOPRIGHT", 2, 0)
@@ -320,6 +438,9 @@ local function _initialize()
         frame:SetPoint("CENTER", UIParent, "CENTER", 200, 0)
       end
       frame:Show()
+      if cs and cs.db then
+        Panel:ApplyTheme(cs.db.global.settings.theme)
+      end
     end
 
     profText:SetText(profName or "")
@@ -387,10 +508,10 @@ local function _initialize()
         local s   = data.steps[idx]
         if s then
           if s.step_type == "trainer" then
-            stepRows[i].text:SetText(string.format("|cff555555%d. [Trainer] %s|r", idx, s.recipe))
+            stepRows[i].text:SetText((NS._themeUpcoming or "|cff555555") .. string.format("%d. [Trainer] %s|r", idx, s.recipe))
             stepRows[i]._recipeName = nil; stepRows[i]._wowheadUrl = nil
           else
-            stepRows[i].text:SetText(string.format("|cff555555%d. %s ×%d|r", idx, s.recipe, s.qty))
+            stepRows[i].text:SetText((NS._themeUpcoming or "|cff555555") .. string.format("%d. %s ×%d|r", idx, s.recipe, s.qty))
             stepRows[i]._recipeName = s.recipe
             stepRows[i]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
           end
@@ -419,15 +540,15 @@ local function _initialize()
       local s    = data.steps[idx]
       if s then
         if i == 1 then
-          stepRows[1].text:SetText(string.format("|cff88ff88> %s ×%d/%d|r", s.recipe, remaining, step.qty))
+          stepRows[1].text:SetText((NS._themeActiveStep or "|cff88ff88") .. string.format("> %s ×%d/%d|r", s.recipe, remaining, step.qty))
           stepRows[1]._recipeName = s.recipe
           stepRows[1]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
         else
           if s.step_type == "trainer" then
-            stepRows[i].text:SetText(string.format("|cff555555%d. [Trainer] %s|r", idx, s.recipe))
+            stepRows[i].text:SetText((NS._themeUpcoming or "|cff555555") .. string.format("%d. [Trainer] %s|r", idx, s.recipe))
             stepRows[i]._recipeName = nil; stepRows[i]._wowheadUrl = nil
           else
-            stepRows[i].text:SetText(string.format("|cff555555%d. %s ×%d|r", idx, s.recipe, s.qty))
+            stepRows[i].text:SetText((NS._themeUpcoming or "|cff555555") .. string.format("%d. %s ×%d|r", idx, s.recipe, s.qty))
             stepRows[i]._recipeName = s.recipe
             stepRows[i]._wowheadUrl = s.spell_id and ("https://www.wowhead.com/classic/spell=" .. s.spell_id) or GetWowheadUrl(s.recipe)
           end
@@ -446,6 +567,7 @@ local function _initialize()
     if step.note then noteText:SetText(step.note); noteText:Show()
     else noteText:Hide() end
 
+    local _t = NS.THEMES[NS.CraftSage.db.global.settings.theme] or NS.THEMES["default"]
     for i, mat in ipairs(step.mats) do
       if i > 6 then break end
       local r    = matRows[i]
@@ -457,12 +579,12 @@ local function _initialize()
       local vhl = NS.CraftSage.db.global.settings.vendor_highlight
       if mat.source == "vendor" and vhl then
         r.name:SetText(name)
-        r.name:SetTextColor(1, 0.8, 0.2, 1)
+        r.name:SetTextColor(unpack(_t.vendor))
         r.buyTag:SetText(L["MAT_SOURCE_VENDOR"])
         r.buyTag:Show()
       else
         r.name:SetText(name)
-        r.name:SetTextColor(0.85, 0.85, 0.85, 1)
+        r.name:SetTextColor(unpack(_t.matText))
         r.buyTag:Hide()
       end
       if have >= need then
@@ -482,7 +604,11 @@ local function _initialize()
         _flashActive = true
         frame:SetBackdropBorderColor(0.5, 1, 0.5, 1)
         C_Timer.After(0.6, function()
-          frame:SetBackdropBorderColor(0.2, 0.6, 0.2, 1)
+          local cs2 = NS.CraftSage
+          if cs2 and cs2.db then
+            local t2 = NS.THEMES[cs2.db.global.settings.theme] or NS.THEMES["default"]
+            frame:SetBackdropBorderColor(unpack(t2.borderColor))
+          end
           _flashActive = false
         end)
       end
@@ -574,11 +700,48 @@ function Panel:ApplySettings()
   if not cs or not cs.db then return end
   local s = cs.db.global.settings
   frame:SetScale(s.panel_scale)
-  frame:SetBackdropColor(0.05, 0.1, 0.05, s.panel_opacity)
+  local t = NS.THEMES[s.theme] or NS.THEMES["default"]
+  frame:SetBackdropColor(t.bgColor[1], t.bgColor[2], t.bgColor[3], s.panel_opacity)
   if stepRows then
     local n = s.upcoming_steps
     if stepRows[2] then stepRows[2]:SetShown(n >= 1) end
     if stepRows[3] then stepRows[3]:SetShown(n >= 2) end
+  end
+end
+
+function Panel:ApplyTheme(name)
+  if not _themeRefs.titleBg then return end
+  local t = NS.THEMES[name] or NS.THEMES["default"]
+  frame:SetBackdrop({
+    bgFile   = t.bgFile,
+    edgeFile = t.edgeFile,
+    tile     = true,
+    tileSize = t.tileSize,
+    edgeSize = t.edgeSize,
+    insets   = t.insets,
+  })
+  frame:SetBackdropBorderColor(unpack(t.borderColor))
+  _themeRefs.titleBg:SetColorTexture(t.titleBg[1], t.titleBg[2], t.titleBg[3], t.titleBg[4])
+  _themeRefs.titleText:SetTextColor(unpack(t.titleText))
+  _themeRefs.profText:SetTextColor(unpack(t.profText))
+  _themeRefs.skillBarBg:SetColorTexture(t.barBg[1], t.barBg[2], t.barBg[3], t.barBg[4])
+  _themeRefs.skillBarFill:SetColorTexture(t.barFill[1], t.barFill[2], t.barFill[3], t.barFill[4])
+  _themeRefs.skillText:SetTextColor(unpack(t.skillText))
+  _themeRefs.stepsLabel:SetTextColor(unpack(t.skillText))
+  _themeRefs.divider:SetColorTexture(t.divider[1], t.divider[2], t.divider[3], 0.5)
+  _themeRefs.matsLabel:SetTextColor(unpack(t.skillText))
+  _themeRefs.noteText:SetTextColor(unpack(t.matText))
+  for i = 1, 6 do
+    _themeRefs.matRowNames[i]:SetTextColor(unpack(t.matText))
+  end
+  local function hex(r, g, b)
+    return string.format("%02x%02x%02x", math.floor(r*255), math.floor(g*255), math.floor(b*255))
+  end
+  NS._themeActiveStep = "|cff" .. hex(t.activeStep[1], t.activeStep[2], t.activeStep[3])
+  NS._themeUpcoming   = "|cff" .. hex(t.upcoming[1],   t.upcoming[2],   t.upcoming[3])
+  Panel:ApplySettings()
+  if NS.ShoppingList.ApplyTheme then
+    NS.ShoppingList:ApplyTheme(name)
   end
 end
 

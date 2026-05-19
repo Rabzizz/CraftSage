@@ -21,24 +21,31 @@ jobs:
         run: |
           BRANCH="${{ github.ref_name }}"
           if [ "$BRANCH" = "main" ]; then
-            echo "type=release"    >> "$GITHUB_OUTPUT"
+            echo "type=release"     >> "$GITHUB_OUTPUT"
             echo "prerelease=false" >> "$GITHUB_OUTPUT"
-            echo "suffix="         >> "$GITHUB_OUTPUT"
           elif [ "$BRANCH" = "beta" ]; then
-            echo "type=beta"       >> "$GITHUB_OUTPUT"
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-            echo "suffix=-beta"    >> "$GITHUB_OUTPUT"
+            echo "type=beta"        >> "$GITHUB_OUTPUT"
+            echo "prerelease=true"  >> "$GITHUB_OUTPUT"
           else
-            echo "type=alpha"      >> "$GITHUB_OUTPUT"
-            echo "prerelease=true" >> "$GITHUB_OUTPUT"
-            echo "suffix=-alpha"   >> "$GITHUB_OUTPUT"
+            echo "type=alpha"       >> "$GITHUB_OUTPUT"
+            echo "prerelease=true"  >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Read version from TOC
+      - name: Read version and resolve full version
         id: ver
         run: |
           VERSION=$(grep -m1 "^## Version:" CraftSage.toc | sed 's/## Version:[[:space:]]*//')
-          FULL_VERSION="${VERSION}${{ steps.rel.outputs.suffix }}"
+          BRANCH="${{ github.ref_name }}"
+
+          if [ "$BRANCH" = "main" ]; then
+            FULL_VERSION="$VERSION"
+          else
+            TYPE="${{ steps.rel.outputs.type }}"
+            EXISTING=$(git tag | grep -E "^v${VERSION}-${TYPE}\.[0-9]+$" | wc -l | tr -d ' ')
+            BUILD=$((EXISTING + 1))
+            FULL_VERSION="${VERSION}-${TYPE}.${BUILD}"
+          fi
+
           echo "version=$VERSION"           >> "$GITHUB_OUTPUT"
           echo "full_version=$FULL_VERSION" >> "$GITHUB_OUTPUT"
 
@@ -88,7 +95,7 @@ jobs:
           done
 
           cd dist
-          zip -r "../CraftSage-v${VERSION}.zip" CraftSage/
+          zip -r "../v${VERSION}.zip" CraftSage/
 
       - name: Upload to CurseForge
         if: steps.check.outputs.exists == 'false'
@@ -119,7 +126,7 @@ jobs:
             --arg version "$VERSION" \
             --argjson gv "$GAME_VERSION_ID" \
             --arg reltype "${{ steps.rel.outputs.type }}" \
-            '{changelog:$changelog,changelogType:"markdown",displayName:("CraftSage v"+$version),gameVersions:[$gv],releaseType:$reltype}' \
+            '{changelog:$changelog,changelogType:"markdown",displayName:("v"+$version),gameVersions:[$gv],releaseType:$reltype}' \
             > metadata.json
 
           echo "--- metadata.json ---"
@@ -130,7 +137,7 @@ jobs:
           RESPONSE=$(curl -s -w "\n%{http_code}" -X POST \
             -H "X-Api-Token: $CURSEFORGE_TOKEN" \
             -F "metadata=<metadata.json" \
-            -F "file=@CraftSage-v${VERSION}.zip" \
+            -F "file=@v${VERSION}.zip" \
             "https://wow.curseforge.com/api/projects/1537185/upload-file")
 
           HTTP_CODE=$(echo "$RESPONSE" | tail -1)
@@ -148,7 +155,7 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           tag_name: v${{ steps.ver.outputs.full_version }}
-          name: CraftSage v${{ steps.ver.outputs.full_version }}
+          name: v${{ steps.ver.outputs.full_version }}
           body_path: release_body.md
           prerelease: ${{ steps.rel.outputs.prerelease }}
-          files: CraftSage-v${{ steps.ver.outputs.full_version }}.zip
+          files: v${{ steps.ver.outputs.full_version }}.zip

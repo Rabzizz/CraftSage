@@ -1,5 +1,12 @@
 # CraftSage Changelog
 
+## [Unreleased]
+
+### Added
+- **Alt Tracker** — a floating window listing all characters with their primary professions and skill levels. Open via right-clicking the minimap button or `/craftsage alts`. Data is captured at login and whenever a profession window is opened. Scrollable for rosters with many alts.
+
+---
+
 ## [1.5.0] — 2026-05-19
 
 ### Added

@@ -286,6 +286,8 @@ function CraftSage:SlashCommand(input)
     else
       NS.Panel:Refresh(self.currentProf, self.currentSkill, self.currentMaxSkill, self.currentData, self.activeStepIndex)
     end
+  elseif cmd == "alts" then
+    NS.AltTracker:Toggle()
   elseif cmd == "reset" then
     if self.currentProf then
       self.db.char.checkmarks[self.currentProf] = nil

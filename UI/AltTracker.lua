@@ -63,6 +63,7 @@ emptyText:Hide()
 -- ── Widget pools ─────────────────────────────────────────────────────────────
 
 local _nameLabels  = {}
+local _classIcons  = {}
 local _profIcons   = {}
 local _profLabels  = {}
 
@@ -89,8 +90,24 @@ local function GetProfLabel(i)
   return _profLabels[i]
 end
 
+local function ClassIconPath(classFile)
+  if not classFile then return nil end
+  return "Interface\\Icons\\ClassIcon_"
+    .. classFile:sub(1, 1):upper() .. classFile:sub(2):lower()
+end
+
+local function GetClassIcon(i)
+  if not _classIcons[i] then
+    local tex = scrollChild:CreateTexture(nil, "ARTWORK")
+    tex:SetSize(20, 20)
+    _classIcons[i] = tex
+  end
+  return _classIcons[i]
+end
+
 local function HideAll()
   for _, v in ipairs(_nameLabels) do v:Hide() end
+  for _, v in ipairs(_classIcons) do v:Hide() end
   for _, v in ipairs(_profIcons)  do v:Hide() end
   for _, v in ipairs(_profLabels) do v:Hide() end
 end
@@ -127,6 +144,13 @@ function AltTracker:Render()
   local profIdx  = 1
 
   for _, entry in ipairs(chars) do
+    -- Class icon
+    local ci = GetClassIcon(nameIdx)
+    ci:SetTexture(ClassIconPath(entry.data.class))
+    ci:ClearAllPoints()
+    ci:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 6, y)
+    ci:Show()
+
     -- Character name header
     local label = GetNameLabel(nameIdx)
     nameIdx = nameIdx + 1
@@ -137,9 +161,9 @@ function AltTracker:Render()
     label:SetText(displayName)
     label:SetTextColor(1, 0.82, 0, 1)
     label:ClearAllPoints()
-    label:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 6, y)
+    label:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 30, y - 3)
     label:Show()
-    y = y - 18
+    y = y - 22
 
     -- Profession rows
     for _, prof in ipairs(entry.data.professions) do

@@ -29,3 +29,12 @@ L["THEME_DEFAULT"]      = "Default"
 L["THEME_BLIZZARD"]     = "Blizzard Classic"
 L["THEME_DARK"]         = "Dark"
 L["THEME_ARCANE"]       = "Arcane"
+
+L["ALT_TRACKER_TITLE"] = "CraftSage \226\128\148 Alts"
+L["ALT_TRACKER_EMPTY"] = "No characters tracked yet.\nOpen a profession window to begin."
+L["ALT_TRACKER_YOU"]   = "you"
+
+L["ALT_FILTER_ALL"]      = "All"
+L["ALT_FILTER_ALLIANCE"] = "Alliance"
+L["ALT_FILTER_HORDE"]    = "Horde"
+L["ALT_CONFIRM_DELETE"]  = "Remove %s from tracking?"

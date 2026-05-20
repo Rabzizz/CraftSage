@@ -1,6 +1,23 @@
 local AddonName, NS = ...
 local L = LibStub("AceLocale-3.0"):GetLocale("CraftSage")
 
+-- Right-click dropdown
+local menuFrame = CreateFrame("Frame", "CraftSageMinimapMenuFrame", UIParent, "UIDropDownMenuTemplate")
+
+local function MinimapMenu_Init(self, level)
+  local info = UIDropDownMenu_CreateInfo()
+  info.text         = "CraftSage"
+  info.isTitle      = true
+  info.notCheckable = true
+  UIDropDownMenu_AddButton(info, level)
+
+  info = UIDropDownMenu_CreateInfo()
+  info.text         = L["ALT_TRACKER_TITLE"]
+  info.notCheckable = true
+  info.func         = function() NS.AltTracker:Toggle() end
+  UIDropDownMenu_AddButton(info, level)
+end
+
 local broker = LibStub("LibDataBroker-1.1"):NewDataObject("CraftSage", {
   type  = "launcher",
   label = "CraftSage",
@@ -13,6 +30,9 @@ local broker = LibStub("LibDataBroker-1.1"):NewDataObject("CraftSage", {
       else
         ACD:Open("CraftSage")
       end
+    elseif button == "RightButton" then
+      UIDropDownMenu_Initialize(menuFrame, MinimapMenu_Init, "MENU")
+      ToggleDropDownMenu(1, nil, menuFrame, "cursor", 3, -3)
     end
   end,
   OnTooltipShow = function(tip)

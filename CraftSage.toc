@@ -2,7 +2,7 @@
 ## Title: CraftSage
 ## Notes: Profession leveling guide for WoW Classic Era
 ## Author: Rabzizz
-## Version: 1.5.0
+## Version: 1.6.0
 ## IconTexture: Interface\AddOns\CraftSage\CraftSage-logo
 ## SavedVariables: CraftSageDB
 
@@ -35,6 +35,7 @@ Data\FirstAid.lua
 
 UI\Panel.lua
 UI\ShoppingList.lua
+UI\AltTracker.lua
 
 Core.lua
 UI\MinimapButton.lua

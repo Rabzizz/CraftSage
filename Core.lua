@@ -8,6 +8,18 @@ local CraftSage = LibStub("AceAddon-3.0"):NewAddon("CraftSage",
 )
 NS.CraftSage = CraftSage
 
+NS.PRIMARY_PROFESSIONS = {
+  ["Alchemy"]        = "Interface\\Icons\\Trade_Alchemy",
+  ["Blacksmithing"]  = "Interface\\Icons\\Trade_BlackSmithing",
+  ["Enchanting"]     = "Interface\\Icons\\Trade_Engraving",
+  ["Engineering"]    = "Interface\\Icons\\Trade_Engineering",
+  ["Herbalism"]      = "Interface\\Icons\\Spell_Nature_Naturetouchgrow",
+  ["Leatherworking"] = "Interface\\Icons\\Trade_LeatherWorking",
+  ["Mining"]         = "Interface\\Icons\\Trade_Mining",
+  ["Skinning"]       = "Interface\\Icons\\INV_Misc_Pelt_Wolf_01",
+  ["Tailoring"]      = "Interface\\Icons\\Trade_Tailoring",
+}
+
 local DB_DEFAULTS = {
   char = {
     checkmarks = {},
@@ -24,7 +36,9 @@ local DB_DEFAULTS = {
       vendor_highlight  = true,
       shopping_progress = true,
       theme             = "default",
-    }
+      alt_filter        = "all",
+    },
+    alts = {},
   }
 }
 
@@ -44,6 +58,49 @@ local function GetCraftLineSafe()
   return nil, 0, 0
 end
 
+local function AltKey()
+  return UnitName("player") .. "-" .. GetRealmName()
+end
+
+local function UpsertAltProf(profName, rank, maxRank)
+  local icon = NS.PRIMARY_PROFESSIONS[profName]
+  if not icon then return end
+  local key  = AltKey()
+  local alts = NS.CraftSage.db.global.alts
+  if not alts[key] then
+    alts[key] = {
+      name        = UnitName("player"),
+      realm       = GetRealmName(),
+      last_seen   = time(),
+      professions = {},
+    }
+  end
+  for _, p in ipairs(alts[key].professions) do
+    if p.name == profName then
+      p.rank = rank; p.maxRank = maxRank
+      return
+    end
+  end
+  table.insert(alts[key].professions, {
+    name    = profName,
+    icon    = icon,
+    rank    = rank,
+    maxRank = maxRank,
+  })
+end
+
+local function UpsertAltMeta()
+  local key  = AltKey()
+  local alts = NS.CraftSage.db.global.alts
+  if not alts[key] then
+    alts[key] = { name = UnitName("player"), realm = GetRealmName(), last_seen = time(), professions = {} }
+  end
+  alts[key].last_seen = time()
+  alts[key].faction   = UnitFactionGroup("player")
+  local _, classFile  = UnitClass("player")
+  alts[key].class     = classFile
+end
+
 function CraftSage:OnInitialize()
   self.db = LibStub("AceDB-3.0"):New("CraftSageDB", DB_DEFAULTS, true)
   self:RegisterChatCommand("craftsage", "SlashCommand")
@@ -53,6 +110,7 @@ function CraftSage:OnEnable()
   self:RegisterEvent("TRADE_SKILL_SHOW", "OnTradeSkillShow")
   self:RegisterEvent("TRADE_SKILL_HIDE", "OnTradeSkillHide")
   NS.Panel:ApplyTheme(self.db.global.settings.theme)
+  UpsertAltMeta()
   -- Enchanting / CraftFrame: CRAFT_SHOW does not fire in Classic Era 11508,
   -- and GetCraftLine() no longer exists. Detection via CraftFrame:HookScript("OnShow")
   -- registered at PLAYER_LOGIN / ADDON_LOADED, with GetCraftLineSafe() for skill data.
@@ -71,6 +129,8 @@ function CraftSage:OnTradeSkillShow()
     NS.Panel:Refresh(profName, skillLevel, maxSkillLevel, self.currentData, self.activeStepIndex)
   end
   self:HighlightActiveRecipe()
+  UpsertAltProf(profName, skillLevel, maxSkillLevel)
+  UpsertAltMeta()
 end
 
 function CraftSage:OnTradeSkillHide()
@@ -91,6 +151,8 @@ function CraftSage:OnCraftShow()
   end
   self:HighlightActiveRecipe()
   if NS.Panel.EnsureCraftGuideBtn then NS.Panel:EnsureCraftGuideBtn() end
+  UpsertAltProf(profName, skillLevel, maxSkillLevel)
+  UpsertAltMeta()
 end
 
 function CraftSage:OnCraftHide()
@@ -126,6 +188,11 @@ _craftFrame:SetScript("OnEvent", function(self, event, arg1)
   if event == "PLAYER_LOGIN" then
     self:UnregisterEvent("PLAYER_LOGIN")
     TryHookCraftFrame()
+    UpsertAltMeta()
+    for i = 1, GetNumSkillLines() do
+      local name, isHeader, _, rank, _, _, maxRank = GetSkillLineInfo(i)
+      if not isHeader then UpsertAltProf(name, rank, maxRank) end
+    end
     return
   end
 
@@ -224,6 +291,8 @@ function CraftSage:SlashCommand(input)
     else
       NS.Panel:Refresh(self.currentProf, self.currentSkill, self.currentMaxSkill, self.currentData, self.activeStepIndex)
     end
+  elseif cmd == "alts" then
+    NS.AltTracker:Toggle()
   elseif cmd == "reset" then
     if self.currentProf then
       self.db.char.checkmarks[self.currentProf] = nil

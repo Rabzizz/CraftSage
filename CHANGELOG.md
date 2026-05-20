@@ -1,12 +1,12 @@
 # CraftSage Changelog
 
-## [Unreleased]
+## [1.6.0] — 2026-05-20
 
 ### Added
 - **Alt Tracker** — a floating window listing all characters with their primary professions and skill levels. Open via right-clicking the minimap button or `/craftsage alts`. Data is captured at login and whenever a profession window is opened. Scrollable for rosters with many alts.
-- **Class icons** — each alt's name header in the Alt Tracker now shows a 20×20 class icon (e.g. warrior shield, mage arcane) for quick visual identification.
-- **Faction filter bar** — All / Alliance / Horde toggle buttons below the Alt Tracker title bar. Selection persists across sessions. Your current character always appears regardless of filter.
-- **Per-alt deletion** — hover over any non-current alt block to reveal a red ✕ button; click to confirm removal from tracking via a WoW dialog.
+- **Class icons** — each alt's name header in the Alt Tracker shows a class icon for quick visual identification.
+- **Faction filter bar** — All / Alliance / Horde toggle buttons below the Alt Tracker title bar. Filters by faction; selection persists across sessions.
+- **Per-alt deletion** — hover over any non-current alt block to reveal a delete button; click to confirm removal from tracking via a WoW dialog.
 
 ---
 

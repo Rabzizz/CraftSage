@@ -24,6 +24,7 @@ CraftSage attaches a side panel to the native TradeSkill window. It reads your c
 - **Ctrl+Click → Wowhead** — Ctrl+click any mat or recipe to get a pre-filled Wowhead URL ready to copy
 - **Shopping list** — full material aggregation with checkboxes and one-click Copy to Chat
 - **Skill progress bar** — visual 0–300 bar at a glance
+- **Alt Tracker** — `/craftsage alts` or right-click the minimap button to open a window listing all your characters with their primary professions and skill levels. Filter by faction (All / Alliance / Horde); each alt shows a class icon. Hover any non-current alt to reveal a delete button.
 - **Settings panel** — customize panel scale, opacity, number of upcoming steps, auto-open behavior, step flash, tooltips, vendor highlights, and more. Access via Escape → Interface → AddOns → CraftSage, or the minimap button
 - **Minimap button** — click to open the settings panel from anywhere; position is draggable and saved between sessions
 - **8 professions supported** — Alchemy, Blacksmithing, Engineering, Enchanting, Leatherworking, Tailoring, Cooking, First Aid
@@ -53,6 +54,7 @@ Open any profession TradeSkill window — CraftSage appears automatically on the
 | Command            | Effect                                                    |
 | ------------------ | --------------------------------------------------------- |
 | `/craftsage`       | Toggle the panel open/closed                              |
+| `/craftsage alts`  | Open the Alt Tracker window                               |
 | `/craftsage reset` | Clear shopping list checkmarks for the current profession |
 
 Access settings via **Escape → Interface → AddOns → CraftSage** or click the minimap button.
